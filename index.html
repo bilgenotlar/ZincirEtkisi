@@ -1812,7 +1812,8 @@
             bestScore: appState.bestScore,
             solvedChainsCount: appState.solvedChainsCount,
             soundEnabled: appState.soundEnabled,
-            history: appState.history.slice(0, 15)
+            history: appState.history.slice(0, 15),
+            usedClassicIds: appState.usedClassicIds.slice(-200)
           };
           localStorage.setItem(STORAGE_KEY, JSON.stringify(payload));
         } catch (e) {}
@@ -1828,6 +1829,7 @@
             if (typeof saved.solvedChainsCount === 'number') appState.solvedChainsCount = saved.solvedChainsCount;
             if (typeof saved.soundEnabled === 'boolean') appState.soundEnabled = saved.soundEnabled;
             if (Array.isArray(saved.history)) appState.history = saved.history;
+            if (Array.isArray(saved.usedClassicIds)) appState.usedClassicIds = saved.usedClassicIds;
           }
         } catch (e) {}
       }
@@ -1857,7 +1859,7 @@
       }
 
       /* =====================================================================
-         5. PUANLAMA, ZİNCİR SEÇİMİ VE SINIR MANTIĞI
+         5. PUANLAMA, RASTGELE ZİNCİR SEÇİMİ VE SINIR MANTIĞI
          ===================================================================== */
       function calculatePointsForLetterCount(openedCount) {
         if (openedCount <= 0) return 200;
@@ -1880,9 +1882,6 @@
         return firstW + ' → ' + lastW;
       }
 
-      /* Mobil ve masaüstü arasında kontrol panelini doğru konuma yerleştirir:
-         - Mobilde (<= 1024px): Seçili hedef aşamanın (örn. 1., 2., 3. halka) HEMEN ALTINA girer
-         - Masaüstünde (> 1024px): Sağ sütundaki (#hud-column) yerine döner */
       function positionControlPanel() {
         var controlPanel = document.getElementById('control-panel');
         var hudColumn = document.getElementById('hud-column');
@@ -1945,35 +1944,85 @@
         scrollActiveTargetIntoViewOnMobile();
       }
 
+      function pickRandomItem(list) {
+        if (!Array.isArray(list) || list.length === 0) return null;
+        var idx = Math.floor(Math.random() * list.length);
+        return list[idx];
+      }
+
       function pickClassicChainForRound(rIdx) {
         var pool = CHAIN_BANK.filter(function (c) { return c.roundEligible !== false; });
         if (pool.length === 0) pool = CHAIN_BANK;
 
-        var targetDiff = rIdx === 0 ? 'Kolay' : (rIdx === 3 ? 'Zor' : 'Orta');
-        var diffPool = pool.filter(function (c) {
-          return c.difficulty === targetDiff && appState.usedClassicIds.indexOf(c.id) === -1;
+        var currentId = appState.currentChain ? appState.currentChain.id : null;
+
+        // Zorluk tercihi: Tur 1 -> Kolay veya Orta (tek Kolay soruya takılmamak için), Tur 4 -> Zor, Tur 2-3 -> Tümü
+        var preferredPool = pool;
+        if (rIdx === 0) {
+          var easyOrMed = pool.filter(function (c) {
+            return c.difficulty === 'Kolay' || c.difficulty === 'Orta';
+          });
+          if (easyOrMed.length > 0) preferredPool = easyOrMed;
+        } else if (rIdx === 3) {
+          var hardOnly = pool.filter(function (c) { return c.difficulty === 'Zor'; });
+          if (hardOnly.length > 0) preferredPool = hardOnly;
+        }
+
+        // Daha önce görülmemiş olanları süz
+        var unseenPreferred = preferredPool.filter(function (c) {
+          return appState.usedClassicIds.indexOf(c.id) === -1 && c.id !== currentId;
         });
 
-        if (diffPool.length === 0) {
-          diffPool = pool.filter(function (c) {
-            return appState.usedClassicIds.indexOf(c.id) === -1;
+        var candidatePool = unseenPreferred;
+
+        // Tercih edilen zorlukta görülmemiş kalmadıysa tüm görülmemiş havuza bak
+        if (candidatePool.length === 0) {
+          candidatePool = pool.filter(function (c) {
+            return appState.usedClassicIds.indexOf(c.id) === -1 && c.id !== currentId;
           });
         }
-        if (diffPool.length === 0) {
-          appState.usedClassicIds = [];
-          diffPool = pool;
+
+        // Tüm banka tamamlandıysa geçmişi sıfırla ve mevcut zincir hariç yeniden başlat
+        if (candidatePool.length === 0) {
+          appState.usedClassicIds = currentId ? [currentId] : [];
+          candidatePool = preferredPool.filter(function (c) { return c.id !== currentId; });
+          if (candidatePool.length === 0) {
+            candidatePool = pool.filter(function (c) { return c.id !== currentId; });
+          }
+          if (candidatePool.length === 0) {
+            candidatePool = pool;
+          }
         }
 
-        var chosen = diffPool[Math.floor(Math.random() * diffPool.length)];
-        appState.usedClassicIds.push(chosen.id);
+        var chosen = pickRandomItem(candidatePool);
+        if (chosen && appState.usedClassicIds.indexOf(chosen.id) === -1) {
+          appState.usedClassicIds.push(chosen.id);
+          savePersistentState();
+        }
+        return chosen;
+      }
+
+      function pickRandomPracticeChain() {
+        var currentId = appState.currentChain ? appState.currentChain.id : null;
+        var unseen = CHAIN_BANK.filter(function (c) {
+          return appState.usedClassicIds.indexOf(c.id) === -1 && c.id !== currentId;
+        });
+        var pool = unseen.length > 0
+          ? unseen
+          : CHAIN_BANK.filter(function (c) { return c.id !== currentId; });
+        if (pool.length === 0) pool = CHAIN_BANK;
+
+        var chosen = pickRandomItem(pool);
+        if (chosen && appState.usedClassicIds.indexOf(chosen.id) === -1) {
+          appState.usedClassicIds.push(chosen.id);
+          savePersistentState();
+        }
         return chosen;
       }
 
       function loadNextPuzzleAnytime() {
         if (appState.mode === 'practice') {
-          var idx = CHAIN_BANK.indexOf(appState.currentChain);
-          var nextIdx = (idx + 1) % CHAIN_BANK.length;
-          var nextPractice = CHAIN_BANK[nextIdx];
+          var nextPractice = pickRandomPracticeChain();
           loadChain(nextPractice);
           setFeedback('is-hint', 'Sıradaki Bulmaca', getSafeChainLabel(nextPractice) + ' zinciri tahtaya yüklendi.');
           return;
@@ -2364,8 +2413,9 @@
 
         if (appState.mode === 'practice') {
           if (picker) picker.classList.remove('hidden');
-          loadChain(CHAIN_BANK[0]);
-          setFeedback('is-hint', 'Serbest Pratik Modu', 'Soru bankasındaki dilediğiniz zinciri seçip süresiz çözebilirsiniz.');
+          var randomPractice = pickRandomPracticeChain();
+          loadChain(randomPractice);
+          setFeedback('is-hint', 'Serbest Pratik Modu', 'Rastgele bir zincir yüklendi; dilerseniz listeden başka bir zincir de seçebilirsiniz.');
         } else {
           if (picker) picker.classList.add('hidden');
           loadChain(pickClassicChainForRound(appState.roundIndex));
@@ -2409,7 +2459,7 @@
         appState.roundIndex = 0;
         appState.scores = { a: 0, b: 0 };
         appState.activeTeam = 'a';
-        loadChain(appState.mode === 'practice' ? CHAIN_BANK[0] : pickClassicChainForRound(0));
+        loadChain(appState.mode === 'practice' ? pickRandomPracticeChain() : pickClassicChainForRound(0));
         setFeedback('is-hint', 'Oyun Sıfırlandı', 'Aktif yarışma skoru sıfırlandı ve Tur 1 yeniden başlatıldı.');
       }
 
@@ -2430,6 +2480,7 @@
         btn.textContent = 'Kayıtları Sıfırla';
         appState.history = [];
         appState.solvedChainsCount = 0;
+        appState.usedClassicIds = appState.currentChain ? [appState.currentChain.id] : [];
         appState.bestScore = Math.max(appState.scores.a, appState.scores.b);
         savePersistentState();
         renderHUD();
@@ -2480,6 +2531,10 @@
       function selectPracticeChain(chainId) {
         for (var i = 0; i < CHAIN_BANK.length; i++) {
           if (CHAIN_BANK[i].id === chainId) {
+            if (appState.usedClassicIds.indexOf(chainId) === -1) {
+              appState.usedClassicIds.push(chainId);
+              savePersistentState();
+            }
             loadChain(CHAIN_BANK[i]);
             setFeedback('is-hint', 'Zincir Seçildi', getSafeChainLabel(CHAIN_BANK[i]) + ' zinciri tahtaya yüklendi.');
             return;
@@ -2558,7 +2613,6 @@
         var board = document.getElementById('chain-board');
         if (!board || !appState.currentChain) return;
 
-        /* Tahta yeniden çizilmeden önce kontrol panelini güvenli yere park et */
         var controlPanel = document.getElementById('control-panel');
         var hudColumn = document.getElementById('hud-column');
         var historyPanel = document.getElementById('history-panel');
@@ -2595,7 +2649,6 @@
             kickerEl.textContent = 'Serbest Pratik · Harfsiz +200 · 1H: 125 · 2H: 100 · 3H: 75 · 4+H: 25';
           }
         }
-        /* Oyun sırasında ara kelimeleri ele vermemek için yalnızca BAŞLANGIÇ → BİTİŞ gösterilir */
         if (titleEl) {
           titleEl.textContent = appState.chainCompleted
             ? appState.currentChain.title
@@ -2735,7 +2788,6 @@
           }
         }
 
-        /* Mobil görünümde kontrol panelini seçili aşamanın hemen altına yerleştir */
         positionControlPanel();
       }
 
