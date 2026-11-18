@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="tr">
+<html lang="tr" data-theme="dark">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,7 +8,10 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
   <style>
-    :root {
+    /* =====================================================================
+       TEMA PALETLERİ: Koyu (Varsayılan), Açık, İlkbahar, Mavi
+       ===================================================================== */
+    :root, [data-theme="dark"] {
       color-scheme: dark;
 
       /* MaviBlue Stüdyo Standart Gece Mavisi Paleti */
@@ -16,7 +19,13 @@
       --bg-surface: #111827;
       --bg-card: #162033;
       --bg-card-elevated: #1e293b;
+      --bg-card-hover: #243247;
+      --bg-node-frontier: #172338;
+      --bg-node-target: #17253d;
+      --bg-tile-active: #142036;
       --bg-input: #0f172a;
+      --bg-radial-1: rgba(14, 165, 233, 0.08);
+      --bg-radial-2: rgba(56, 189, 248, 0.05);
 
       /* Metin Hiyerarşisi */
       --text-primary: #f1f5f9;
@@ -31,21 +40,191 @@
       /* MaviBlue Marka Vurguları */
       --brand-blue: #38bdf8;
       --brand-blue-strong: #0284c7;
+      --brand-blue-hover: #0369a1;
       --brand-blue-soft: rgba(56, 189, 248, 0.14);
+      --brand-blue-soft-hover: rgba(56, 189, 248, 0.22);
       --brand-blue-border: rgba(56, 189, 248, 0.42);
+      --brand-mark-text: #082f49;
 
       --accent-amber: #f59e0b;
+      --accent-amber-text: #fbbf24;
       --accent-amber-soft: rgba(245, 158, 11, 0.14);
+      --accent-amber-soft-hover: rgba(245, 158, 11, 0.22);
       --accent-amber-border: rgba(245, 158, 11, 0.42);
 
       --accent-emerald: #10b981;
+      --accent-emerald-text: #34d399;
       --accent-emerald-soft: rgba(16, 185, 129, 0.14);
       --accent-emerald-border: rgba(16, 185, 129, 0.42);
 
       --accent-rose: #f43f5e;
+      --accent-rose-text: #fb7185;
       --accent-rose-soft: rgba(244, 63, 94, 0.14);
       --accent-rose-border: rgba(244, 63, 94, 0.42);
 
+      /* Yumuşak Derinlik Gölgeleri */
+      --shadow-card: 0 4px 20px -2px rgba(2, 6, 23, 0.55);
+      --shadow-focus: 0 0 0 3px rgba(56, 189, 248, 0.25);
+      --shadow-active: 0 8px 24px -4px rgba(14, 165, 233, 0.2);
+    }
+
+    [data-theme="light"] {
+      color-scheme: light;
+
+      --bg-base: #f1f5f9;
+      --bg-surface: #f8fafc;
+      --bg-card: #ffffff;
+      --bg-card-elevated: #e2e8f0;
+      --bg-card-hover: #cbd5e1;
+      --bg-node-frontier: #f0f9ff;
+      --bg-node-target: #e0f2fe;
+      --bg-tile-active: #eff6ff;
+      --bg-input: #ffffff;
+      --bg-radial-1: rgba(2, 132, 199, 0.06);
+      --bg-radial-2: rgba(14, 165, 233, 0.04);
+
+      --text-primary: #0f172a;
+      --text-secondary: #475569;
+      --text-muted: #64748b;
+
+      --border-subtle: #e2e8f0;
+      --border-default: #cbd5e1;
+      --border-strong: #94a3b8;
+
+      --brand-blue: #0284c7;
+      --brand-blue-strong: #0284c7;
+      --brand-blue-hover: #0369a1;
+      --brand-blue-soft: rgba(2, 132, 199, 0.1);
+      --brand-blue-soft-hover: rgba(2, 132, 199, 0.18);
+      --brand-blue-border: rgba(2, 132, 199, 0.38);
+      --brand-mark-text: #ffffff;
+
+      --accent-amber: #d97706;
+      --accent-amber-text: #b45309;
+      --accent-amber-soft: rgba(217, 119, 6, 0.12);
+      --accent-amber-soft-hover: rgba(217, 119, 6, 0.2);
+      --accent-amber-border: rgba(217, 119, 6, 0.38);
+
+      --accent-emerald: #059669;
+      --accent-emerald-text: #047857;
+      --accent-emerald-soft: rgba(5, 150, 105, 0.12);
+      --accent-emerald-border: rgba(5, 150, 105, 0.38);
+
+      --accent-rose: #e11d48;
+      --accent-rose-text: #be123c;
+      --accent-rose-soft: rgba(225, 29, 72, 0.1);
+      --accent-rose-border: rgba(225, 29, 72, 0.35);
+
+      --shadow-card: 0 4px 16px -2px rgba(15, 23, 42, 0.08);
+      --shadow-focus: 0 0 0 3px rgba(2, 132, 199, 0.2);
+      --shadow-active: 0 8px 20px -4px rgba(2, 132, 199, 0.16);
+    }
+
+    [data-theme="spring"] {
+      color-scheme: light;
+
+      --bg-base: #eef7f2;
+      --bg-surface: #f5fbf7;
+      --bg-card: #ffffff;
+      --bg-card-elevated: #dff0e6;
+      --bg-card-hover: #cbe5d6;
+      --bg-node-frontier: #edf9f2;
+      --bg-node-target: #dcf4e6;
+      --bg-tile-active: #e6f6ed;
+      --bg-input: #ffffff;
+      --bg-radial-1: rgba(16, 185, 129, 0.09);
+      --bg-radial-2: rgba(244, 114, 182, 0.06);
+
+      --text-primary: #143626;
+      --text-secondary: #3d6350;
+      --text-muted: #658a77;
+
+      --border-subtle: #d1e7db;
+      --border-default: #b2d6c2;
+      --border-strong: #87b89d;
+
+      --brand-blue: #15803d;
+      --brand-blue-strong: #16a34a;
+      --brand-blue-hover: #15803d;
+      --brand-blue-soft: rgba(22, 163, 74, 0.11);
+      --brand-blue-soft-hover: rgba(22, 163, 74, 0.19);
+      --brand-blue-border: rgba(22, 163, 74, 0.38);
+      --brand-mark-text: #ffffff;
+
+      --accent-amber: #d97706;
+      --accent-amber-text: #b45309;
+      --accent-amber-soft: rgba(217, 119, 6, 0.12);
+      --accent-amber-soft-hover: rgba(217, 119, 6, 0.2);
+      --accent-amber-border: rgba(217, 119, 6, 0.38);
+
+      --accent-emerald: #0d9488;
+      --accent-emerald-text: #0f766e;
+      --accent-emerald-soft: rgba(13, 148, 136, 0.12);
+      --accent-emerald-border: rgba(13, 148, 136, 0.38);
+
+      --accent-rose: #db2777;
+      --accent-rose-text: #be185d;
+      --accent-rose-soft: rgba(219, 39, 119, 0.1);
+      --accent-rose-border: rgba(219, 39, 119, 0.35);
+
+      --shadow-card: 0 4px 18px -2px rgba(20, 54, 38, 0.08);
+      --shadow-focus: 0 0 0 3px rgba(22, 163, 74, 0.22);
+      --shadow-active: 0 8px 20px -4px rgba(22, 163, 74, 0.16);
+    }
+
+    [data-theme="blue"] {
+      color-scheme: dark;
+
+      --bg-base: #06182c;
+      --bg-surface: #0a223d;
+      --bg-card: #0e2d4f;
+      --bg-card-elevated: #143b66;
+      --bg-card-hover: #1a497d;
+      --bg-node-frontier: #11345c;
+      --bg-node-target: #153f6e;
+      --bg-tile-active: #123861;
+      --bg-input: #081d34;
+      --bg-radial-1: rgba(56, 189, 248, 0.14);
+      --bg-radial-2: rgba(14, 165, 233, 0.1);
+
+      --text-primary: #e0f2fe;
+      --text-secondary: #93c5fd;
+      --text-muted: #60a5fa;
+
+      --border-subtle: #163d69;
+      --border-default: #22548c;
+      --border-strong: #326eb0;
+
+      --brand-blue: #38bdf8;
+      --brand-blue-strong: #0284c7;
+      --brand-blue-hover: #0ea5e9;
+      --brand-blue-soft: rgba(56, 189, 248, 0.18);
+      --brand-blue-soft-hover: rgba(56, 189, 248, 0.28);
+      --brand-blue-border: rgba(56, 189, 248, 0.5);
+      --brand-mark-text: #041526;
+
+      --accent-amber: #fbbf24;
+      --accent-amber-text: #fde047;
+      --accent-amber-soft: rgba(251, 191, 36, 0.16);
+      --accent-amber-soft-hover: rgba(251, 191, 36, 0.25);
+      --accent-amber-border: rgba(251, 191, 36, 0.45);
+
+      --accent-emerald: #2dd4bf;
+      --accent-emerald-text: #5eead4;
+      --accent-emerald-soft: rgba(45, 212, 191, 0.16);
+      --accent-emerald-border: rgba(45, 212, 191, 0.45);
+
+      --accent-rose: #fb7185;
+      --accent-rose-text: #fda4af;
+      --accent-rose-soft: rgba(251, 113, 133, 0.16);
+      --accent-rose-border: rgba(251, 113, 133, 0.45);
+
+      --shadow-card: 0 6px 24px -2px rgba(3, 13, 26, 0.65);
+      --shadow-focus: 0 0 0 3px rgba(56, 189, 248, 0.3);
+      --shadow-active: 0 8px 26px -4px rgba(56, 189, 248, 0.28);
+    }
+
+    :root {
       /* Tipografi */
       --font-display: 'Plus Jakarta Sans', 'Inter', sans-serif;
       --font-body: 'Inter', sans-serif;
@@ -57,11 +236,6 @@
       --radius-lg: 16px;
       --radius-pill: 9999px;
 
-      /* Yumuşak Derinlik Gölgeleri */
-      --shadow-card: 0 4px 20px -2px rgba(2, 6, 23, 0.55);
-      --shadow-focus: 0 0 0 3px rgba(56, 189, 248, 0.25);
-      --shadow-active: 0 8px 24px -4px rgba(14, 165, 233, 0.2);
-
       --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
       --dur-fast: 140ms;
       --dur-normal: 220ms;
@@ -72,14 +246,15 @@
       margin: 0;
       padding: 0;
       background-color: var(--bg-base);
-      background-image: radial-gradient(circle at 18% 0%, rgba(14, 165, 233, 0.08), transparent 42%),
-                        radial-gradient(circle at 85% 10%, rgba(56, 189, 248, 0.05), transparent 38%);
+      background-image: radial-gradient(circle at 18% 0%, var(--bg-radial-1), transparent 42%),
+                        radial-gradient(circle at 85% 10%, var(--bg-radial-2), transparent 38%);
       color: var(--text-primary);
       font-family: var(--font-body);
       font-size: 15px;
       line-height: 1.55;
       min-height: 100vh;
       -webkit-font-smoothing: antialiased;
+      transition: background-color var(--dur-normal) var(--ease-out), color var(--dur-normal) var(--ease-out);
     }
 
     button, input, select {
@@ -118,7 +293,6 @@
       display: flex;
       align-items: center;
       gap: 10px;
-      text-decoration: none;
       color: var(--text-primary);
     }
 
@@ -126,15 +300,16 @@
       width: 32px;
       height: 32px;
       border-radius: var(--radius-sm);
-      background: linear-gradient(135deg, #0284c7, #38bdf8);
+      background: linear-gradient(135deg, var(--brand-blue-strong), var(--brand-blue));
       display: inline-flex;
       align-items: center;
       justify-content: center;
       font-family: var(--font-display);
       font-weight: 800;
       font-size: 14px;
-      color: #082f49;
+      color: var(--brand-mark-text);
       letter-spacing: -0.03em;
+      text-decoration: none;
     }
 
     .brand-name {
@@ -142,6 +317,18 @@
       font-weight: 700;
       font-size: 15px;
       letter-spacing: -0.01em;
+    }
+
+    .brand-link {
+      color: var(--brand-blue);
+      font-weight: 800;
+      text-decoration: none;
+      transition: opacity var(--dur-fast) var(--ease-out);
+    }
+
+    .brand-link:hover {
+      opacity: 0.85;
+      text-decoration: underline;
     }
 
     .brand-sub {
@@ -158,20 +345,36 @@
       gap: 8px;
     }
 
-    .portal-link {
-      font-size: 13px;
-      font-weight: 500;
-      color: var(--text-secondary);
-      text-decoration: none;
-      padding: 6px 12px;
-      border-radius: var(--radius-sm);
-      border: 1px solid var(--border-default);
+    /* Tema Seçici Hapları */
+    .theme-switcher {
+      display: inline-flex;
+      align-items: center;
+      gap: 3px;
+      padding: 3px;
       background: var(--bg-card);
+      border: 1px solid var(--border-default);
+      border-radius: var(--radius-pill);
+    }
+
+    .theme-pill {
+      border: none;
+      background: transparent;
+      color: var(--text-secondary);
+      font-size: 12px;
+      font-weight: 600;
+      padding: 4px 10px;
+      border-radius: var(--radius-pill);
+      cursor: pointer;
       transition: all var(--dur-fast) var(--ease-out);
     }
-    .portal-link:hover {
-      color: var(--brand-blue);
-      border-color: var(--brand-blue-border);
+
+    .theme-pill:hover {
+      color: var(--text-primary);
+    }
+
+    .theme-pill.is-active {
+      background: var(--brand-blue-strong);
+      color: #ffffff;
     }
 
     /* Ana Başlık Alanı */
@@ -253,7 +456,7 @@
     }
     .btn:hover:not(:disabled) {
       border-color: var(--brand-blue-border);
-      background: #243247;
+      background: var(--bg-card-hover);
     }
     .btn:active:not(:disabled) {
       transform: translateY(1px);
@@ -269,8 +472,8 @@
       color: #ffffff;
     }
     .btn-primary:hover:not(:disabled) {
-      background: #0369a1;
-      border-color: #7dd3fc;
+      background: var(--brand-blue-hover);
+      border-color: var(--brand-blue);
     }
 
     .btn-soft-blue {
@@ -279,16 +482,16 @@
       color: var(--brand-blue);
     }
     .btn-soft-blue:hover:not(:disabled) {
-      background: rgba(56, 189, 248, 0.22);
+      background: var(--brand-blue-soft-hover);
     }
 
     .btn-amber {
       background: var(--accent-amber-soft);
       border-color: var(--accent-amber-border);
-      color: #fbbf24;
+      color: var(--accent-amber-text);
     }
     .btn-amber:hover:not(:disabled) {
-      background: rgba(245, 158, 11, 0.22);
+      background: var(--accent-amber-soft-hover);
     }
 
     .btn.is-active {
@@ -353,17 +556,17 @@
     .badge.is-emerald {
       background: var(--accent-emerald-soft);
       border-color: var(--accent-emerald-border);
-      color: #34d399;
+      color: var(--accent-emerald-text);
     }
     .badge.is-amber {
       background: var(--accent-amber-soft);
       border-color: var(--accent-amber-border);
-      color: #fbbf24;
+      color: var(--accent-amber-text);
     }
     .badge.is-rose {
       background: var(--accent-rose-soft);
       border-color: var(--accent-rose-border);
-      color: #fb7185;
+      color: var(--accent-rose-text);
     }
 
     /* Zincir Tahtası */
@@ -400,10 +603,10 @@
     }
     .chain-node.is-frontier:hover {
       border-color: var(--brand-blue);
-      background: #172338;
+      background: var(--bg-node-frontier);
     }
     .chain-node.is-target {
-      background: #17253d;
+      background: var(--bg-node-target);
       border: 1.5px solid var(--brand-blue);
       box-shadow: var(--shadow-active);
     }
@@ -434,7 +637,7 @@
       border-color: var(--brand-blue-border);
     }
     .chain-node.is-solved .node-index {
-      color: #34d399;
+      color: var(--accent-emerald-text);
       border-color: var(--accent-emerald-border);
     }
 
@@ -480,12 +683,12 @@
     }
     .chain-node.is-solved .letter-box.is-revealed {
       border-color: var(--accent-emerald);
-      color: #34d399;
+      color: var(--accent-emerald-text);
       background: var(--accent-emerald-soft);
     }
     .chain-node.is-passed .letter-box.is-revealed {
       border-color: var(--accent-amber);
-      color: #fbbf24;
+      color: var(--accent-amber-text);
       background: var(--accent-amber-soft);
     }
     .letter-box.is-blank {
@@ -524,7 +727,7 @@
       font-weight: 600;
     }
     .link-bridge.is-linked .bridge-phrase {
-      color: #34d399;
+      color: var(--accent-emerald-text);
     }
     .bridge-morph {
       color: var(--brand-blue);
@@ -553,7 +756,7 @@
     }
     .score-tile.is-active-team {
       border-color: var(--brand-blue-border);
-      background: #142036;
+      background: var(--bg-tile-active);
     }
 
     .stat-label {
@@ -571,7 +774,7 @@
       font-variant-numeric: tabular-nums;
     }
     .stat-value.is-blue { color: var(--brand-blue); }
-    .stat-value.is-emerald { color: #34d399; }
+    .stat-value.is-emerald { color: var(--accent-emerald-text); }
     .stat-caption {
       font-size: 12px;
       color: var(--text-muted);
@@ -621,7 +824,7 @@
 
     .frontier-btn-row {
       display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
+      grid-template-columns: 1fr;
       gap: 8px;
       margin-top: 12px;
     }
@@ -688,8 +891,8 @@
       font-weight: 700;
       margin: 0 0 4px 0;
     }
-    .feedback-box.is-success .feedback-title { color: #34d399; }
-    .feedback-box.is-error .feedback-title { color: #fb7185; }
+    .feedback-box.is-success .feedback-title { color: var(--accent-emerald-text); }
+    .feedback-box.is-error .feedback-title { color: var(--accent-rose-text); }
     .feedback-box.is-hint .feedback-title { color: var(--brand-blue); }
 
     /* Hızlı Zincir & Bonus Alanı */
@@ -747,7 +950,7 @@
     }
     .catalog-card.is-featured {
       border-color: var(--brand-blue-border);
-      background: #142036;
+      background: var(--bg-tile-active);
     }
 
     .builder-rows {
@@ -838,14 +1041,21 @@
   <div class="page-shell">
     <!-- MaviBlue Stüdyo Standart Üst Bar -->
     <div class="studio-topbar">
-      <a href="index.html" class="studio-brand" title="MaviBlue Stüdyo Ana Sayfa">
-        <span class="brand-mark">MB</span>
-        <span class="brand-name">MaviBlue Stüdyo</span>
+      <div class="studio-brand">
+        <a href="https://maviblue.win" class="brand-mark" title="MaviBlue Stüdyo">MB</a>
+        <span class="brand-name">
+          <a href="https://maviblue.win" class="brand-link">MaviBlue</a> Stüdyo Sunar
+        </span>
         <span class="brand-sub">Kelime &amp; Mantık Oyunları</span>
-      </a>
+      </div>
       <div class="topbar-links">
+        <div class="theme-switcher" role="group" aria-label="Tema Seçimi">
+          <button type="button" class="theme-pill is-active" data-theme-val="dark" onclick="setAppTheme('dark')">Koyu</button>
+          <button type="button" class="theme-pill" data-theme-val="light" onclick="setAppTheme('light')">Açık</button>
+          <button type="button" class="theme-pill" data-theme-val="spring" onclick="setAppTheme('spring')">İlkbahar</button>
+          <button type="button" class="theme-pill" data-theme-val="blue" onclick="setAppTheme('blue')">Mavi</button>
+        </div>
         <span class="badge is-blue" id="bank-status-badge">Soru Bankası Yükleniyor…</span>
-        <a href="https://maviblue.win" class="portal-link">Bulmaca Sahnesi</a>
       </div>
     </div>
 
@@ -868,6 +1078,7 @@
         <div class="utility-row">
           <button type="button" class="btn btn-soft-blue" id="btn-team-toggle" onclick="toggleTeamMode()">Mod: Tek Kişilik</button>
           <button type="button" class="btn" id="btn-sound-toggle" onclick="toggleSound()">Ses: Açık</button>
+          <button type="button" class="btn btn-primary" id="btn-next-puzzle" onclick="loadNextPuzzleAnytime()">Sonraki Zincir →</button>
           <button type="button" class="btn btn-amber" id="btn-reset-all" onclick="handleResetGame(this)">Sıfırla</button>
         </div>
       </div>
@@ -976,7 +1187,7 @@
 
             <!-- Final Bahis Kutusu -->
             <div id="wager-box" class="wager-box hidden">
-              <p class="kicker" style="color:#fbbf24;">Final Bahis Turu</p>
+              <p class="kicker" style="color:var(--accent-amber-text);">Final Bahis Turu</p>
               <p style="margin:0; font-size:12.5px; color:var(--text-secondary);" id="wager-rules-text">
                 Her harf isteyişte bahis koyun. Doğru tahmin bahsi ekler, yanlış tahmin düşer.
               </p>
@@ -1022,9 +1233,6 @@
               <button type="button" class="btn btn-soft-blue" id="btn-letter-top" onclick="revealFrontierLetter('top')">
                 Üstten Harf Al
               </button>
-              <button type="button" class="btn btn-soft-blue" id="btn-letter-bottom" onclick="revealFrontierLetter('bottom')">
-                Alttan Harf Al
-              </button>
             </div>
 
             <div class="hint-btn-row">
@@ -1042,7 +1250,7 @@
             <div id="feedback-box" class="feedback-box is-hint" aria-live="polite">
               <p class="feedback-title" id="feedback-title">Hazır</p>
               <p id="feedback-msg" style="margin:0;">
-                Üstteki veya alttaki açık kelimenin yanındaki boşluğu seçin (↑/↓ yön tuşlarıyla da geçebilirsiniz), harf alın ya da doğrudan tahmininizi yazın.
+                Üstteki açık kelimenin altından harf alabilir ya da doğrudan tahmininizi yazabilirsiniz.
               </p>
             </div>
           </section>
@@ -1132,14 +1340,14 @@
             </p>
           </div>
           <div class="morph-example-card">
-            <p class="kicker" style="color:#34d399;">2. Ünsüz Yumuşaması &amp; Ünlü Düşmesi</p>
+            <p class="kicker" style="color:var(--accent-emerald-text);">2. Ünsüz Yumuşaması &amp; Ünlü Düşmesi</p>
             <p style="margin:0 0 6px 0; font-weight:700;">BEYGİR GÜCÜ (ç→c) · BURUN / BURNU</p>
             <p style="margin:0; font-size:13px; color:var(--text-secondary);">
               Sonundaki sert ünsüz yumuşayan veya ikinci hecesindeki dar ünlü düşen sözcüklerde (<em>GÜÇ/GÜCÜ, ZEHİR/ZEHRİ, BURUN/BURNU</em>) her iki biçim de otomatik tanınır.
             </p>
           </div>
           <div class="morph-example-card">
-            <p class="kicker" style="color:#fbbf24;">3. Yapım Eki &amp; Tam İfade Toleransı</p>
+            <p class="kicker" style="color:var(--accent-amber-text);">3. Yapım Eki &amp; Tam İfade Toleransı</p>
             <p style="margin:0 0 6px 0; font-weight:700;">GÜÇ ZEHİRLENMESİ → ZEHİR GİBİ</p>
             <p style="margin:0; font-size:13px; color:var(--text-secondary);">
               Tamlama içinde türemiş hâli (<em>ZEHİRLENMESİ</em>) veya iki kelimelik tamlamanın tamamı yazılsa bile sistem çekirdek kavramı (<em>ZEHİR</em>) eşleştirir.
@@ -1160,6 +1368,33 @@
       'use strict';
 
       var STORAGE_KEY = 'maviblue_zincir_etkisi_v1';
+      var THEME_STORAGE_KEY = 'maviblue_zincir_theme_v1';
+
+      /* =====================================================================
+         0. TEMA YÖNETİMİ (Koyu, Açık, İlkbahar, Mavi)
+         ===================================================================== */
+      function setAppTheme(themeName) {
+        var allowed = ['dark', 'light', 'spring', 'blue'];
+        var chosen = allowed.indexOf(themeName) !== -1 ? themeName : 'dark';
+        document.documentElement.setAttribute('data-theme', chosen);
+        try {
+          localStorage.setItem(THEME_STORAGE_KEY, chosen);
+        } catch (e) {}
+
+        var pills = document.querySelectorAll('.theme-pill');
+        for (var i = 0; i < pills.length; i++) {
+          var isMatch = pills[i].getAttribute('data-theme-val') === chosen;
+          pills[i].classList.toggle('is-active', isMatch);
+        }
+      }
+
+      function initAppTheme() {
+        var saved = 'dark';
+        try {
+          saved = localStorage.getItem(THEME_STORAGE_KEY) || 'dark';
+        } catch (e) {}
+        setAppTheme(saved);
+      }
 
       /* =====================================================================
          1. YEDEK (FALLBACK) VERİ — zincirbankasi.json erişilemezse devreye girer
@@ -1260,7 +1495,6 @@
       }
 
       function dropNarrowVowel(rootUpper) {
-        // İki heceli sözcüklerde son hecedeki dar ünlü (I, İ, U, Ü) düşmesi: BURUN -> BURN, ZEHİR -> ZEHR
         if (!rootUpper || rootUpper.length < 4) return null;
         var vowels = 'AEIİOÖUÜ';
         var narrow = 'IİUÜ';
@@ -1544,7 +1778,6 @@
         var pool = CHAIN_BANK.filter(function (c) { return c.roundEligible !== false; });
         if (pool.length === 0) pool = CHAIN_BANK;
 
-        // Zorluk kademesine göre öncelikli havuz (Tur 1 Kolay, Tur 2-3 Orta, Tur 4 Zor)
         var targetDiff = rIdx === 0 ? 'Kolay' : (rIdx === 3 ? 'Zor' : 'Orta');
         var diffPool = pool.filter(function (c) {
           return c.difficulty === targetDiff && appState.usedClassicIds.indexOf(c.id) === -1;
@@ -1563,6 +1796,33 @@
         var chosen = diffPool[Math.floor(Math.random() * diffPool.length)];
         appState.usedClassicIds.push(chosen.id);
         return chosen;
+      }
+
+      /* İstediğiniz an sıradaki bulmacaya geçme fonksiyonu */
+      function loadNextPuzzleAnytime() {
+        hideSpeedStage();
+        if (appState.mode === 'builder') {
+          switchMode('classic');
+          return;
+        }
+        if (appState.mode === 'practice') {
+          var combined = appState.customChains.concat(CHAIN_BANK);
+          var idx = combined.indexOf(appState.currentChain);
+          var nextIdx = (idx + 1) % combined.length;
+          loadChain(combined[nextIdx]);
+          setFeedback('is-hint', 'Sıradaki Bulmaca', '"' + combined[nextIdx].title + '" tahtaya yüklendi.');
+          return;
+        }
+
+        // Klasik Yarışma modunda bir sonraki tura / yeni bulmacaya geç
+        if (appState.roundIndex < 3) {
+          appState.roundIndex += 1;
+        } else {
+          appState.roundIndex = 0;
+        }
+        var nextChain = pickClassicChainForRound(appState.roundIndex);
+        loadChain(nextChain);
+        setFeedback('is-hint', 'Sıradaki Bulmaca (Tur ' + (appState.roundIndex + 1) + ')', '"' + nextChain.title + '" yüklendi.');
       }
 
       function getFrontierIndices() {
@@ -1658,10 +1918,7 @@
           ? (appState.currentChain.nodes[targetIdx - 1].bottomForm || appState.currentChain.nodes[targetIdx - 1].root)
           : (appState.currentChain.nodes[targetIdx + 1].topForm || appState.currentChain.nodes[targetIdx + 1].root);
 
-        var msg = (side === 'top'
-          ? anchorWord + ' kelimesinin altından '
-          : anchorWord + ' kelimesinin üstünden ') +
-          'harf açıldı: "' + revealedChar + '".';
+        var msg = anchorWord + ' kelimesinin altından harf açıldı: "' + revealedChar + '".';
 
         if (isFinalWagerRound()) {
           msg += ' Bahis: ' + appState.wagerAmount + ' Puan. Şimdi tahmininizi girin!';
@@ -2786,7 +3043,6 @@
         var targetBadge = document.getElementById('active-target-badge');
         var guessLabel = document.getElementById('guess-label');
         var btnTop = document.getElementById('btn-letter-top');
-        var btnBot = document.getElementById('btn-letter-bottom');
         var btnSubmit = document.getElementById('btn-submit-guess');
         var btnMorph = document.getElementById('btn-hint-morph');
         var btnMean = document.getElementById('btn-hint-meaning');
@@ -2810,15 +3066,6 @@
             btnTop.textContent = topRef + ' Altından Harf';
           } else {
             btnTop.textContent = 'Üstten Harf Al';
-          }
-        }
-        if (btnBot) {
-          btnBot.disabled = disabled || f.bottomIdx === -1;
-          if (f.bottomIdx !== -1 && nodes[f.bottomIdx + 1]) {
-            var botRef = nodes[f.bottomIdx + 1].topForm || nodes[f.bottomIdx + 1].root;
-            btnBot.textContent = botRef + ' Üstünden Harf';
-          } else {
-            btnBot.textContent = 'Alttan Harf Al';
           }
         }
 
@@ -2878,9 +3125,11 @@
         }
       });
 
+      window.setAppTheme = setAppTheme;
       window.switchMode = switchMode;
       window.toggleTeamMode = toggleTeamMode;
       window.toggleSound = toggleSound;
+      window.loadNextPuzzleAnytime = loadNextPuzzleAnytime;
       window.handleResetGame = handleResetGame;
       window.selectFrontierSlot = selectFrontierSlot;
       window.handleNodeKeydown = handleNodeKeydown;
@@ -2910,6 +3159,7 @@
          12. BAŞLATMA
          ===================================================================== */
       async function initApp() {
+        initAppTheme();
         loadPersistentState();
         var soundBtn = document.getElementById('btn-sound-toggle');
         if (soundBtn) soundBtn.textContent = appState.soundEnabled ? 'Ses: Açık' : 'Ses: Kapalı';
