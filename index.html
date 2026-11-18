@@ -2,7 +2,7 @@
 <html lang="tr" data-theme="dark">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>Zincir Etkisi — MaviBlue Stüdyo</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -67,6 +67,7 @@
       --shadow-card: 0 4px 20px -2px rgba(2, 6, 23, 0.55);
       --shadow-focus: 0 0 0 3px rgba(56, 189, 248, 0.25);
       --shadow-active: 0 8px 24px -4px rgba(14, 165, 233, 0.2);
+      --shadow-dock: 0 -8px 28px rgba(2, 6, 23, 0.72);
     }
 
     [data-theme="light"] {
@@ -120,6 +121,7 @@
       --shadow-card: 0 4px 16px -2px rgba(15, 23, 42, 0.08);
       --shadow-focus: 0 0 0 3px rgba(2, 132, 199, 0.2);
       --shadow-active: 0 8px 20px -4px rgba(2, 132, 199, 0.16);
+      --shadow-dock: 0 -6px 24px rgba(15, 23, 42, 0.12);
     }
 
     [data-theme="spring"] {
@@ -173,6 +175,7 @@
       --shadow-card: 0 4px 18px -2px rgba(20, 54, 38, 0.08);
       --shadow-focus: 0 0 0 3px rgba(22, 163, 74, 0.22);
       --shadow-active: 0 8px 20px -4px rgba(22, 163, 74, 0.16);
+      --shadow-dock: 0 -6px 24px rgba(20, 54, 38, 0.12);
     }
 
     [data-theme="blue"] {
@@ -226,6 +229,7 @@
       --shadow-card: 0 6px 24px -2px rgba(3, 13, 26, 0.65);
       --shadow-focus: 0 0 0 3px rgba(56, 189, 248, 0.3);
       --shadow-active: 0 8px 26px -4px rgba(56, 189, 248, 0.28);
+      --shadow-dock: 0 -8px 28px rgba(3, 13, 26, 0.8);
     }
 
     :root {
@@ -821,7 +825,7 @@
       border: 1px solid var(--border-default);
       border-radius: var(--radius-sm);
       color: var(--text-primary);
-      font-size: 15px;
+      font-size: 16px; /* iOS Safari otomatik zoom engelleme */
       font-weight: 600;
       transition: border-color var(--dur-fast) var(--ease-out),
                   box-shadow var(--dur-fast) var(--ease-out);
@@ -988,21 +992,207 @@
 
     .hidden { display: none !important; }
 
-    @media (max-width: 900px) {
-      .game-header { grid-template-columns: 1fr; }
-      .header-controls { align-items: flex-start; }
-      .mode-nav, .utility-row { justify-content: flex-start; }
-      .workspace-grid { grid-template-columns: 1fr; }
+    /* =====================================================================
+       MOBİL & TABLET OPTİMİZASYONU (<= 1024px): SABİT ALT KUMANDA ÇUBUĞU
+       ===================================================================== */
+    @media (max-width: 1024px) {
+      .game-header {
+        grid-template-columns: 1fr;
+        padding: 14px 16px;
+        gap: 12px;
+      }
+      .game-subtitle {
+        display: none;
+      }
+      .header-controls {
+        align-items: flex-start;
+      }
+      .mode-nav, .utility-row {
+        justify-content: flex-start;
+      }
+      .workspace-grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+      }
+
+      /* Alt sabit bar nedeniyle içeriğin altta kalmaması için boşluk */
+      .page-shell {
+        padding: 12px 12px 245px 12px;
+        gap: 14px;
+      }
+
+      /* Skor kutusu mobilde en üstte kompakt görünsün */
+      .hud-column {
+        display: contents;
+      }
+      .score-panel-mobile-top {
+        order: -1;
+        padding: 12px 16px;
+      }
+      .score-panel-mobile-top .panel-head {
+        margin-bottom: 10px;
+        padding-bottom: 8px;
+      }
+      .score-panel-mobile-top .stat-value {
+        font-size: 22px;
+      }
+      .score-panel-mobile-top .score-tile {
+        padding: 10px 12px;
+      }
+
+      /* Zincir tahtasını tek ekrana sığacak kadar kompakt yap */
+      .board-panel-mobile {
+        padding: 14px;
+      }
+      .chain-board {
+        gap: 4px;
+      }
+      .chain-node {
+        grid-template-columns: auto minmax(0, 1fr) auto;
+        padding: 9px 12px;
+        gap: 10px;
+      }
+      .node-index {
+        min-width: 34px;
+        font-size: 11px;
+        padding: 3px 5px;
+      }
+      .node-word-anchor {
+        font-size: 17px;
+      }
+      .letter-box {
+        width: 28px;
+        height: 32px;
+        font-size: 15px;
+      }
+      .node-subnote {
+        font-size: 11.5px;
+      }
+      .link-bridge {
+        margin-left: 16px;
+        padding: 2px 10px;
+        font-size: 11.5px;
+      }
+
+      /* TAHMİN VE HARF AL PANELİ: EKRANIN ALTINA SABİT (FIXED DOCK) */
+      #control-panel {
+        position: fixed;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 900;
+        margin: 0;
+        border-radius: 18px 18px 0 0;
+        border-left: none;
+        border-right: none;
+        border-bottom: none;
+        border-top: 1.5px solid var(--brand-blue-border);
+        background: var(--bg-card);
+        padding: 10px 14px calc(10px + env(safe-area-inset-bottom)) 14px;
+        box-shadow: var(--shadow-dock);
+      }
+
+      #control-panel .panel-head {
+        margin-bottom: 8px;
+        padding-bottom: 6px;
+      }
+      #control-panel .panel-title {
+        font-size: 15px;
+      }
+
+      #control-panel .input-action-row {
+        flex-direction: row;
+        align-items: center;
+        gap: 8px;
+      }
+      #control-panel .field-label {
+        display: none;
+      }
+      #control-panel .text-input {
+        min-height: 40px;
+        padding: 8px 12px;
+        font-size: 16px;
+      }
+      #control-panel #btn-submit-guess {
+        min-height: 40px;
+        padding: 8px 12px;
+        white-space: nowrap;
+        flex-shrink: 0;
+      }
+
+      /* Mobilde Harf Al ve 3 İpucu butonu tek kompakt satırda yan yana */
+      #control-panel .dock-actions-wrap {
+        display: grid;
+        grid-template-columns: 1.35fr 1fr 1fr 1fr;
+        gap: 6px;
+        margin-top: 8px;
+      }
+      #control-panel .frontier-btn-row,
+      #control-panel .hint-btn-row {
+        display: contents;
+      }
+      #control-panel .dock-actions-wrap .btn {
+        min-height: 36px;
+        padding: 6px 6px;
+        font-size: 11.5px;
+        line-height: 1.2;
+        text-align: center;
+      }
+
+      /* Geri bildirim kutusu alt dock içinde kompakt tek/iki satır */
+      #control-panel .feedback-box {
+        margin-top: 8px;
+        padding: 8px 10px;
+        font-size: 12px;
+        line-height: 1.35;
+      }
+      #control-panel .feedback-title {
+        display: inline;
+        margin-right: 6px;
+        font-size: 12px;
+      }
+      #control-panel #feedback-msg {
+        display: inline;
+      }
+
+      /* Final bahis kutusu mobilde kompakt */
+      #control-panel .wager-box {
+        padding: 8px 10px;
+        margin-bottom: 8px;
+      }
+      #control-panel .wager-box p {
+        display: none;
+      }
+      #control-panel .wager-slider-row {
+        margin-top: 0;
+      }
+      #control-panel .wager-presets {
+        margin-top: 6px;
+      }
+      #control-panel .wager-presets .btn {
+        min-height: 30px;
+        padding: 4px 8px;
+        font-size: 11.5px;
+      }
     }
 
-    @media (max-width: 640px) {
-      .page-shell { padding: 12px; gap: 14px; }
-      .card-panel { padding: 16px; }
-      .chain-node { grid-template-columns: 1fr; gap: 8px; }
-      .node-action-col { align-items: flex-start; }
-      .link-bridge { margin-left: 10px; flex-direction: column; align-items: flex-start; }
-      .input-action-row { flex-direction: column; align-items: stretch; }
-      .letter-box { width: 30px; height: 34px; font-size: 15px; }
+    @media (max-width: 520px) {
+      .brand-sub {
+        display: none;
+      }
+      .chain-node {
+        padding: 8px 10px;
+        gap: 8px;
+      }
+      .node-action-col .badge {
+        font-size: 10.5px;
+        padding: 3px 7px;
+      }
+      .letter-box {
+        width: 25px;
+        height: 30px;
+        font-size: 14px;
+      }
     }
   </style>
 </head>
@@ -1073,7 +1263,7 @@
 
       <div class="workspace-grid">
         <!-- SOL SÜTUN: ZİNCİR TAHTASI -->
-        <section class="card-panel" aria-label="Zincir Tahtası">
+        <section class="card-panel board-panel-mobile" aria-label="Zincir Tahtası">
           <div class="panel-head">
             <div>
               <p class="kicker" id="board-kicker">Tur 1 / 4 · Harfsiz +200 Puan</p>
@@ -1100,7 +1290,7 @@
 
         <!-- SAĞ SÜTUN: SKOR VE KUMANDA -->
         <aside class="hud-column" aria-label="Yarışma Kumandası">
-          <section class="card-panel">
+          <section class="card-panel score-panel-mobile-top">
             <div class="panel-head">
               <h2 class="panel-title">Skor ve Durum</h2>
               <span class="badge is-amber" id="round-mode-badge">Klasik Mod</span>
@@ -1162,6 +1352,7 @@
                     autocomplete="off"
                     autocapitalize="characters"
                     spellcheck="false"
+                    enterkeyhint="send"
                     placeholder="Örn: BEYGİR veya BEYGİRİ"
                   >
                 </div>
@@ -1169,22 +1360,24 @@
               </div>
             </form>
 
-            <div class="frontier-btn-row">
-              <button type="button" class="btn btn-soft-blue" id="btn-letter-top" onclick="revealFrontierLetter('top')">
-                Üstten Harf Al
-              </button>
-            </div>
+            <div class="dock-actions-wrap">
+              <div class="frontier-btn-row">
+                <button type="button" class="btn btn-soft-blue" id="btn-letter-top" onclick="revealFrontierLetter('top')">
+                  Üstten Harf Al
+                </button>
+              </div>
 
-            <div class="hint-btn-row">
-              <button type="button" class="btn btn-amber" id="btn-hint-morph" onclick="showMorphHint()" title="25 Puan düşer">
-                Ek İpucu (-25)
-              </button>
-              <button type="button" class="btn btn-amber" id="btn-hint-meaning" onclick="showMeaningHint()" title="25 Puan düşer">
-                Anlam İpucu (-25)
-              </button>
-              <button type="button" class="btn" id="btn-pass-word" onclick="passTargetWord()">
-                Kelimeyi Aç
-              </button>
+              <div class="hint-btn-row">
+                <button type="button" class="btn btn-amber" id="btn-hint-morph" onclick="showMorphHint()" title="25 Puan düşer">
+                  Ek İpucu (-25)
+                </button>
+                <button type="button" class="btn btn-amber" id="btn-hint-meaning" onclick="showMeaningHint()" title="25 Puan düşer">
+                  Anlam İpucu (-25)
+                </button>
+                <button type="button" class="btn" id="btn-pass-word" onclick="passTargetWord()">
+                  Kelimeyi Aç
+                </button>
+              </div>
             </div>
 
             <div id="feedback-box" class="feedback-box is-hint" aria-live="polite">
@@ -1604,6 +1797,16 @@
         return appState.mode === 'classic' && appState.roundIndex === 3;
       }
 
+      function scrollActiveTargetIntoViewOnMobile() {
+        if (window.innerWidth > 1024) return;
+        setTimeout(function () {
+          var targetEl = document.querySelector('.chain-node.is-target');
+          if (targetEl && typeof targetEl.scrollIntoView === 'function') {
+            targetEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          }
+        }, 60);
+      }
+
       function loadChain(chainObj) {
         if (!chainObj) return;
         appState.currentChain = chainObj;
@@ -1623,6 +1826,7 @@
           setWagerPreset(200);
         }
         renderAll();
+        scrollActiveTargetIntoViewOnMobile();
       }
 
       function pickClassicChainForRound(rIdx) {
@@ -1778,12 +1982,13 @@
           msg += ' Bahis: ' + appState.wagerAmount + ' Puan.';
         } else {
           var currentReward = calculatePointsForLetterCount(st.revealedCount);
-          msg += ' Bu kelimenin güncel ödülü: ' + currentReward + ' Puan.';
+          msg += ' Güncel ödül: ' + currentReward + ' Puan.';
         }
 
         setFeedback('is-hint', 'Harf Açıldı', msg);
         renderBoard();
         renderControls();
+        scrollActiveTargetIntoViewOnMobile();
         var inp = document.getElementById('guess-input');
         if (inp) inp.focus();
       }
@@ -1796,7 +2001,7 @@
         if (!inp) return;
         var raw = inp.value.trim();
         if (!raw) {
-          setFeedback('is-error', 'Boş Tahmin', 'Lütfen bir kelime yazın (örneğin kök kelimeyi veya tamlama içindeki ekli biçimini).');
+          setFeedback('is-error', 'Boş Tahmin', 'Lütfen bir kelime yazın (kök veya tamlama içindeki ekli biçimi).');
           return;
         }
 
@@ -1825,12 +2030,12 @@
 
           var safeDetail = nextSolved
             ? (node.morphNote || (prevSurface + ' ' + (node.topForm || node.root) + ' → ' + (node.bottomForm || node.root) + ' ' + nextSurface))
-            : ('Üst bağlantı tamamlandı: ' + prevSurface + ' ' + (node.topForm || node.root));
+            : ('Üst bağlantı: ' + prevSurface + ' ' + (node.topForm || node.root));
           var tierText = isFinalWagerRound()
             ? ' (Final Bahis)'
             : (openedBeforeSolve === 0
-              ? ' (Harf almadan doğrudan bildiniz!)'
-              : ' (' + openedBeforeSolve + ' harf yardımıyla)');
+              ? ' (Harfsiz)'
+              : ' (' + openedBeforeSolve + ' harf)');
 
           setFeedback(
             'is-success',
@@ -1839,31 +2044,32 @@
           );
 
           checkChainCompletion();
+          renderAll();
+          scrollActiveTargetIntoViewOnMobile();
         } else {
           playChimeError();
           if (isFinalWagerRound()) {
             addScoreToActiveTeam(-appState.wagerAmount);
             setFeedback(
               'is-error',
-              'Yanlış Tahmin (−' + appState.wagerAmount + ' Puan)',
+              'Yanlış (−' + appState.wagerAmount + ' Puan)',
               '"' + trUpper(raw) + '" aranan kelime değil. ' +
-              (appState.teamMode ? 'Sıra diğer takıma geçti.' : 'Bir harf daha açarak yeniden deneyebilirsiniz.')
+              (appState.teamMode ? 'Sıra diğer takıma geçti.' : 'Harf açarak yeniden deneyin.')
             );
           } else {
             setFeedback(
               'is-error',
               'Eşleşmedi',
               '"' + trUpper(raw) + '" bu halka için doğru değil. ' +
-              (appState.teamMode ? 'Sıra rakip takıma geçti.' : 'Harf alabilir veya Ek / Anlam ipucu kullanabilirsiniz.')
+              (appState.teamMode ? 'Sıra rakip takıma geçti.' : 'Harf veya ipucu alabilirsiniz.')
             );
           }
 
           if (appState.teamMode) {
             appState.activeTeam = appState.activeTeam === 'a' ? 'b' : 'a';
           }
+          renderAll();
         }
-
-        renderAll();
       }
 
       function passTargetWord() {
@@ -1899,6 +2105,7 @@
         }
         checkChainCompletion();
         renderAll();
+        scrollActiveTargetIntoViewOnMobile();
       }
 
       function showMorphHint() {
@@ -1993,7 +2200,14 @@
             nextBtn.textContent = 'Sonraki Zincir →';
           }
         }
-        if (completeBar) completeBar.classList.remove('hidden');
+        if (completeBar) {
+          completeBar.classList.remove('hidden');
+          if (window.innerWidth <= 1024 && typeof completeBar.scrollIntoView === 'function') {
+            setTimeout(function () {
+              completeBar.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }, 80);
+          }
+        }
       }
 
       function advanceNextStage() {
@@ -2464,6 +2678,7 @@
 
         var targetBadge = document.getElementById('active-target-badge');
         var guessLabel = document.getElementById('guess-label');
+        var guessInput = document.getElementById('guess-input');
         var btnTop = document.getElementById('btn-letter-top');
         var btnSubmit = document.getElementById('btn-submit-guess');
         var btnMorph = document.getElementById('btn-hint-morph');
@@ -2509,9 +2724,14 @@
           }
         }
 
-        if (guessLabel && activeIdx !== -1 && nodes[activeIdx]) {
+        if (activeIdx !== -1 && nodes[activeIdx]) {
           var len = trUpper(nodes[activeIdx].root).length;
-          guessLabel.textContent = activeIdx + '. Halka İçin Tahmin (' + len + ' harfli kök veya ekli biçimi)';
+          if (guessLabel) {
+            guessLabel.textContent = activeIdx + '. Halka İçin Tahmin (' + len + ' harfli kök veya ekli biçimi)';
+          }
+          if (guessInput) {
+            guessInput.placeholder = activeIdx + '. halka (' + len + ' harf) — Kök veya ekli biçimi';
+          }
         }
 
         var showWager = isFinalWagerRound() && !disabled;
