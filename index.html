@@ -924,10 +924,6 @@
       margin-bottom: 14px;
     }
 
-    /* Alt Görünümler */
-    .subview-section { display: none; }
-    .subview-section.is-visible { display: block; }
-
     .chain-catalog-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
@@ -951,23 +947,6 @@
     .catalog-card.is-featured {
       border-color: var(--brand-blue-border);
       background: var(--bg-tile-active);
-    }
-
-    .builder-rows {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      margin: 16px 0;
-    }
-    .builder-row {
-      display: grid;
-      grid-template-columns: 110px repeat(3, minmax(0, 1fr));
-      gap: 10px;
-      align-items: end;
-      padding: 12px;
-      background: var(--bg-surface);
-      border: 1px solid var(--border-subtle);
-      border-radius: var(--radius-md);
     }
 
     .morph-reference-strip {
@@ -1032,7 +1011,6 @@
       .node-action-col { align-items: flex-start; }
       .link-bridge { margin-left: 10px; flex-direction: column; align-items: flex-start; }
       .input-action-row { flex-direction: column; align-items: stretch; }
-      .builder-row { grid-template-columns: 1fr; }
       .letter-box { width: 30px; height: 34px; font-size: 15px; }
     }
   </style>
@@ -1073,7 +1051,6 @@
         <nav class="mode-nav" aria-label="Oyun Modları">
           <button type="button" class="btn is-active" id="nav-classic" onclick="switchMode('classic')">Klasik Yarışma</button>
           <button type="button" class="btn" id="nav-practice" onclick="switchMode('practice')">Serbest Pratik</button>
-          <button type="button" class="btn" id="nav-builder" onclick="switchMode('builder')">Hızlı Test Kur</button>
         </nav>
         <div class="utility-row">
           <button type="button" class="btn btn-soft-blue" id="btn-team-toggle" onclick="toggleTeamMode()">Mod: Tek Kişilik</button>
@@ -1085,7 +1062,7 @@
     </header>
 
     <!-- ANA OYUN SAHNESİ -->
-    <main id="view-stage" class="subview-section is-visible">
+    <main id="view-stage">
       <!-- Hızlı Zincir / 60sn Bonus Turu -->
       <section id="speed-stage" class="speed-panel hidden" aria-live="polite">
         <div class="panel-head">
@@ -1118,7 +1095,7 @@
         <div class="panel-head">
           <div>
             <p class="kicker">Soru Bankası (zincirbankasi.json)</p>
-            <h2 class="panel-title">Hazır veya Özel Zincir Seç</h2>
+            <h2 class="panel-title">Hazır Zincir Seç</h2>
           </div>
           <div style="display:flex; flex-wrap:wrap; gap:6px;">
             <button type="button" class="btn is-active" id="filter-all" onclick="filterPracticeChains('all')">Tümü</button>
@@ -1135,7 +1112,7 @@
         <section class="card-panel" aria-label="Zincir Tahtası">
           <div class="panel-head">
             <div>
-              <p class="kicker" id="board-kicker">Tur 1 / 4 · +100 Puan / Kelime</p>
+              <p class="kicker" id="board-kicker">Tur 1 / 4 · Harfsiz +200 Puan</p>
               <h2 class="panel-title" id="board-title">Kelime Zinciri</h2>
             </div>
             <div style="display:flex; flex-wrap:wrap; gap:6px; align-items:center;">
@@ -1225,7 +1202,7 @@
                     placeholder="Örn: BEYGİR veya BEYGİRİ"
                   >
                 </div>
-                <button type="submit" class="btn btn-primary" id="btn-submit-guess">Tahmin Et</button>
+                <button type="submit" class="btn btn-primary" id="btn-submit-guess">Tahmin Et (+200)</button>
               </div>
             </form>
 
@@ -1250,7 +1227,7 @@
             <div id="feedback-box" class="feedback-box is-hint" aria-live="polite">
               <p class="feedback-title" id="feedback-title">Hazır</p>
               <p id="feedback-msg" style="margin:0;">
-                Üstteki açık kelimenin altından harf alabilir ya da doğrudan tahmininizi yazabilirsiniz.
+                Harf yardımı almadan bilirseniz +200 Puan kazanırsınız (1 harf: 125, 2 harf: 100, 3 harf: 75, 4+ harf: 25 Puan).
               </p>
             </div>
           </section>
@@ -1281,55 +1258,15 @@
           </section>
         </aside>
       </div>
-    </main>
 
-    <!-- HIZLI TEST ZİNCİR KURUCU -->
-    <section id="view-builder" class="subview-section">
-      <div class="card-panel">
-        <div class="panel-head">
-          <div>
-            <p class="kicker">Tarayıcı İçi Hızlı Deneme</p>
-            <h2 class="panel-title">Tarayıcıda Özel Zincir Dene</h2>
-          </div>
-          <button type="button" class="btn btn-soft-blue" onclick="loadBuilderExample()">Örnek Doldur (Dolap Beygiri)</button>
-        </div>
-        <p style="margin-top:0; color:var(--text-secondary); max-width:74ch;">
-          Kalıcı soru bankası dosyası (<code>zincirbankasi.json</code>) oluşturmak veya yapay zekâdan aldığınız JSON çıktılarını birleştirmek için
-          bilgisayarınızdaki <strong>zinciretkisi_editor.html</strong> aracını kullanabilirsiniz. Buradan ise tarayıcı belleğine anlık deneme zinciri ekleyebilirsiniz.
-        </p>
-
-        <div class="score-grid" style="margin-bottom: 14px;">
-          <div class="control-group" style="margin-bottom:0;">
-            <label class="field-label" for="builder-title">Zincir Başlığı</label>
-            <input type="text" id="builder-title" class="text-input" value="Özel Türkçe Zincir" maxlength="48">
-          </div>
-          <div class="control-group" style="margin-bottom:0;">
-            <label class="field-label" for="builder-difficulty">Zorluk Seviyesi</label>
-            <select id="builder-difficulty" class="select-input">
-              <option value="Kolay">Kolay</option>
-              <option value="Orta" selected>Orta</option>
-              <option value="Zor">Zor</option>
-            </select>
-          </div>
-        </div>
-
-        <div id="builder-rows" class="builder-rows"></div>
-
-        <div style="display:flex; flex-wrap:wrap; gap:8px; align-items:center;">
-          <button type="button" class="btn" onclick="addBuilderSlot()">+ Ara Kelime Ekle</button>
-          <button type="button" class="btn" onclick="removeBuilderSlot()">− Son Ara Kelimeyi Çıkar</button>
-          <button type="button" class="btn btn-primary" onclick="saveAndPlayCustomChain()">Kaydet ve Tahtada Oyna</button>
-        </div>
-
-        <div id="builder-feedback" class="feedback-box hidden"></div>
-      </div>
-
-      <section class="card-panel" style="margin-top: 22px;">
+      <!-- TÜRKÇE DİL MOTORU NASIL ÇALIŞIR? (OYUN REHBERİ) -->
+      <section class="card-panel" style="margin-top: 22px;" aria-label="Türkçe Dil Motoru Rehberi">
         <div class="panel-head">
           <div>
             <p class="kicker">Türkçe Dil Motoru Nasıl Çalışır?</p>
             <h2 class="panel-title">İsim Tamlamaları, Yumuşama ve Ünlü Düşmesi</h2>
           </div>
+          <span class="badge is-blue">Harfsiz +200 · 1 Harf 125 · 2 Harf 100 · 3 Harf 75 · 4+ Harf 25 Puan</span>
         </div>
         <div class="morph-reference-strip">
           <div class="morph-example-card">
@@ -1355,7 +1292,7 @@
           </div>
         </div>
       </section>
-    </section>
+    </main>
 
     <footer class="studio-footer">
       <span>© 2026 MaviBlue Stüdyo · Zincir Etkisi</span>
@@ -1634,16 +1571,7 @@
         speedTimerId: null,
         speedSecondsLeft: 15,
         speedMaxSeconds: 15,
-        speedRunning: false,
-
-        customChains: [],
-        builderSlots: [
-          { root: 'DOLAP', topForm: '', bottomForm: 'DOLAP', anchor: true },
-          { root: 'BEYGİR', topForm: 'BEYGİRİ', bottomForm: 'BEYGİR', anchor: false },
-          { root: 'GÜÇ', topForm: 'GÜCÜ', bottomForm: 'GÜÇ', anchor: false },
-          { root: 'ZEHİR', topForm: 'ZEHİRLENMESİ', bottomForm: 'ZEHİR', anchor: false },
-          { root: 'GİBİ', topForm: 'GİBİ', bottomForm: '', anchor: true }
-        ]
+        speedRunning: false
       };
 
       var audioCtx = null;
@@ -1685,8 +1613,7 @@
             bestScore: appState.bestScore,
             solvedChainsCount: appState.solvedChainsCount,
             soundEnabled: appState.soundEnabled,
-            history: appState.history.slice(0, 15),
-            customChains: appState.customChains.slice(0, 15)
+            history: appState.history.slice(0, 15)
           };
           localStorage.setItem(STORAGE_KEY, JSON.stringify(payload));
         } catch (e) {}
@@ -1702,7 +1629,6 @@
             if (typeof saved.solvedChainsCount === 'number') appState.solvedChainsCount = saved.solvedChainsCount;
             if (typeof saved.soundEnabled === 'boolean') appState.soundEnabled = saved.soundEnabled;
             if (Array.isArray(saved.history)) appState.history = saved.history;
-            if (Array.isArray(saved.customChains)) appState.customChains = saved.customChains;
           }
         } catch (e) {}
       }
@@ -1740,12 +1666,14 @@
       }
 
       /* =====================================================================
-         5. ZİNCİR SEÇİMİ VE SINIR MANTIĞI
+         5. PUANLAMA, ZİNCİR SEÇİMİ VE SINIR MANTIĞI
          ===================================================================== */
-      function getRoundPoints() {
-        if (appState.mode === 'practice') return 100;
-        var map = [100, 200, 300, 0];
-        return map[appState.roundIndex] || 100;
+      function calculatePointsForLetterCount(openedCount) {
+        if (openedCount <= 0) return 200;
+        if (openedCount === 1) return 125;
+        if (openedCount === 2) return 100;
+        if (openedCount === 3) return 75;
+        return 25;
       }
 
       function isFinalWagerRound() {
@@ -1801,16 +1729,11 @@
       /* İstediğiniz an sıradaki bulmacaya geçme fonksiyonu */
       function loadNextPuzzleAnytime() {
         hideSpeedStage();
-        if (appState.mode === 'builder') {
-          switchMode('classic');
-          return;
-        }
         if (appState.mode === 'practice') {
-          var combined = appState.customChains.concat(CHAIN_BANK);
-          var idx = combined.indexOf(appState.currentChain);
-          var nextIdx = (idx + 1) % combined.length;
-          loadChain(combined[nextIdx]);
-          setFeedback('is-hint', 'Sıradaki Bulmaca', '"' + combined[nextIdx].title + '" tahtaya yüklendi.');
+          var idx = CHAIN_BANK.indexOf(appState.currentChain);
+          var nextIdx = (idx + 1) % CHAIN_BANK.length;
+          loadChain(CHAIN_BANK[nextIdx]);
+          setFeedback('is-hint', 'Sıradaki Bulmaca', '"' + CHAIN_BANK[nextIdx].title + '" tahtaya yüklendi.');
           return;
         }
 
@@ -1896,7 +1819,7 @@
         var rootUpper = trUpper(node.root);
 
         if (st.revealedCount >= rootUpper.length) {
-          setFeedback('is-hint', 'Tüm Harfler Açık', 'Bu kelimenin tüm harfleri zaten açıldı. Doğru kökü veya tamlama biçimini yazıp tahmin edin.');
+          setFeedback('is-hint', 'Tüm Harfler Açık', 'Bu kelimenin tüm harfleri zaten açıldı (Ödül: 25 Puan). Doğru kökü veya tamlama biçimini yazıp tahmin edin.');
           renderBoard();
           renderControls();
           return;
@@ -1917,10 +1840,13 @@
           ? (appState.currentChain.nodes[targetIdx - 1].bottomForm || appState.currentChain.nodes[targetIdx - 1].root)
           : (appState.currentChain.nodes[targetIdx + 1].topForm || appState.currentChain.nodes[targetIdx + 1].root);
 
-        var msg = anchorWord + ' kelimesinin altından harf açıldı: "' + revealedChar + '".';
+        var msg = anchorWord + ' kelimesinin altından ' + st.revealedCount + '. harf açıldı: "' + revealedChar + '".';
 
         if (isFinalWagerRound()) {
-          msg += ' Bahis: ' + appState.wagerAmount + ' Puan. Şimdi tahmininizi girin!';
+          msg += ' Bahis: ' + appState.wagerAmount + ' Puan.';
+        } else {
+          var currentReward = calculatePointsForLetterCount(st.revealedCount);
+          msg += ' Bu kelimenin güncel ödülü: ' + currentReward + ' Puan.';
         }
 
         setFeedback('is-hint', 'Harf Açıldı', msg);
@@ -1960,19 +1886,23 @@
           inp.value = '';
           playChimeSuccess();
 
-          var basePts = isFinalWagerRound() ? appState.wagerAmount : getRoundPoints();
-          var noLetterBonus = (!isFinalWagerRound() && openedBeforeSolve === 0) ? 50 : 0;
-          var totalPts = basePts + noLetterBonus;
+          var totalPts = isFinalWagerRound()
+            ? appState.wagerAmount
+            : calculatePointsForLetterCount(openedBeforeSolve);
           addScoreToActiveTeam(totalPts);
 
           var safeDetail = nextSolved
             ? (node.morphNote || (prevSurface + ' ' + (node.topForm || node.root) + ' → ' + (node.bottomForm || node.root) + ' ' + nextSurface))
             : ('Üst bağlantı tamamlandı: ' + prevSurface + ' ' + (node.topForm || node.root));
-          var bonusText = noLetterBonus > 0 ? ' (Harf Almadan Bilme Bonusu: +50)' : '';
+          var tierText = isFinalWagerRound()
+            ? ' (Final Bahis)'
+            : (openedBeforeSolve === 0
+              ? ' (Harf almadan doğrudan bildiniz!)'
+              : ' (' + openedBeforeSolve + ' harf yardımıyla)');
 
           setFeedback(
             'is-success',
-            'Doğru! +' + totalPts + ' Puan' + bonusText,
+            'Doğru! +' + totalPts + ' Puan' + tierText,
             'Kök "' + node.root + '" doğrulandı. ' + safeDetail
           );
 
@@ -2426,32 +2356,20 @@
          8. MOD GEÇİŞLERİ, BAHİS VE AYARLAR
          ===================================================================== */
       function switchMode(mode) {
-        appState.mode = mode;
+        appState.mode = mode === 'practice' ? 'practice' : 'classic';
         hideSpeedStage();
 
-        var navIds = ['nav-classic', 'nav-practice', 'nav-builder'];
+        var navIds = ['nav-classic', 'nav-practice'];
         for (var i = 0; i < navIds.length; i++) {
           var btn = document.getElementById(navIds[i]);
           if (btn) btn.classList.remove('is-active');
         }
-        var activeNav = document.getElementById('nav-' + mode);
+        var activeNav = document.getElementById('nav-' + appState.mode);
         if (activeNav) activeNav.classList.add('is-active');
 
-        var stage = document.getElementById('view-stage');
-        var builder = document.getElementById('view-builder');
         var picker = document.getElementById('practice-picker-bar');
 
-        if (mode === 'builder') {
-          if (stage) stage.classList.remove('is-visible');
-          if (builder) builder.classList.add('is-visible');
-          renderBuilder();
-          return;
-        }
-
-        if (stage) stage.classList.add('is-visible');
-        if (builder) builder.classList.remove('is-visible');
-
-        if (mode === 'practice') {
+        if (appState.mode === 'practice') {
           if (picker) picker.classList.remove('hidden');
           loadChain(CHAIN_BANK[0]);
           setFeedback('is-hint', 'Serbest Pratik Modu', 'Soru bankasındaki dilediğiniz zinciri seçip süresiz çözebilirsiniz.');
@@ -2529,7 +2447,7 @@
       }
 
       /* =====================================================================
-         9. PRATİK KATALOĞU VE TARAYICI TEST KURUCU
+         9. PRATİK KATALOĞU
          ===================================================================== */
       function filterPracticeChains(diff) {
         appState.practiceFilter = diff;
@@ -2545,11 +2463,10 @@
       }
 
       function selectPracticeChain(chainId) {
-        var all = appState.customChains.concat(CHAIN_BANK);
-        for (var i = 0; i < all.length; i++) {
-          if (all[i].id === chainId) {
-            loadChain(all[i]);
-            setFeedback('is-hint', 'Zincir Seçildi', '"' + all[i].title + '" tahtaya yüklendi.');
+        for (var i = 0; i < CHAIN_BANK.length; i++) {
+          if (CHAIN_BANK[i].id === chainId) {
+            loadChain(CHAIN_BANK[i]);
+            setFeedback('is-hint', 'Zincir Seçildi', '"' + CHAIN_BANK[i].title + '" tahtaya yüklendi.');
             return;
           }
         }
@@ -2560,8 +2477,7 @@
         if (!container) return;
         container.innerHTML = '';
 
-        var combined = appState.customChains.concat(CHAIN_BANK);
-        var filtered = combined.filter(function (c) {
+        var filtered = CHAIN_BANK.filter(function (c) {
           return appState.practiceFilter === 'all' || c.difficulty === appState.practiceFilter;
         });
 
@@ -2579,10 +2495,10 @@
           diffBadge.textContent = ch.difficulty;
           badgeRow.appendChild(diffBadge);
 
-          if (ch.featured || ch.isCustom) {
+          if (ch.featured) {
             var tag = document.createElement('span');
             tag.className = 'badge is-blue';
-            tag.textContent = ch.isCustom ? 'Özel' : 'Vitrin';
+            tag.textContent = 'Vitrin';
             badgeRow.appendChild(tag);
           }
 
@@ -2608,180 +2524,6 @@
           card.appendChild(playBtn);
           container.appendChild(card);
         }
-      }
-
-      function renderBuilder() {
-        var container = document.getElementById('builder-rows');
-        if (!container) return;
-        container.innerHTML = '';
-
-        for (var i = 0; i < appState.builderSlots.length; i++) {
-          var slot = appState.builderSlots[i];
-          var isFirst = i === 0;
-          var isLast = i === appState.builderSlots.length - 1;
-
-          var row = document.createElement('div');
-          row.className = 'builder-row';
-
-          var idx = document.createElement('span');
-          idx.className = 'badge ' + (isFirst || isLast ? 'is-blue' : 'is-emerald');
-          idx.textContent = isFirst ? 'Başlangıç' : (isLast ? 'Bitiş' : (i + '. Halka'));
-          row.appendChild(idx);
-
-          var g1 = document.createElement('div');
-          g1.className = 'control-group';
-          g1.style.marginBottom = '0';
-          var l1 = document.createElement('label');
-          l1.className = 'field-label';
-          l1.setAttribute('for', 'b-root-' + i);
-          l1.textContent = 'Kök Sözcük';
-          var i1 = document.createElement('input');
-          i1.type = 'text';
-          i1.id = 'b-root-' + i;
-          i1.className = 'text-input';
-          i1.value = slot.root;
-          i1.setAttribute('oninput', 'updateBuilderSlot(' + i + ', "root", this.value)');
-          g1.appendChild(l1);
-          g1.appendChild(i1);
-          row.appendChild(g1);
-
-          var g2 = document.createElement('div');
-          g2.className = 'control-group';
-          g2.style.marginBottom = '0';
-          var l2 = document.createElement('label');
-          l2.className = 'field-label';
-          l2.setAttribute('for', 'b-top-' + i);
-          l2.textContent = isFirst ? 'Üst Bağlantı (Yok)' : 'Üst Tamlama Biçimi';
-          var i2 = document.createElement('input');
-          i2.type = 'text';
-          i2.id = 'b-top-' + i;
-          i2.className = 'text-input';
-          i2.value = slot.topForm;
-          i2.disabled = isFirst;
-          i2.placeholder = slot.root;
-          i2.setAttribute('oninput', 'updateBuilderSlot(' + i + ', "topForm", this.value)');
-          g2.appendChild(l2);
-          g2.appendChild(i2);
-          row.appendChild(g2);
-
-          var g3 = document.createElement('div');
-          g3.className = 'control-group';
-          g3.style.marginBottom = '0';
-          var l3 = document.createElement('label');
-          l3.className = 'field-label';
-          l3.setAttribute('for', 'b-bot-' + i);
-          l3.textContent = isLast ? 'Alt Bağlantı (Yok)' : 'Alt Tamlama Biçimi';
-          var i3 = document.createElement('input');
-          i3.type = 'text';
-          i3.id = 'b-bot-' + i;
-          i3.className = 'text-input';
-          i3.value = slot.bottomForm;
-          i3.disabled = isLast;
-          i3.placeholder = slot.root;
-          i3.setAttribute('oninput', 'updateBuilderSlot(' + i + ', "bottomForm", this.value)');
-          g3.appendChild(l3);
-          g3.appendChild(i3);
-          row.appendChild(g3);
-
-          container.appendChild(row);
-        }
-      }
-
-      function updateBuilderSlot(idx, field, value) {
-        if (!appState.builderSlots[idx]) return;
-        appState.builderSlots[idx][field] = trUpper(value);
-      }
-
-      function addBuilderSlot() {
-        if (appState.builderSlots.length >= 6) {
-          showBuilderFeedback('is-error', 'Sınır', 'Bir zincir en fazla 6 kelimeden oluşabilir.');
-          return;
-        }
-        var last = appState.builderSlots.pop();
-        appState.builderSlots.push({ root: '', topForm: '', bottomForm: '', anchor: false });
-        appState.builderSlots.push(last);
-        renderBuilder();
-      }
-
-      function removeBuilderSlot() {
-        if (appState.builderSlots.length <= 4) {
-          showBuilderFeedback('is-error', 'En Az 4 Kelime', 'Bir zincirde en az 2 ara kelime (toplam 4 sözcük) bulunmalıdır.');
-          return;
-        }
-        appState.builderSlots.splice(appState.builderSlots.length - 2, 1);
-        renderBuilder();
-      }
-
-      function loadBuilderExample() {
-        appState.builderSlots = [
-          { root: 'DOLAP', topForm: '', bottomForm: 'DOLAP', anchor: true },
-          { root: 'BEYGİR', topForm: 'BEYGİRİ', bottomForm: 'BEYGİR', anchor: false },
-          { root: 'GÜÇ', topForm: 'GÜCÜ', bottomForm: 'GÜÇ', anchor: false },
-          { root: 'ZEHİR', topForm: 'ZEHİRLENMESİ', bottomForm: 'ZEHİR', anchor: false },
-          { root: 'GİBİ', topForm: 'GİBİ', bottomForm: '', anchor: true }
-        ];
-        var titleEl = document.getElementById('builder-title');
-        if (titleEl) titleEl.value = 'Dolap Beygiri Örneği';
-        renderBuilder();
-        showBuilderFeedback('is-hint', 'Örnek Yüklendi', 'Kök ve ekli biçimleri inceleyip doğrudan tahtada oynayabilirsiniz.');
-      }
-
-      function saveAndPlayCustomChain() {
-        var titleEl = document.getElementById('builder-title');
-        var diffEl = document.getElementById('builder-difficulty');
-        var title = titleEl && titleEl.value.trim() ? titleEl.value.trim() : 'Özel Zincir';
-        var diff = diffEl ? diffEl.value : 'Orta';
-
-        var cleanNodes = [];
-        for (var i = 0; i < appState.builderSlots.length; i++) {
-          var s = appState.builderSlots[i];
-          var rootU = trUpper(s.root);
-          if (!rootU || rootU.indexOf(' ') !== -1) {
-            showBuilderFeedback('is-error', 'Eksik veya Geçersiz Kelime', (i + 1) + '. satırdaki kök sözcük tek kelime ve dolu olmalıdır.');
-            return;
-          }
-          var topU = trUpper(s.topForm) || rootU;
-          var botU = trUpper(s.bottomForm) || rootU;
-          var isAnchor = (i === 0 || i === appState.builderSlots.length - 1);
-          cleanNodes.push({
-            root: rootU,
-            topForm: topU,
-            bottomForm: botU,
-            anchor: isAnchor,
-            accepted: [rootU, topU, botU],
-            morphNote: isAnchor ? '' : ('Özel halka: ' + topU + ' / ' + botU)
-          });
-        }
-
-        var newChain = {
-          id: 'custom-' + Date.now(),
-          title: title,
-          difficulty: diff,
-          isCustom: true,
-          roundEligible: false,
-          nodes: cleanNodes
-        };
-
-        appState.customChains.unshift(newChain);
-        savePersistentState();
-        switchMode('practice');
-        loadChain(newChain);
-        setFeedback('is-success', 'Özel Zincir Hazır', '"' + title + '" kaydedildi ve oyun tahtasına yüklendi.');
-      }
-
-      function showBuilderFeedback(cls, title, msg) {
-        var box = document.getElementById('builder-feedback');
-        if (!box) return;
-        box.className = 'feedback-box ' + cls;
-        box.innerHTML = '';
-        var t = document.createElement('p');
-        t.className = 'feedback-title';
-        t.textContent = title;
-        var p = document.createElement('p');
-        p.style.margin = '0';
-        p.textContent = msg;
-        box.appendChild(t);
-        box.appendChild(p);
       }
 
       /* =====================================================================
@@ -2820,9 +2562,9 @@
           if (appState.mode === 'classic') {
             kickerEl.textContent = isFinalWagerRound()
               ? 'Tur 4 / 4 · Final Bahis Turu (100–500 / Son Kelime 1000)'
-              : ('Tur ' + (appState.roundIndex + 1) + ' / 4 · +' + getRoundPoints() + ' Puan / Kelime');
+              : ('Tur ' + (appState.roundIndex + 1) + ' / 4 · Harfsiz +200 · 1H: 125 · 2H: 100 · 3H: 75 · 4+H: 25');
           } else {
-            kickerEl.textContent = 'Serbest Pratik · Türkçe Kök & Tamlama Modu';
+            kickerEl.textContent = 'Serbest Pratik · Harfsiz +200 · 1H: 125 · 2H: 100 · 3H: 75 · 4+H: 25';
           }
         }
         if (titleEl) titleEl.textContent = appState.currentChain.title;
@@ -2889,7 +2631,8 @@
                 sub.textContent = 'Çözülen kök: ' + wordU + ' · Üst bağlantı: ' + prevSurface + ' ' + topSurface;
               }
             } else if (isTarget) {
-              sub.textContent = 'Seçili hedef · ' + wordU.length + ' harfli kök (ekli biçimler de kabul edilir)';
+              var potPts = isFinalWagerRound() ? appState.wagerAmount : calculatePointsForLetterCount(st.revealedCount);
+              sub.textContent = 'Seçili hedef · ' + wordU.length + ' harf (' + st.revealedCount + ' harf açık · Ödül: ' + potPts + ' Puan)';
             } else if (isFrontier) {
               sub.textContent = 'Seçmek için tıklayın · ' + wordU.length + ' harf';
             } else {
@@ -3053,7 +2796,17 @@
 
         var disabled = appState.chainCompleted || activeIdx === -1;
 
-        if (btnSubmit) btnSubmit.disabled = disabled;
+        if (btnSubmit) {
+          btnSubmit.disabled = disabled;
+          if (!disabled && appState.nodeStates[activeIdx]) {
+            var currentPts = isFinalWagerRound()
+              ? appState.wagerAmount
+              : calculatePointsForLetterCount(appState.nodeStates[activeIdx].revealedCount);
+            btnSubmit.textContent = 'Tahmin Et (+' + currentPts + ')';
+          } else {
+            btnSubmit.textContent = 'Tahmin Et';
+          }
+        }
         if (btnMorph) btnMorph.disabled = disabled;
         if (btnMean) btnMean.disabled = disabled;
         if (btnPass) btnPass.disabled = disabled;
@@ -3062,7 +2815,7 @@
           btnTop.disabled = disabled || f.topIdx === -1;
           if (f.topIdx !== -1 && nodes[f.topIdx - 1]) {
             var topRef = nodes[f.topIdx - 1].bottomForm || nodes[f.topIdx - 1].root;
-            btnTop.textContent = topRef + ' Altından Harf';
+            btnTop.textContent = topRef + ' Altından Harf Al';
           } else {
             btnTop.textContent = 'Üstten Harf Al';
           }
@@ -3108,7 +2861,7 @@
          11. KLAVYE KISAYOLLARI (↑ / ↓ Sınır Geçişi)
          ===================================================================== */
       document.addEventListener('keydown', function (ev) {
-        if (appState.mode === 'builder' || appState.speedActive || appState.chainCompleted) return;
+        if (appState.speedActive || appState.chainCompleted) return;
         if (ev.key === 'ArrowUp') {
           var fUp = getFrontierIndices();
           if (fUp.topIdx !== -1) {
@@ -3147,11 +2900,6 @@
       window.setWagerPreset = setWagerPreset;
       window.filterPracticeChains = filterPracticeChains;
       window.selectPracticeChain = selectPracticeChain;
-      window.updateBuilderSlot = updateBuilderSlot;
-      window.addBuilderSlot = addBuilderSlot;
-      window.removeBuilderSlot = removeBuilderSlot;
-      window.loadBuilderExample = loadBuilderExample;
-      window.saveAndPlayCustomChain = saveAndPlayCustomChain;
 
       /* =====================================================================
          12. BAŞLATMA
