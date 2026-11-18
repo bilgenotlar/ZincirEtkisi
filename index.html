@@ -1,0 +1,2929 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Zincir Etkisi — MaviBlue Stüdyo</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      color-scheme: dark;
+
+      /* MaviBlue Stüdyo Standart Gece Mavisi Paleti */
+      --bg-base: #0b1120;
+      --bg-surface: #111827;
+      --bg-card: #162033;
+      --bg-card-elevated: #1e293b;
+      --bg-input: #0f172a;
+
+      /* Metin Hiyerarşisi */
+      --text-primary: #f1f5f9;
+      --text-secondary: #94a3b8;
+      --text-muted: #64748b;
+
+      /* Kenarlıklar */
+      --border-subtle: #1e293b;
+      --border-default: #334155;
+      --border-strong: #475569;
+
+      /* MaviBlue Marka Vurguları */
+      --brand-blue: #38bdf8;
+      --brand-blue-strong: #0284c7;
+      --brand-blue-soft: rgba(56, 189, 248, 0.14);
+      --brand-blue-border: rgba(56, 189, 248, 0.42);
+
+      --accent-amber: #f59e0b;
+      --accent-amber-soft: rgba(245, 158, 11, 0.14);
+      --accent-amber-border: rgba(245, 158, 11, 0.42);
+
+      --accent-emerald: #10b981;
+      --accent-emerald-soft: rgba(16, 185, 129, 0.14);
+      --accent-emerald-border: rgba(16, 185, 129, 0.42);
+
+      --accent-rose: #f43f5e;
+      --accent-rose-soft: rgba(244, 63, 94, 0.14);
+      --accent-rose-border: rgba(244, 63, 94, 0.42);
+
+      /* Tipografi */
+      --font-display: 'Plus Jakarta Sans', 'Inter', sans-serif;
+      --font-body: 'Inter', sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+
+      /* Boyutlar ve Yuvarlaklık */
+      --radius-sm: 8px;
+      --radius-md: 12px;
+      --radius-lg: 16px;
+      --radius-pill: 9999px;
+
+      /* Yumuşak Derinlik Gölgeleri */
+      --shadow-card: 0 4px 20px -2px rgba(2, 6, 23, 0.55);
+      --shadow-focus: 0 0 0 3px rgba(56, 189, 248, 0.25);
+      --shadow-active: 0 8px 24px -4px rgba(14, 165, 233, 0.2);
+
+      --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+      --dur-fast: 140ms;
+      --dur-normal: 220ms;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+    html, body {
+      margin: 0;
+      padding: 0;
+      background-color: var(--bg-base);
+      background-image: radial-gradient(circle at 18% 0%, rgba(14, 165, 233, 0.08), transparent 42%),
+                        radial-gradient(circle at 85% 10%, rgba(56, 189, 248, 0.05), transparent 38%);
+      color: var(--text-primary);
+      font-family: var(--font-body);
+      font-size: 15px;
+      line-height: 1.55;
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    button, input, select {
+      font-family: inherit;
+      color: inherit;
+    }
+
+    :focus-visible {
+      outline: 2px solid var(--brand-blue);
+      outline-offset: 2px;
+    }
+
+    .page-shell {
+      max-width: 1240px;
+      margin: 0 auto;
+      padding: 20px 24px 36px 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 22px;
+    }
+
+    /* Üst Stüdyo Çubuğu */
+    .studio-topbar {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      padding: 10px 16px;
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+    }
+
+    .studio-brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      color: var(--text-primary);
+    }
+
+    .brand-mark {
+      width: 32px;
+      height: 32px;
+      border-radius: var(--radius-sm);
+      background: linear-gradient(135deg, #0284c7, #38bdf8);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: 14px;
+      color: #082f49;
+      letter-spacing: -0.03em;
+    }
+
+    .brand-name {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 15px;
+      letter-spacing: -0.01em;
+    }
+
+    .brand-sub {
+      font-size: 12px;
+      color: var(--text-secondary);
+      border-left: 1px solid var(--border-default);
+      padding-left: 10px;
+    }
+
+    .topbar-links {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .portal-link {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text-secondary);
+      text-decoration: none;
+      padding: 6px 12px;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border-default);
+      background: var(--bg-card);
+      transition: all var(--dur-fast) var(--ease-out);
+    }
+    .portal-link:hover {
+      color: var(--brand-blue);
+      border-color: var(--brand-blue-border);
+    }
+
+    /* Ana Başlık Alanı */
+    .game-header {
+      display: grid;
+      grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
+      gap: 20px;
+      align-items: end;
+      padding: 20px 24px;
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-card);
+    }
+
+    .kicker {
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--brand-blue);
+      margin: 0 0 6px 0;
+    }
+
+    .game-title {
+      font-family: var(--font-display);
+      font-size: clamp(1.75rem, 1.4rem + 1.1vw, 2.25rem);
+      font-weight: 800;
+      letter-spacing: -0.025em;
+      line-height: 1.15;
+      margin: 0;
+      color: var(--text-primary);
+    }
+
+    .game-title span {
+      color: var(--brand-blue);
+    }
+
+    .game-subtitle {
+      margin: 8px 0 0 0;
+      color: var(--text-secondary);
+      max-width: 62ch;
+      font-size: 14.5px;
+    }
+
+    .header-controls {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 10px;
+    }
+
+    .mode-nav, .utility-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      justify-content: flex-end;
+    }
+
+    /* Standart MaviBlue Butonlar */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      min-height: 40px;
+      padding: 8px 14px;
+      background: var(--bg-card-elevated);
+      color: var(--text-primary);
+      border: 1px solid var(--border-default);
+      border-radius: var(--radius-sm);
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background-color var(--dur-fast) var(--ease-out),
+                  border-color var(--dur-fast) var(--ease-out),
+                  color var(--dur-fast) var(--ease-out),
+                  transform var(--dur-fast) var(--ease-out);
+    }
+    .btn:hover:not(:disabled) {
+      border-color: var(--brand-blue-border);
+      background: #243247;
+    }
+    .btn:active:not(:disabled) {
+      transform: translateY(1px);
+    }
+    .btn:disabled {
+      opacity: 0.45;
+      cursor: not-allowed;
+    }
+
+    .btn-primary {
+      background: var(--brand-blue-strong);
+      border-color: var(--brand-blue);
+      color: #ffffff;
+    }
+    .btn-primary:hover:not(:disabled) {
+      background: #0369a1;
+      border-color: #7dd3fc;
+    }
+
+    .btn-soft-blue {
+      background: var(--brand-blue-soft);
+      border-color: var(--brand-blue-border);
+      color: var(--brand-blue);
+    }
+    .btn-soft-blue:hover:not(:disabled) {
+      background: rgba(56, 189, 248, 0.22);
+    }
+
+    .btn-amber {
+      background: var(--accent-amber-soft);
+      border-color: var(--accent-amber-border);
+      color: #fbbf24;
+    }
+    .btn-amber:hover:not(:disabled) {
+      background: rgba(245, 158, 11, 0.22);
+    }
+
+    .btn.is-active {
+      background: var(--brand-blue-strong);
+      border-color: var(--brand-blue);
+      color: #ffffff;
+    }
+
+    /* Kartlar ve Paneller */
+    .card-panel {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      padding: 22px;
+      box-shadow: var(--shadow-card);
+    }
+
+    .workspace-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr);
+      gap: 22px;
+      align-items: start;
+    }
+
+    .panel-head {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 16px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .panel-title {
+      font-family: var(--font-display);
+      font-size: 18px;
+      font-weight: 700;
+      letter-spacing: -0.015em;
+      margin: 0;
+      color: var(--text-primary);
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 4px 10px;
+      border-radius: var(--radius-pill);
+      border: 1px solid var(--border-default);
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text-secondary);
+      background: var(--bg-card-elevated);
+    }
+    .badge.is-blue {
+      background: var(--brand-blue-soft);
+      border-color: var(--brand-blue-border);
+      color: var(--brand-blue);
+    }
+    .badge.is-emerald {
+      background: var(--accent-emerald-soft);
+      border-color: var(--accent-emerald-border);
+      color: #34d399;
+    }
+    .badge.is-amber {
+      background: var(--accent-amber-soft);
+      border-color: var(--accent-amber-border);
+      color: #fbbf24;
+    }
+    .badge.is-rose {
+      background: var(--accent-rose-soft);
+      border-color: var(--accent-rose-border);
+      color: #fb7185;
+    }
+
+    /* Zincir Tahtası */
+    .chain-board {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .chain-node {
+      display: grid;
+      grid-template-columns: auto minmax(0, 1fr) auto;
+      gap: 14px;
+      align-items: center;
+      padding: 14px 16px;
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      transition: border-color var(--dur-normal) var(--ease-out),
+                  box-shadow var(--dur-normal) var(--ease-out),
+                  background-color var(--dur-normal) var(--ease-out);
+    }
+    .chain-node.is-anchor {
+      background: var(--bg-card-elevated);
+      border-color: var(--brand-blue-border);
+    }
+    .chain-node.is-solved {
+      background: rgba(16, 185, 129, 0.08);
+      border-color: var(--accent-emerald-border);
+    }
+    .chain-node.is-frontier {
+      cursor: pointer;
+      border-color: var(--border-strong);
+    }
+    .chain-node.is-frontier:hover {
+      border-color: var(--brand-blue);
+      background: #172338;
+    }
+    .chain-node.is-target {
+      background: #17253d;
+      border: 1.5px solid var(--brand-blue);
+      box-shadow: var(--shadow-active);
+    }
+    .chain-node.is-passed {
+      background: rgba(245, 158, 11, 0.07);
+      border-color: var(--accent-amber-border);
+    }
+
+    .node-index {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--text-secondary);
+      min-width: 42px;
+      text-align: center;
+      padding: 5px 6px;
+      border: 1px solid var(--border-default);
+      border-radius: var(--radius-sm);
+      background: var(--bg-card);
+    }
+    .chain-node.is-target .node-index {
+      color: var(--brand-blue);
+      border-color: var(--brand-blue);
+      background: var(--brand-blue-soft);
+    }
+    .chain-node.is-anchor .node-index {
+      color: var(--brand-blue);
+      border-color: var(--brand-blue-border);
+    }
+    .chain-node.is-solved .node-index {
+      color: #34d399;
+      border-color: var(--accent-emerald-border);
+    }
+
+    .node-body {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .node-word-anchor {
+      font-family: var(--font-display);
+      font-size: 20px;
+      font-weight: 800;
+      letter-spacing: 0.03em;
+      color: var(--brand-blue);
+    }
+
+    .letter-strip {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      align-items: center;
+    }
+
+    .letter-box {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 34px;
+      height: 38px;
+      background: var(--bg-card);
+      border: 1px solid var(--border-default);
+      border-radius: var(--radius-sm);
+      font-family: var(--font-display);
+      font-size: 17px;
+      font-weight: 700;
+      color: var(--text-primary);
+    }
+    .letter-box.is-revealed {
+      border-color: var(--brand-blue);
+      color: var(--brand-blue);
+      background: var(--brand-blue-soft);
+    }
+    .chain-node.is-solved .letter-box.is-revealed {
+      border-color: var(--accent-emerald);
+      color: #34d399;
+      background: var(--accent-emerald-soft);
+    }
+    .chain-node.is-passed .letter-box.is-revealed {
+      border-color: var(--accent-amber);
+      color: #fbbf24;
+      background: var(--accent-amber-soft);
+    }
+    .letter-box.is-blank {
+      color: var(--text-muted);
+    }
+
+    .node-subnote {
+      font-size: 12.5px;
+      color: var(--text-secondary);
+    }
+
+    .node-action-col {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 4px;
+    }
+
+    /* Tamlama Köprüsü */
+    .link-bridge {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      padding: 4px 14px;
+      margin-left: 28px;
+      border-left: 2px solid var(--border-default);
+      font-size: 12.5px;
+      color: var(--text-muted);
+    }
+    .link-bridge.is-linked {
+      border-left-color: var(--accent-emerald);
+      color: var(--text-primary);
+    }
+    .bridge-phrase {
+      font-weight: 600;
+    }
+    .link-bridge.is-linked .bridge-phrase {
+      color: #34d399;
+    }
+    .bridge-morph {
+      color: var(--brand-blue);
+      font-size: 12px;
+      font-weight: 500;
+    }
+
+    /* Sağ Kumanda Sütunu */
+    .hud-column {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .score-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .score-tile {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 14px 16px;
+    }
+    .score-tile.is-active-team {
+      border-color: var(--brand-blue-border);
+      background: #142036;
+    }
+
+    .stat-label {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text-secondary);
+      margin: 0 0 4px 0;
+    }
+    .stat-value {
+      font-family: var(--font-display);
+      font-size: 28px;
+      font-weight: 800;
+      line-height: 1.15;
+      margin: 0;
+      font-variant-numeric: tabular-nums;
+    }
+    .stat-value.is-blue { color: var(--brand-blue); }
+    .stat-value.is-emerald { color: #34d399; }
+    .stat-caption {
+      font-size: 12px;
+      color: var(--text-muted);
+      margin: 4px 0 0 0;
+    }
+
+    /* Form Elemanları */
+    .control-group {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      margin-bottom: 14px;
+    }
+    .field-label {
+      font-size: 12.5px;
+      font-weight: 600;
+      color: var(--text-secondary);
+    }
+    .text-input, .select-input {
+      width: 100%;
+      min-height: 44px;
+      padding: 10px 14px;
+      background: var(--bg-input);
+      border: 1px solid var(--border-default);
+      border-radius: var(--radius-sm);
+      color: var(--text-primary);
+      font-size: 15px;
+      font-weight: 600;
+      transition: border-color var(--dur-fast) var(--ease-out),
+                  box-shadow var(--dur-fast) var(--ease-out);
+    }
+    .text-input:focus, .select-input:focus {
+      outline: none;
+      border-color: var(--brand-blue);
+      box-shadow: var(--shadow-focus);
+    }
+
+    .input-action-row {
+      display: flex;
+      gap: 10px;
+      align-items: end;
+    }
+    .input-action-row .control-group {
+      flex: 1 1 auto;
+      margin-bottom: 0;
+    }
+
+    .frontier-btn-row {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 8px;
+      margin-top: 12px;
+    }
+
+    .hint-btn-row {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 8px;
+      margin-top: 8px;
+    }
+
+    /* Final Bahis Kutusu */
+    .wager-box {
+      background: var(--bg-surface);
+      border: 1px solid var(--accent-amber-border);
+      border-radius: var(--radius-md);
+      padding: 14px;
+      margin-bottom: 14px;
+    }
+    .wager-presets {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 10px;
+    }
+    .wager-slider-row {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 92px;
+      gap: 10px;
+      align-items: end;
+      margin-top: 10px;
+    }
+    input[type="range"] {
+      width: 100%;
+      accent-color: var(--accent-amber);
+      min-height: 38px;
+      cursor: pointer;
+    }
+
+    /* Geri Bildirim Kutusu */
+    .feedback-box {
+      padding: 14px 16px;
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-left: 4px solid var(--border-strong);
+      border-radius: var(--radius-sm);
+      margin-top: 14px;
+      font-size: 14px;
+    }
+    .feedback-box.is-success {
+      border-left-color: var(--accent-emerald);
+      background: rgba(16, 185, 129, 0.06);
+    }
+    .feedback-box.is-error {
+      border-left-color: var(--accent-rose);
+      background: rgba(244, 63, 94, 0.06);
+    }
+    .feedback-box.is-hint {
+      border-left-color: var(--brand-blue);
+      background: rgba(56, 189, 248, 0.06);
+    }
+    .feedback-title {
+      font-size: 12.5px;
+      font-weight: 700;
+      margin: 0 0 4px 0;
+    }
+    .feedback-box.is-success .feedback-title { color: #34d399; }
+    .feedback-box.is-error .feedback-title { color: #fb7185; }
+    .feedback-box.is-hint .feedback-title { color: var(--brand-blue); }
+
+    /* Hızlı Zincir & Bonus Alanı */
+    .speed-panel {
+      background: var(--bg-card);
+      border: 1px solid var(--accent-amber-border);
+      border-radius: var(--radius-lg);
+      padding: 22px;
+      margin-bottom: 22px;
+      box-shadow: var(--shadow-card);
+    }
+    .timer-bar-track {
+      height: 8px;
+      background: var(--bg-surface);
+      border-radius: var(--radius-pill);
+      overflow: hidden;
+      margin: 10px 0 14px 0;
+    }
+    .timer-bar-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--brand-blue), var(--accent-amber));
+      transform-origin: left center;
+      transition: transform 200ms linear;
+    }
+    .speed-inputs-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+      gap: 12px;
+      margin-bottom: 14px;
+    }
+
+    /* Alt Görünümler */
+    .subview-section { display: none; }
+    .subview-section.is-visible { display: block; }
+
+    .chain-catalog-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 14px;
+    }
+
+    .catalog-card {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 16px;
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      transition: border-color var(--dur-fast) var(--ease-out);
+    }
+    .catalog-card:hover {
+      border-color: var(--brand-blue-border);
+    }
+    .catalog-card.is-featured {
+      border-color: var(--brand-blue-border);
+      background: #142036;
+    }
+
+    .builder-rows {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin: 16px 0;
+    }
+    .builder-row {
+      display: grid;
+      grid-template-columns: 110px repeat(3, minmax(0, 1fr));
+      gap: 10px;
+      align-items: end;
+      padding: 12px;
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+    }
+
+    .morph-reference-strip {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 14px;
+      margin-top: 14px;
+    }
+    .morph-example-card {
+      padding: 14px 16px;
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+    }
+
+    .history-table-wrap {
+      overflow-x: auto;
+      margin-top: 8px;
+    }
+    table.hud-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+    }
+    table.hud-table th {
+      text-align: left;
+      color: var(--text-secondary);
+      font-weight: 600;
+      padding: 8px 10px;
+      border-bottom: 1px solid var(--border-default);
+    }
+    table.hud-table td {
+      padding: 8px 10px;
+      border-bottom: 1px solid var(--border-subtle);
+      font-variant-numeric: tabular-nums;
+    }
+
+    .studio-footer {
+      border-top: 1px solid var(--border-subtle);
+      padding-top: 16px;
+      color: var(--text-muted);
+      font-size: 12.5px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .hidden { display: none !important; }
+
+    @media (max-width: 900px) {
+      .game-header { grid-template-columns: 1fr; }
+      .header-controls { align-items: flex-start; }
+      .mode-nav, .utility-row { justify-content: flex-start; }
+      .workspace-grid { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 640px) {
+      .page-shell { padding: 12px; gap: 14px; }
+      .card-panel { padding: 16px; }
+      .chain-node { grid-template-columns: 1fr; gap: 8px; }
+      .node-action-col { align-items: flex-start; }
+      .link-bridge { margin-left: 10px; flex-direction: column; align-items: flex-start; }
+      .input-action-row { flex-direction: column; align-items: stretch; }
+      .builder-row { grid-template-columns: 1fr; }
+      .letter-box { width: 30px; height: 34px; font-size: 15px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page-shell">
+    <!-- MaviBlue Stüdyo Standart Üst Bar -->
+    <div class="studio-topbar">
+      <a href="index.html" class="studio-brand" title="MaviBlue Stüdyo Ana Sayfa">
+        <span class="brand-mark">MB</span>
+        <span class="brand-name">MaviBlue Stüdyo</span>
+        <span class="brand-sub">Kelime &amp; Mantık Oyunları</span>
+      </a>
+      <div class="topbar-links">
+        <span class="badge is-blue" id="bank-status-badge">Soru Bankası Yükleniyor…</span>
+        <a href="https://maviblue.win" class="portal-link">Bulmaca Sahnesi</a>
+      </div>
+    </div>
+
+    <!-- Oyun Başlığı ve Mod Kontrolleri -->
+    <header class="game-header">
+      <div>
+        <p class="kicker">Türkçe Kelime Zinciri · İsim Tamlamaları ve Deyimler</p>
+        <h1 class="game-title">Zincir <span>Etkisi</span></h1>
+        <p class="game-subtitle">
+          Başlangıç ve bitiş sözcüklerini anlamlı tamlama ve deyim halkalarıyla birleştirin.
+          Türkçe dil motoru iyelik eklerini, ünsüz yumuşamasını ve ünlü düşmesini kök kelimeyle birlikte tanır.
+        </p>
+      </div>
+      <div class="header-controls">
+        <nav class="mode-nav" aria-label="Oyun Modları">
+          <button type="button" class="btn is-active" id="nav-classic" onclick="switchMode('classic')">Klasik Yarışma</button>
+          <button type="button" class="btn" id="nav-practice" onclick="switchMode('practice')">Serbest Pratik</button>
+          <button type="button" class="btn" id="nav-builder" onclick="switchMode('builder')">Hızlı Test Kur</button>
+        </nav>
+        <div class="utility-row">
+          <button type="button" class="btn btn-soft-blue" id="btn-team-toggle" onclick="toggleTeamMode()">Mod: Tek Kişilik</button>
+          <button type="button" class="btn" id="btn-sound-toggle" onclick="toggleSound()">Ses: Açık</button>
+          <button type="button" class="btn btn-amber" id="btn-reset-all" onclick="handleResetGame(this)">Sıfırla</button>
+        </div>
+      </div>
+    </header>
+
+    <!-- ANA OYUN SAHNESİ -->
+    <main id="view-stage" class="subview-section is-visible">
+      <!-- Hızlı Zincir / 60sn Bonus Turu -->
+      <section id="speed-stage" class="speed-panel hidden" aria-live="polite">
+        <div class="panel-head">
+          <div>
+            <p class="kicker" id="speed-kicker">Hızlı Zincir · Bonus Turu</p>
+            <h2 class="panel-title" id="speed-title">Hızlı Zinciri Bağla</h2>
+          </div>
+          <div style="display:flex; gap:8px; align-items:center;">
+            <span class="badge is-amber" id="speed-timer-badge">15 sn</span>
+            <span class="badge is-blue" id="speed-reward-badge">+100 Puan</span>
+          </div>
+        </div>
+        <div class="timer-bar-track" aria-hidden="true">
+          <div class="timer-bar-fill" id="speed-timer-bar"></div>
+        </div>
+        <p id="speed-desc" style="margin-top:0; color:var(--text-secondary);">
+          Başlangıç ve bitiş sözcüklerini ilk harf ipuçlarıyla hızlıca birleştirin.
+        </p>
+        <div id="speed-chain-preview" class="speed-inputs-grid"></div>
+        <div style="display:flex; flex-wrap:wrap; gap:8px;">
+          <button type="button" class="btn btn-amber" id="btn-speed-start" onclick="startSpeedTimer()">Süreyi Başlat</button>
+          <button type="button" class="btn btn-primary" id="btn-speed-submit" onclick="submitSpeedChain()" disabled>Yanıtları Kontrol Et</button>
+          <button type="button" class="btn" id="btn-speed-skip" onclick="skipSpeedChain()">Sonraki Tura Geç</button>
+        </div>
+        <div id="speed-feedback" class="feedback-box hidden"></div>
+      </section>
+
+      <!-- Pratik Modu Zincir Seçici -->
+      <section id="practice-picker-bar" class="card-panel hidden" style="margin-bottom: 22px;">
+        <div class="panel-head">
+          <div>
+            <p class="kicker">Soru Bankası (zincirbankasi.json)</p>
+            <h2 class="panel-title">Hazır veya Özel Zincir Seç</h2>
+          </div>
+          <div style="display:flex; flex-wrap:wrap; gap:6px;">
+            <button type="button" class="btn is-active" id="filter-all" onclick="filterPracticeChains('all')">Tümü</button>
+            <button type="button" class="btn" id="filter-easy" onclick="filterPracticeChains('Kolay')">Kolay</button>
+            <button type="button" class="btn" id="filter-medium" onclick="filterPracticeChains('Orta')">Orta</button>
+            <button type="button" class="btn" id="filter-hard" onclick="filterPracticeChains('Zor')">Zor</button>
+          </div>
+        </div>
+        <div id="practice-catalog" class="chain-catalog-grid"></div>
+      </section>
+
+      <div class="workspace-grid">
+        <!-- SOL SÜTUN: ZİNCİR TAHTASI -->
+        <section class="card-panel" aria-label="Zincir Tahtası">
+          <div class="panel-head">
+            <div>
+              <p class="kicker" id="board-kicker">Tur 1 / 4 · +100 Puan / Kelime</p>
+              <h2 class="panel-title" id="board-title">Kelime Zinciri</h2>
+            </div>
+            <div style="display:flex; flex-wrap:wrap; gap:6px; align-items:center;">
+              <span class="badge is-blue" id="board-difficulty-badge">Orta</span>
+              <span class="badge is-emerald" id="board-progress-badge">0 / 4 Çözüldü</span>
+            </div>
+          </div>
+
+          <div id="chain-board" class="chain-board" role="region" aria-live="polite"></div>
+
+          <!-- Zincir Tamamlandı Barı -->
+          <div id="chain-complete-bar" class="feedback-box is-success hidden" style="margin-top: 18px;">
+            <p class="feedback-title" id="complete-title">Zincir Tamamlandı</p>
+            <p id="complete-summary" style="margin:0 0 12px 0;"></p>
+            <div style="display:flex; flex-wrap:wrap; gap:8px;">
+              <button type="button" class="btn btn-primary" id="btn-next-stage" onclick="advanceNextStage()">Sonraki Aşamaya Geç</button>
+              <button type="button" class="btn btn-soft-blue" onclick="replayCurrentChain()">Bu Zinciri Tekrarla</button>
+              <button type="button" class="btn" id="btn-share-result" onclick="shareGameResult(this)">Sonucu Kopyala</button>
+            </div>
+          </div>
+        </section>
+
+        <!-- SAĞ SÜTUN: SKOR VE KUMANDA -->
+        <aside class="hud-column" aria-label="Yarışma Kumandası">
+          <section class="card-panel">
+            <div class="panel-head">
+              <h2 class="panel-title">Skor ve Durum</h2>
+              <span class="badge is-amber" id="round-mode-badge">Klasik Mod</span>
+            </div>
+            <div class="score-grid">
+              <div class="score-tile is-active-team" id="tile-team-a">
+                <p class="stat-label" id="label-team-a">Güncel Skor</p>
+                <p class="stat-value is-blue" id="score-team-a">0</p>
+                <p class="stat-caption" id="caption-team-a">Tur 1 / 4</p>
+              </div>
+              <div class="score-tile" id="tile-team-b">
+                <p class="stat-label" id="label-team-b">En Yüksek Skor</p>
+                <p class="stat-value is-emerald" id="score-team-b">0</p>
+                <p class="stat-caption" id="caption-team-b">Kayıtlı oturum rekoru</p>
+              </div>
+            </div>
+          </section>
+
+          <section class="card-panel" id="control-panel">
+            <div class="panel-head">
+              <h2 class="panel-title">Tahmin ve Harf Al</h2>
+              <span class="badge is-blue" id="active-target-badge">Üst Sınır Seçili</span>
+            </div>
+
+            <!-- Final Bahis Kutusu -->
+            <div id="wager-box" class="wager-box hidden">
+              <p class="kicker" style="color:#fbbf24;">Final Bahis Turu</p>
+              <p style="margin:0; font-size:12.5px; color:var(--text-secondary);" id="wager-rules-text">
+                Her harf isteyişte bahis koyun. Doğru tahmin bahsi ekler, yanlış tahmin düşer.
+              </p>
+              <div class="wager-slider-row">
+                <div class="control-group" style="margin-bottom:0;">
+                  <label class="field-label" for="wager-slider">Bahis Tutarı</label>
+                  <input type="range" id="wager-slider" min="100" max="500" step="50" value="200" oninput="syncWagerFromSlider(this.value)">
+                </div>
+                <div class="control-group" style="margin-bottom:0;">
+                  <label class="field-label" for="wager-number">Puan</label>
+                  <input type="number" id="wager-number" class="text-input" min="100" max="500" step="50" value="200" oninput="syncWagerFromNumber(this.value)">
+                </div>
+              </div>
+              <div class="wager-presets">
+                <button type="button" class="btn btn-amber" onclick="setWagerPreset(100)">100</button>
+                <button type="button" class="btn btn-amber" onclick="setWagerPreset(250)">250</button>
+                <button type="button" class="btn btn-amber" onclick="setWagerPreset(500)">500</button>
+                <button type="button" class="btn btn-amber hidden" id="btn-wager-1000" onclick="setWagerPreset(1000)">1000 (Son)</button>
+              </div>
+            </div>
+
+            <form onsubmit="submitGuess(event)">
+              <div class="input-action-row">
+                <div class="control-group">
+                  <label class="field-label" for="guess-input" id="guess-label">
+                    Tahmininiz (Kök veya ekli tamlama biçimi)
+                  </label>
+                  <input
+                    type="text"
+                    id="guess-input"
+                    class="text-input"
+                    autocomplete="off"
+                    autocapitalize="characters"
+                    spellcheck="false"
+                    placeholder="Örn: BEYGİR veya BEYGİRİ"
+                  >
+                </div>
+                <button type="submit" class="btn btn-primary" id="btn-submit-guess">Tahmin Et</button>
+              </div>
+            </form>
+
+            <div class="frontier-btn-row">
+              <button type="button" class="btn btn-soft-blue" id="btn-letter-top" onclick="revealFrontierLetter('top')">
+                Üstten Harf Al
+              </button>
+              <button type="button" class="btn btn-soft-blue" id="btn-letter-bottom" onclick="revealFrontierLetter('bottom')">
+                Alttan Harf Al
+              </button>
+            </div>
+
+            <div class="hint-btn-row">
+              <button type="button" class="btn btn-amber" id="btn-hint-morph" onclick="showMorphHint()" title="25 Puan düşer">
+                Ek İpucu (-25)
+              </button>
+              <button type="button" class="btn btn-amber" id="btn-hint-meaning" onclick="showMeaningHint()" title="25 Puan düşer">
+                Anlam İpucu (-25)
+              </button>
+              <button type="button" class="btn" id="btn-pass-word" onclick="passTargetWord()">
+                Kelimeyi Aç
+              </button>
+            </div>
+
+            <div id="feedback-box" class="feedback-box is-hint" aria-live="polite">
+              <p class="feedback-title" id="feedback-title">Hazır</p>
+              <p id="feedback-msg" style="margin:0;">
+                Üstteki veya alttaki açık kelimenin yanındaki boşluğu seçin (↑/↓ yön tuşlarıyla da geçebilirsiniz), harf alın ya da doğrudan tahmininizi yazın.
+              </p>
+            </div>
+          </section>
+
+          <section class="card-panel">
+            <div class="panel-head">
+              <h2 class="panel-title">Oturum Kayıtları</h2>
+              <span class="badge is-blue" id="stats-solved-badge">0 Zincir</span>
+            </div>
+            <div class="history-table-wrap">
+              <table class="hud-table">
+                <thead>
+                  <tr>
+                    <th>Zincir</th>
+                    <th>Mod</th>
+                    <th>Puan</th>
+                  </tr>
+                </thead>
+                <tbody id="history-tbody">
+                  <tr>
+                    <td colspan="3" style="color:var(--text-muted);">
+                      Henüz tamamlanan zincir yok. İlk zinciri çözdüğünüzde kayıtlar burada görünür.
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+        </aside>
+      </div>
+    </main>
+
+    <!-- HIZLI TEST ZİNCİR KURUCU -->
+    <section id="view-builder" class="subview-section">
+      <div class="card-panel">
+        <div class="panel-head">
+          <div>
+            <p class="kicker">Tarayıcı İçi Hızlı Deneme</p>
+            <h2 class="panel-title">Tarayıcıda Özel Zincir Dene</h2>
+          </div>
+          <button type="button" class="btn btn-soft-blue" onclick="loadBuilderExample()">Örnek Doldur (Dolap Beygiri)</button>
+        </div>
+        <p style="margin-top:0; color:var(--text-secondary); max-width:74ch;">
+          Kalıcı soru bankası dosyası (<code>zincirbankasi.json</code>) oluşturmak veya yapay zekâdan aldığınız JSON çıktılarını birleştirmek için
+          bilgisayarınızdaki <strong>zinciretkisi_editor.html</strong> aracını kullanabilirsiniz. Buradan ise tarayıcı belleğine anlık deneme zinciri ekleyebilirsiniz.
+        </p>
+
+        <div class="score-grid" style="margin-bottom: 14px;">
+          <div class="control-group" style="margin-bottom:0;">
+            <label class="field-label" for="builder-title">Zincir Başlığı</label>
+            <input type="text" id="builder-title" class="text-input" value="Özel Türkçe Zincir" maxlength="48">
+          </div>
+          <div class="control-group" style="margin-bottom:0;">
+            <label class="field-label" for="builder-difficulty">Zorluk Seviyesi</label>
+            <select id="builder-difficulty" class="select-input">
+              <option value="Kolay">Kolay</option>
+              <option value="Orta" selected>Orta</option>
+              <option value="Zor">Zor</option>
+            </select>
+          </div>
+        </div>
+
+        <div id="builder-rows" class="builder-rows"></div>
+
+        <div style="display:flex; flex-wrap:wrap; gap:8px; align-items:center;">
+          <button type="button" class="btn" onclick="addBuilderSlot()">+ Ara Kelime Ekle</button>
+          <button type="button" class="btn" onclick="removeBuilderSlot()">− Son Ara Kelimeyi Çıkar</button>
+          <button type="button" class="btn btn-primary" onclick="saveAndPlayCustomChain()">Kaydet ve Tahtada Oyna</button>
+        </div>
+
+        <div id="builder-feedback" class="feedback-box hidden"></div>
+      </div>
+
+      <section class="card-panel" style="margin-top: 22px;">
+        <div class="panel-head">
+          <div>
+            <p class="kicker">Türkçe Dil Motoru Nasıl Çalışır?</p>
+            <h2 class="panel-title">İsim Tamlamaları, Yumuşama ve Ünlü Düşmesi</h2>
+          </div>
+        </div>
+        <div class="morph-reference-strip">
+          <div class="morph-example-card">
+            <p class="kicker">1. İyelik Eki Değişimi</p>
+            <p style="margin:0 0 6px 0; font-weight:700;">DOLAP BEYGİRİ → BEYGİR GÜCÜ</p>
+            <p style="margin:0; font-size:13px; color:var(--text-secondary);">
+              İlk tamlamada tamlanan olarak <strong>-i</strong> eki alan <em>BEYGİRİ</em>, sonraki tamlamada tamlayan konumuna geçerek yalın <strong>BEYGİR</strong> köküne döner.
+            </p>
+          </div>
+          <div class="morph-example-card">
+            <p class="kicker" style="color:#34d399;">2. Ünsüz Yumuşaması &amp; Ünlü Düşmesi</p>
+            <p style="margin:0 0 6px 0; font-weight:700;">BEYGİR GÜCÜ (ç→c) · BURUN / BURNU</p>
+            <p style="margin:0; font-size:13px; color:var(--text-secondary);">
+              Sonundaki sert ünsüz yumuşayan veya ikinci hecesindeki dar ünlü düşen sözcüklerde (<em>GÜÇ/GÜCÜ, ZEHİR/ZEHRİ, BURUN/BURNU</em>) her iki biçim de otomatik tanınır.
+            </p>
+          </div>
+          <div class="morph-example-card">
+            <p class="kicker" style="color:#fbbf24;">3. Yapım Eki &amp; Tam İfade Toleransı</p>
+            <p style="margin:0 0 6px 0; font-weight:700;">GÜÇ ZEHİRLENMESİ → ZEHİR GİBİ</p>
+            <p style="margin:0; font-size:13px; color:var(--text-secondary);">
+              Tamlama içinde türemiş hâli (<em>ZEHİRLENMESİ</em>) veya iki kelimelik tamlamanın tamamı yazılsa bile sistem çekirdek kavramı (<em>ZEHİR</em>) eşleştirir.
+            </p>
+          </div>
+        </div>
+      </section>
+    </section>
+
+    <footer class="studio-footer">
+      <span>© 2026 MaviBlue Stüdyo · Zincir Etkisi</span>
+      <span>Türkçe karakterler (İ, ı, Ş, Ğ, Ü, Ö, Ç) ve ASCII klavye yazımı tam desteklenir.</span>
+    </footer>
+  </div>
+
+  <script>
+    (function () {
+      'use strict';
+
+      var STORAGE_KEY = 'maviblue_zincir_etkisi_v1';
+
+      /* =====================================================================
+         1. YEDEK (FALLBACK) VERİ — zincirbankasi.json erişilemezse devreye girer
+         ===================================================================== */
+      var FALLBACK_BANK = {
+        chains: [
+          {
+            id: 'vitrin-dolap-beygiri',
+            title: 'Dolap Beygiri Vitrini',
+            difficulty: 'Orta',
+            featured: true,
+            roundEligible: true,
+            nodes: [
+              { root: 'DOLAP', bottomForm: 'DOLAP', anchor: true },
+              {
+                root: 'BEYGİR',
+                topForm: 'BEYGİRİ',
+                bottomForm: 'BEYGİR',
+                accepted: ['BEYGİR', 'BEYGİRİ', 'BEYGİRİN'],
+                morphNote: 'İyelik eki (-i): DOLAP BEYGİRİ → yalın tamlayan: BEYGİR GÜCÜ',
+                meaningHint: 'Sürekli aynı işi tekdüze yapanları anlatan benzetmedeki yük hayvanı.'
+              },
+              {
+                root: 'GÜÇ',
+                topForm: 'GÜCÜ',
+                bottomForm: 'GÜÇ',
+                accepted: ['GÜÇ', 'GÜCÜ', 'GÜCE', 'GÜCÜN'],
+                morphNote: 'Ünsüz yumuşaması (ç→c) + iyelik (-ü): BEYGİR GÜCÜ → yalın: GÜÇ ZEHİRLENMESİ',
+                meaningHint: 'Motorlarda beygirle ölçülen birim; elde edilince insanı sarhoş edebilen yetke.'
+              },
+              {
+                root: 'ZEHİR',
+                topForm: 'ZEHİRLENMESİ',
+                bottomForm: 'ZEHİR',
+                accepted: ['ZEHİR', 'ZEHİRLENMESİ', 'ZEHİRLENME', 'ZEHRİ', 'ZEHİRİ'],
+                morphNote: 'Yapım + iyelik (-len-me-si) türemesi: GÜÇ ZEHİRLENMESİ → kök: ZEHİR GİBİ',
+                meaningHint: 'Acı veya çok keskin tatları, sert sözleri anlatırken benzetme yapılan yakıcı madde.'
+              },
+              { root: 'GİBİ', topForm: 'GİBİ', anchor: true }
+            ]
+          }
+        ],
+        speedChains: [
+          {
+            id: 'speed-kopru',
+            reward: 100,
+            nodes: [
+              { root: 'KÖPRÜ', bottomForm: 'KÖPRÜ', anchor: true },
+              { root: 'ALT', topForm: 'ALTI', bottomForm: 'ALT', accepted: ['ALT', 'ALTI'] },
+              { root: 'GEÇİT', topForm: 'GEÇİT', bottomForm: 'GEÇİT', accepted: ['GEÇİT', 'GEÇİDİ'] },
+              { root: 'TÖRENİ', topForm: 'TÖRENİ', anchor: true }
+            ]
+          }
+        ],
+        bonusChains: [
+          {
+            label: '1. Zincir (4 Kelime)',
+            nodes: [
+              { root: 'GÖZ', bottomForm: 'GÖZ', anchor: true },
+              { root: 'BEBEK', topForm: 'BEBEĞİ', bottomForm: 'BEBEK', accepted: ['BEBEK', 'BEBEĞİ'] },
+              { root: 'ARABA', topForm: 'ARABASI', bottomForm: 'ARABA', accepted: ['ARABA', 'ARABASI'] },
+              { root: 'VAPURU', topForm: 'VAPURU', anchor: true }
+            ]
+          }
+        ]
+      };
+
+      var CHAIN_BANK = [];
+      var SPEED_CHAINS = [];
+      var BONUS_ROUND_CHAINS = [];
+
+      /* =====================================================================
+         2. TÜRKÇE MORFOLOJİ VE EŞLEŞTİRME MOTORU (Ünlü Düşmesi Dahil)
+         ===================================================================== */
+      function trUpper(str) {
+        return String(str || '').trim().replace(/\s+/g, ' ').toLocaleUpperCase('tr-TR');
+      }
+
+      function foldTurkishAscii(str) {
+        return trUpper(str)
+          .replace(/İ/g, 'I')
+          .replace(/Ğ/g, 'G')
+          .replace(/Ü/g, 'U')
+          .replace(/Ş/g, 'S')
+          .replace(/Ö/g, 'O')
+          .replace(/Ç/g, 'C');
+      }
+
+      function softenFinalConsonant(rootUpper) {
+        if (!rootUpper || rootUpper.length < 2) return rootUpper;
+        var last = rootUpper.slice(-1);
+        var stem = rootUpper.slice(0, -1);
+        if (last === 'P') return stem + 'B';
+        if (last === 'Ç') return stem + 'C';
+        if (last === 'T') return stem + 'D';
+        if (last === 'K') return stem + 'Ğ';
+        return rootUpper;
+      }
+
+      function dropNarrowVowel(rootUpper) {
+        // İki heceli sözcüklerde son hecedeki dar ünlü (I, İ, U, Ü) düşmesi: BURUN -> BURN, ZEHİR -> ZEHR
+        if (!rootUpper || rootUpper.length < 4) return null;
+        var vowels = 'AEIİOÖUÜ';
+        var narrow = 'IİUÜ';
+        var vowelPositions = [];
+        for (var i = 0; i < rootUpper.length; i++) {
+          if (vowels.indexOf(rootUpper.charAt(i)) !== -1) {
+            vowelPositions.push(i);
+          }
+        }
+        if (vowelPositions.length === 2) {
+          var secondVIdx = vowelPositions[1];
+          var ch = rootUpper.charAt(secondVIdx);
+          if (narrow.indexOf(ch) !== -1 && secondVIdx === rootUpper.length - 2) {
+            return rootUpper.slice(0, secondVIdx) + rootUpper.slice(secondVIdx + 1);
+          }
+        }
+        return null;
+      }
+
+      function generateTurkishVariants(rootUpper) {
+        var variants = new Set();
+        variants.add(rootUpper);
+        var soft = softenFinalConsonant(rootUpper);
+        variants.add(soft);
+        var dropped = dropNarrowVowel(rootUpper);
+        if (dropped) variants.add(dropped);
+
+        var suffixes = [
+          'I', 'İ', 'U', 'Ü', 'A', 'E',
+          'SI', 'Sİ', 'SU', 'SÜ',
+          'YI', 'Yİ', 'YU', 'YÜ',
+          'IN', 'İN', 'UN', 'ÜN',
+          'NIN', 'NİN', 'NUN', 'NÜN',
+          'LAR', 'LER', 'LARI', 'LERİ',
+          'LI', 'Lİ', 'LU', 'LÜ',
+          'LIK', 'LİK', 'LUK', 'LÜK',
+          'LIĞI', 'LİĞİ', 'LUĞU', 'LÜĞÜ',
+          'SIZ', 'SİZ', 'SUZ', 'SÜZ',
+          'CI', 'Cİ', 'CU', 'CÜ',
+          'DA', 'DE', 'TA', 'TE',
+          'DAN', 'DEN', 'TAN', 'TEN'
+        ];
+
+        for (var i = 0; i < suffixes.length; i++) {
+          variants.add(rootUpper + suffixes[i]);
+          if (soft !== rootUpper) {
+            variants.add(soft + suffixes[i]);
+          }
+          if (dropped) {
+            variants.add(dropped + suffixes[i]);
+          }
+        }
+        return variants;
+      }
+
+      function matchGuessAgainstNode(rawInput, node, prevSurface, nextSurface) {
+        var cleaned = trUpper(rawInput);
+        if (!cleaned) return { matched: false, matchedForm: '' };
+
+        var candidates = [cleaned];
+        var prevU = trUpper(prevSurface || '');
+        var nextU = trUpper(nextSurface || '');
+        if (prevU && cleaned.indexOf(prevU + ' ') === 0) {
+          candidates.push(cleaned.slice(prevU.length + 1).trim());
+        }
+        if (nextU && cleaned.endsWith(' ' + nextU)) {
+          candidates.push(cleaned.slice(0, cleaned.length - nextU.length - 1).trim());
+        }
+        var parts = cleaned.split(' ');
+        if (parts.length === 2) {
+          candidates.push(parts[0]);
+          candidates.push(parts[1]);
+        }
+
+        var explicitList = [node.root, node.topForm || '', node.bottomForm || ''];
+        if (Array.isArray(node.accepted)) {
+          explicitList = explicitList.concat(node.accepted);
+        }
+
+        var explicitUpper = new Set();
+        var explicitFolded = new Set();
+        for (var i = 0; i < explicitList.length; i++) {
+          var item = trUpper(explicitList[i]);
+          if (item) {
+            explicitUpper.add(item);
+            explicitFolded.add(foldTurkishAscii(item));
+          }
+        }
+
+        var autoVariants = generateTurkishVariants(trUpper(node.root));
+        var autoFolded = new Set();
+        autoVariants.forEach(function (v) {
+          autoFolded.add(foldTurkishAscii(v));
+        });
+
+        for (var c = 0; c < candidates.length; c++) {
+          var cand = candidates[c];
+          if (!cand) continue;
+          var candFold = foldTurkishAscii(cand);
+          if (explicitUpper.has(cand) || autoVariants.has(cand)) {
+            return { matched: true, matchedForm: cand, exactTr: true };
+          }
+          if (explicitFolded.has(candFold) || autoFolded.has(candFold)) {
+            return { matched: true, matchedForm: cand, exactTr: false };
+          }
+        }
+        return { matched: false, matchedForm: '' };
+      }
+
+      /* =====================================================================
+         3. UYGULAMA DURUMU VE SES SENTEZLEYİCİ
+         ===================================================================== */
+      var appState = {
+        mode: 'classic',
+        teamMode: false,
+        soundEnabled: true,
+        practiceFilter: 'all',
+
+        roundIndex: 0,
+        usedClassicIds: [],
+        scores: { a: 0, b: 0 },
+        activeTeam: 'a',
+        bestScore: 0,
+        solvedChainsCount: 0,
+        history: [],
+
+        currentChain: null,
+        nodeStates: [],
+        selectedFrontier: 'top',
+        wagerAmount: 200,
+        chainCompleted: false,
+
+        speedActive: false,
+        speedType: 'speed',
+        speedChainIdx: 0,
+        speedBonusSubIdx: 0,
+        speedTimerId: null,
+        speedSecondsLeft: 15,
+        speedMaxSeconds: 15,
+        speedRunning: false,
+
+        customChains: [],
+        builderSlots: [
+          { root: 'DOLAP', topForm: '', bottomForm: 'DOLAP', anchor: true },
+          { root: 'BEYGİR', topForm: 'BEYGİRİ', bottomForm: 'BEYGİR', anchor: false },
+          { root: 'GÜÇ', topForm: 'GÜCÜ', bottomForm: 'GÜÇ', anchor: false },
+          { root: 'ZEHİR', topForm: 'ZEHİRLENMESİ', bottomForm: 'ZEHİR', anchor: false },
+          { root: 'GİBİ', topForm: 'GİBİ', bottomForm: '', anchor: true }
+        ]
+      };
+
+      var audioCtx = null;
+
+      function playTone(freq, duration, type) {
+        if (!appState.soundEnabled) return;
+        try {
+          var AudioContextCtor = window.AudioContext || window.webkitAudioContext;
+          if (!AudioContextCtor) return;
+          if (!audioCtx) audioCtx = new AudioContextCtor();
+          var osc = audioCtx.createOscillator();
+          var gain = audioCtx.createGain();
+          osc.type = type || 'sine';
+          osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+          gain.gain.setValueAtTime(0.06, audioCtx.currentTime);
+          gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + duration);
+          osc.connect(gain);
+          gain.connect(audioCtx.destination);
+          osc.start();
+          osc.stop(audioCtx.currentTime + duration);
+        } catch (e) {}
+      }
+
+      function playChimeSuccess() {
+        playTone(523.25, 0.12, 'triangle');
+        setTimeout(function () { playTone(659.25, 0.14, 'triangle'); }, 80);
+        setTimeout(function () { playTone(783.99, 0.22, 'triangle'); }, 160);
+      }
+
+      function playChimeLetter() { playTone(440, 0.08, 'sine'); }
+      function playChimeError() { playTone(196, 0.18, 'sawtooth'); }
+
+      /* =====================================================================
+         4. LOCALSTORAGE KALICILIK VE DIŞ JSON YÜKLEME
+         ===================================================================== */
+      function savePersistentState() {
+        try {
+          var payload = {
+            bestScore: appState.bestScore,
+            solvedChainsCount: appState.solvedChainsCount,
+            soundEnabled: appState.soundEnabled,
+            history: appState.history.slice(0, 15),
+            customChains: appState.customChains.slice(0, 15)
+          };
+          localStorage.setItem(STORAGE_KEY, JSON.stringify(payload));
+        } catch (e) {}
+      }
+
+      function loadPersistentState() {
+        try {
+          var raw = localStorage.getItem(STORAGE_KEY);
+          if (!raw) return;
+          var saved = JSON.parse(raw);
+          if (saved && typeof saved === 'object') {
+            if (typeof saved.bestScore === 'number') appState.bestScore = saved.bestScore;
+            if (typeof saved.solvedChainsCount === 'number') appState.solvedChainsCount = saved.solvedChainsCount;
+            if (typeof saved.soundEnabled === 'boolean') appState.soundEnabled = saved.soundEnabled;
+            if (Array.isArray(saved.history)) appState.history = saved.history;
+            if (Array.isArray(saved.customChains)) appState.customChains = saved.customChains;
+          }
+        } catch (e) {}
+      }
+
+      async function loadQuestionBank() {
+        var statusBadge = document.getElementById('bank-status-badge');
+        try {
+          var resp = await fetch('zincirbankasi.json', { cache: 'no-store' });
+          if (!resp.ok) throw new Error('HTTP ' + resp.status);
+          var data = await resp.json();
+          if (!data || !Array.isArray(data.chains) || data.chains.length === 0) {
+            throw new Error('Geçersiz JSON şeması');
+          }
+          CHAIN_BANK = data.chains;
+          SPEED_CHAINS = Array.isArray(data.speedChains) && data.speedChains.length > 0
+            ? data.speedChains
+            : FALLBACK_BANK.speedChains;
+          BONUS_ROUND_CHAINS = Array.isArray(data.bonusChains) && data.bonusChains.length > 0
+            ? data.bonusChains
+            : FALLBACK_BANK.bonusChains;
+
+          if (statusBadge) {
+            statusBadge.textContent = CHAIN_BANK.length + ' Zincir Yüklendi';
+            statusBadge.className = 'badge is-emerald';
+          }
+        } catch (err) {
+          CHAIN_BANK = FALLBACK_BANK.chains;
+          SPEED_CHAINS = FALLBACK_BANK.speedChains;
+          BONUS_ROUND_CHAINS = FALLBACK_BANK.bonusChains;
+          if (statusBadge) {
+            statusBadge.textContent = 'Yerleşik Yedek Mod (' + CHAIN_BANK.length + ' Zincir)';
+            statusBadge.className = 'badge is-amber';
+          }
+        }
+      }
+
+      /* =====================================================================
+         5. ZİNCİR SEÇİMİ VE SINIR MANTIĞI
+         ===================================================================== */
+      function getRoundPoints() {
+        if (appState.mode === 'practice') return 100;
+        var map = [100, 200, 300, 0];
+        return map[appState.roundIndex] || 100;
+      }
+
+      function isFinalWagerRound() {
+        return appState.mode === 'classic' && appState.roundIndex === 3;
+      }
+
+      function loadChain(chainObj) {
+        if (!chainObj) return;
+        appState.currentChain = chainObj;
+        appState.chainCompleted = false;
+        appState.nodeStates = chainObj.nodes.map(function (node) {
+          return {
+            solved: Boolean(node.anchor),
+            passed: false,
+            revealedCount: node.anchor ? trUpper(node.root).length : 0
+          };
+        });
+        appState.selectedFrontier = 'top';
+        hideSpeedStage();
+        var completeBar = document.getElementById('chain-complete-bar');
+        if (completeBar) completeBar.classList.add('hidden');
+
+        if (isFinalWagerRound()) {
+          setWagerPreset(200);
+        }
+        renderAll();
+      }
+
+      function pickClassicChainForRound(rIdx) {
+        var pool = CHAIN_BANK.filter(function (c) { return c.roundEligible !== false; });
+        if (pool.length === 0) pool = CHAIN_BANK;
+
+        // Zorluk kademesine göre öncelikli havuz (Tur 1 Kolay, Tur 2-3 Orta, Tur 4 Zor)
+        var targetDiff = rIdx === 0 ? 'Kolay' : (rIdx === 3 ? 'Zor' : 'Orta');
+        var diffPool = pool.filter(function (c) {
+          return c.difficulty === targetDiff && appState.usedClassicIds.indexOf(c.id) === -1;
+        });
+
+        if (diffPool.length === 0) {
+          diffPool = pool.filter(function (c) {
+            return appState.usedClassicIds.indexOf(c.id) === -1;
+          });
+        }
+        if (diffPool.length === 0) {
+          appState.usedClassicIds = [];
+          diffPool = pool;
+        }
+
+        var chosen = diffPool[Math.floor(Math.random() * diffPool.length)];
+        appState.usedClassicIds.push(chosen.id);
+        return chosen;
+      }
+
+      function getFrontierIndices() {
+        var nodes = appState.nodeStates;
+        var topIdx = -1;
+        var bottomIdx = -1;
+        for (var i = 1; i < nodes.length - 1; i++) {
+          if (!nodes[i].solved) {
+            topIdx = i;
+            break;
+          }
+        }
+        for (var j = nodes.length - 2; j >= 1; j--) {
+          if (!nodes[j].solved) {
+            bottomIdx = j;
+            break;
+          }
+        }
+        return { topIdx: topIdx, bottomIdx: bottomIdx };
+      }
+
+      function getActiveTargetIndex() {
+        var f = getFrontierIndices();
+        if (f.topIdx === -1 && f.bottomIdx === -1) return -1;
+        if (appState.selectedFrontier === 'bottom' && f.bottomIdx !== -1) return f.bottomIdx;
+        if (f.topIdx !== -1) return f.topIdx;
+        return f.bottomIdx;
+      }
+
+      function countRemainingHiddenSlots() {
+        var c = 0;
+        for (var i = 1; i < appState.nodeStates.length - 1; i++) {
+          if (!appState.nodeStates[i].solved) c++;
+        }
+        return c;
+      }
+
+      /* =====================================================================
+         6. OYUN AKSİYONLARI
+         ===================================================================== */
+      function selectFrontierSlot(idx) {
+        var f = getFrontierIndices();
+        if (idx === f.topIdx) {
+          appState.selectedFrontier = 'top';
+        } else if (idx === f.bottomIdx) {
+          appState.selectedFrontier = 'bottom';
+        } else {
+          return;
+        }
+        renderBoard();
+        renderControls();
+        var inp = document.getElementById('guess-input');
+        if (inp) inp.focus();
+      }
+
+      function handleNodeKeydown(ev, idx) {
+        if (ev.key === 'Enter' || ev.key === ' ') {
+          ev.preventDefault();
+          selectFrontierSlot(idx);
+        }
+      }
+
+      function revealFrontierLetter(side) {
+        if (appState.chainCompleted) return;
+        var f = getFrontierIndices();
+        var targetIdx = side === 'bottom' ? f.bottomIdx : f.topIdx;
+        if (targetIdx === -1) return;
+
+        appState.selectedFrontier = side;
+        var node = appState.currentChain.nodes[targetIdx];
+        var st = appState.nodeStates[targetIdx];
+        var rootUpper = trUpper(node.root);
+
+        if (st.revealedCount >= rootUpper.length) {
+          setFeedback('is-hint', 'Tüm Harfler Açık', 'Bu kelimenin tüm harfleri zaten açıldı. Doğru kökü veya tamlama biçimini yazıp tahmin edin.');
+          renderBoard();
+          renderControls();
+          return;
+        }
+
+        if (isFinalWagerRound()) {
+          var maxWager = countRemainingHiddenSlots() === 1 ? 1000 : 500;
+          if (appState.wagerAmount < 100 || appState.wagerAmount > maxWager) {
+            appState.wagerAmount = Math.min(maxWager, Math.max(100, appState.wagerAmount));
+          }
+        }
+
+        st.revealedCount += 1;
+        playChimeLetter();
+
+        var revealedChar = rootUpper.charAt(st.revealedCount - 1);
+        var anchorWord = side === 'top'
+          ? (appState.currentChain.nodes[targetIdx - 1].bottomForm || appState.currentChain.nodes[targetIdx - 1].root)
+          : (appState.currentChain.nodes[targetIdx + 1].topForm || appState.currentChain.nodes[targetIdx + 1].root);
+
+        var msg = (side === 'top'
+          ? anchorWord + ' kelimesinin altından '
+          : anchorWord + ' kelimesinin üstünden ') +
+          'harf açıldı: "' + revealedChar + '".';
+
+        if (isFinalWagerRound()) {
+          msg += ' Bahis: ' + appState.wagerAmount + ' Puan. Şimdi tahmininizi girin!';
+        }
+
+        setFeedback('is-hint', 'Harf Açıldı', msg);
+        renderBoard();
+        renderControls();
+        var inp = document.getElementById('guess-input');
+        if (inp) inp.focus();
+      }
+
+      function submitGuess(ev) {
+        if (ev) ev.preventDefault();
+        if (appState.chainCompleted) return;
+
+        var inp = document.getElementById('guess-input');
+        if (!inp) return;
+        var raw = inp.value.trim();
+        if (!raw) {
+          setFeedback('is-error', 'Boş Tahmin', 'Lütfen bir kelime yazın (örneğin kök kelimeyi veya tamlama içindeki ekli biçimini).');
+          return;
+        }
+
+        var targetIdx = getActiveTargetIndex();
+        if (targetIdx === -1) return;
+
+        var nodes = appState.currentChain.nodes;
+        var node = nodes[targetIdx];
+        var st = appState.nodeStates[targetIdx];
+        var prevSurface = nodes[targetIdx - 1].bottomForm || nodes[targetIdx - 1].root;
+        var nextSurface = nodes[targetIdx + 1].topForm || nodes[targetIdx + 1].root;
+
+        var result = matchGuessAgainstNode(raw, node, prevSurface, nextSurface);
+        if (result.matched) {
+          var openedBeforeSolve = st.revealedCount;
+          st.solved = true;
+          st.revealedCount = trUpper(node.root).length;
+          inp.value = '';
+          playChimeSuccess();
+
+          var basePts = isFinalWagerRound() ? appState.wagerAmount : getRoundPoints();
+          var noLetterBonus = (!isFinalWagerRound() && openedBeforeSolve === 0) ? 50 : 0;
+          var totalPts = basePts + noLetterBonus;
+          addScoreToActiveTeam(totalPts);
+
+          var linkSummary = prevSurface + ' ' + (node.topForm || node.root) +
+            ' → ' + (node.bottomForm || node.root) + ' ' + nextSurface;
+          var bonusText = noLetterBonus > 0 ? ' (Harf Almadan Bilme Bonusu: +50)' : '';
+
+          setFeedback(
+            'is-success',
+            'Doğru! +' + totalPts + ' Puan' + bonusText,
+            'Kök "' + node.root + '" doğrulandı. ' + (node.morphNote || linkSummary)
+          );
+
+          checkChainCompletion();
+        } else {
+          playChimeError();
+          if (isFinalWagerRound()) {
+            addScoreToActiveTeam(-appState.wagerAmount);
+            setFeedback(
+              'is-error',
+              'Yanlış Tahmin (−' + appState.wagerAmount + ' Puan)',
+              '"' + trUpper(raw) + '" aranan kelime değil. ' +
+              (appState.teamMode ? 'Sıra diğer takıma geçti.' : 'Bir harf daha açarak yeniden deneyebilirsiniz.')
+            );
+          } else {
+            setFeedback(
+              'is-error',
+              'Eşleşmedi',
+              '"' + trUpper(raw) + '" bu halka için doğru değil. ' +
+              (appState.teamMode ? 'Sıra rakip takıma geçti.' : 'Harf alabilir veya Ek / Anlam ipucu kullanabilirsiniz.')
+            );
+          }
+
+          if (appState.teamMode) {
+            appState.activeTeam = appState.activeTeam === 'a' ? 'b' : 'a';
+          }
+        }
+
+        renderAll();
+      }
+
+      function passTargetWord() {
+        if (appState.chainCompleted) return;
+        var targetIdx = getActiveTargetIndex();
+        if (targetIdx === -1) return;
+
+        var node = appState.currentChain.nodes[targetIdx];
+        var st = appState.nodeStates[targetIdx];
+        st.solved = true;
+        st.passed = true;
+        st.revealedCount = trUpper(node.root).length;
+
+        var inp = document.getElementById('guess-input');
+        if (inp) inp.value = '';
+
+        setFeedback(
+          'is-hint',
+          'Kelime Açıldı (0 Puan)',
+          'Hedef kök "' + node.root + '" olarak açıldı. ' + (node.morphNote || '')
+        );
+
+        if (appState.teamMode) {
+          appState.activeTeam = appState.activeTeam === 'a' ? 'b' : 'a';
+        }
+        checkChainCompletion();
+        renderAll();
+      }
+
+      function showMorphHint() {
+        if (appState.chainCompleted) return;
+        var targetIdx = getActiveTargetIndex();
+        if (targetIdx === -1) return;
+        addScoreToActiveTeam(-25);
+        renderHUD();
+
+        var nodes = appState.currentChain.nodes;
+        var node = nodes[targetIdx];
+        var prevSurface = nodes[targetIdx - 1].bottomForm || nodes[targetIdx - 1].root;
+        var nextSurface = nodes[targetIdx + 1].topForm || nodes[targetIdx + 1].root;
+
+        var topChanged = trUpper(node.topForm || node.root) !== trUpper(node.root);
+        var botChanged = trUpper(node.bottomForm || node.root) !== trUpper(node.root);
+
+        var hintText = 'Aranan kök ' + trUpper(node.root).length + ' harflidir. ';
+        hintText += topChanged
+          ? (prevSurface + ' sözcüğünün altında ek/değişim alır; ')
+          : (prevSurface + ' sözcüğünün altında yalın kalır; ');
+        hintText += botChanged
+          ? (nextSurface + ' sözcüğünün üstünde ek alır.')
+          : (nextSurface + ' sözcüğünün üstünde yalın kök olarak bağlanır.');
+
+        setFeedback('is-hint', 'Morfoloji İpucu (−25 Puan)', hintText);
+      }
+
+      function showMeaningHint() {
+        if (appState.chainCompleted) return;
+        var targetIdx = getActiveTargetIndex();
+        if (targetIdx === -1) return;
+        addScoreToActiveTeam(-25);
+        renderHUD();
+
+        var node = appState.currentChain.nodes[targetIdx];
+        var hint = node.meaningHint || 'Üstteki ve alttaki kelimelerle ortak kullanılan Türkçe sözcük.';
+        setFeedback('is-hint', 'Anlam İpucu (−25 Puan)', hint);
+      }
+
+      function addScoreToActiveTeam(delta) {
+        var key = appState.teamMode ? appState.activeTeam : 'a';
+        appState.scores[key] = Math.max(0, appState.scores[key] + delta);
+        var topScore = Math.max(appState.scores.a, appState.scores.b);
+        if (topScore > appState.bestScore) {
+          appState.bestScore = topScore;
+        }
+      }
+
+      function checkChainCompletion() {
+        if (countRemainingHiddenSlots() > 0) return;
+
+        appState.chainCompleted = true;
+        appState.solvedChainsCount += 1;
+
+        var currentPts = appState.teamMode
+          ? (appState.scores.a + ' — ' + appState.scores.b)
+          : String(appState.scores.a);
+
+        appState.history.unshift({
+          title: appState.currentChain.title,
+          mode: appState.mode === 'classic' ? ('Tur ' + (appState.roundIndex + 1)) : 'Pratik',
+          score: currentPts
+        });
+        if (appState.history.length > 15) appState.history.length = 15;
+        savePersistentState();
+
+        var completeBar = document.getElementById('chain-complete-bar');
+        var completeTitle = document.getElementById('complete-title');
+        var completeSummary = document.getElementById('complete-summary');
+        var nextBtn = document.getElementById('btn-next-stage');
+
+        var seq = [];
+        var nodes = appState.currentChain.nodes;
+        for (var i = 0; i < nodes.length - 1; i++) {
+          var left = nodes[i].bottomForm || nodes[i].root;
+          var right = nodes[i + 1].topForm || nodes[i + 1].root;
+          seq.push(left + ' ' + right);
+        }
+
+        if (completeTitle) {
+          completeTitle.textContent = 'Zincir Tamamlandı: ' + appState.currentChain.title;
+        }
+        if (completeSummary) {
+          completeSummary.textContent = 'Tam Tamlama Akışı: ' + seq.join(' → ');
+        }
+        if (nextBtn) {
+          if (appState.mode === 'classic') {
+            if (appState.roundIndex < 3) {
+              var spObj = SPEED_CHAINS[appState.roundIndex % SPEED_CHAINS.length];
+              nextBtn.textContent = 'Hızlı Zincire Geç (+' + spObj.reward + ' Puan)';
+            } else {
+              nextBtn.textContent = '60 sn Büyük Ödül Turuna Geç (+10.000)';
+            }
+          } else {
+            nextBtn.textContent = 'Sıradaki Zinciri Yükle';
+          }
+        }
+        if (completeBar) completeBar.classList.remove('hidden');
+      }
+
+      function shareGameResult(btn) {
+        var text = 'MaviBlue Stüdyo · Zincir Etkisi\n' +
+          'Zincir: ' + (appState.currentChain ? appState.currentChain.title : '') + '\n' +
+          'Skor: ' + appState.scores.a + ' Puan | Toplam Çözülen: ' + appState.solvedChainsCount + '\n' +
+          'maviblue.win';
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(text).then(function () {
+            if (btn) {
+              var old = btn.textContent;
+              btn.textContent = 'Panoya Kopyalandı ✓';
+              setTimeout(function () { btn.textContent = old; }, 2200);
+            }
+          });
+        }
+      }
+
+      function advanceNextStage() {
+        if (appState.mode === 'practice') {
+          var idx = CHAIN_BANK.indexOf(appState.currentChain);
+          var nextIdx = (idx + 1) % CHAIN_BANK.length;
+          loadChain(CHAIN_BANK[nextIdx]);
+          setFeedback('is-hint', 'Yeni Zincir Yüklendi', CHAIN_BANK[nextIdx].title + ' tahtada hazır.');
+          return;
+        }
+
+        if (appState.roundIndex < 3) {
+          openSpeedStage('speed', appState.roundIndex);
+        } else {
+          openSpeedStage('bonus', 0);
+        }
+      }
+
+      function replayCurrentChain() {
+        if (appState.currentChain) {
+          loadChain(appState.currentChain);
+          setFeedback('is-hint', 'Zincir Sıfırlandı', 'Aynı zincir yeniden başlatıldı.');
+        }
+      }
+
+      /* =====================================================================
+         7. HIZLI ZİNCİR VE 60 SN BÜYÜK ÖDÜL TURU
+         ===================================================================== */
+      function hideSpeedStage() {
+        if (appState.speedTimerId) {
+          clearInterval(appState.speedTimerId);
+          appState.speedTimerId = null;
+        }
+        appState.speedActive = false;
+        appState.speedRunning = false;
+        var el = document.getElementById('speed-stage');
+        if (el) el.classList.add('hidden');
+      }
+
+      function openSpeedStage(type, idx) {
+        appState.speedActive = true;
+        appState.speedType = type;
+        appState.speedChainIdx = idx;
+        appState.speedBonusSubIdx = 0;
+        appState.speedRunning = false;
+        appState.speedMaxSeconds = type === 'bonus' ? 60 : 15;
+        appState.speedSecondsLeft = appState.speedMaxSeconds;
+
+        var el = document.getElementById('speed-stage');
+        if (el) el.classList.remove('hidden');
+
+        var startBtn = document.getElementById('btn-speed-start');
+        var submitBtn = document.getElementById('btn-speed-submit');
+        if (startBtn) {
+          startBtn.disabled = false;
+          startBtn.textContent = 'Süreyi Başlat';
+        }
+        if (submitBtn) submitBtn.disabled = true;
+
+        var fb = document.getElementById('speed-feedback');
+        if (fb) fb.classList.add('hidden');
+
+        renderSpeedStage();
+      }
+
+      function getCurrentSpeedChainObj() {
+        if (appState.speedType === 'bonus') {
+          return BONUS_ROUND_CHAINS[appState.speedBonusSubIdx % BONUS_ROUND_CHAINS.length];
+        }
+        return SPEED_CHAINS[appState.speedChainIdx % SPEED_CHAINS.length];
+      }
+
+      function renderSpeedStage() {
+        var obj = getCurrentSpeedChainObj();
+        var kicker = document.getElementById('speed-kicker');
+        var title = document.getElementById('speed-title');
+        var timerBadge = document.getElementById('speed-timer-badge');
+        var rewardBadge = document.getElementById('speed-reward-badge');
+        var bar = document.getElementById('speed-timer-bar');
+        var preview = document.getElementById('speed-chain-preview');
+        var desc = document.getElementById('speed-desc');
+
+        if (kicker) {
+          kicker.textContent = appState.speedType === 'bonus'
+            ? ('Büyük Ödül Turu · ' + obj.label)
+            : ('Tur ' + (appState.roundIndex + 1) + ' Hızlı Zinciri');
+        }
+        if (title) {
+          title.textContent = appState.speedType === 'bonus'
+            ? '60 Saniyede Zincirleri Tamamla'
+            : 'Hızlı Zincir Bonusu';
+        }
+        if (desc) {
+          desc.textContent = appState.speedRunning
+            ? 'Gizli kelimelerin ilk harfleri açık. Hızlıca doldurup kontrol edin!'
+            : 'Süreyi başlat düğmesine bastığınızda gizli sözcüklerin ilk harfleri açılır ve geri sayım başlar.';
+        }
+        if (timerBadge) timerBadge.textContent = appState.speedSecondsLeft + ' sn';
+        if (rewardBadge) {
+          rewardBadge.textContent = appState.speedType === 'bonus'
+            ? '+10.000 Puan'
+            : ('+' + obj.reward + ' Puan');
+        }
+        if (bar) {
+          var ratio = Math.max(0, appState.speedSecondsLeft / appState.speedMaxSeconds);
+          bar.style.transform = 'scaleX(' + ratio.toFixed(3) + ')';
+        }
+
+        if (!preview) return;
+        preview.innerHTML = '';
+
+        for (var i = 0; i < obj.nodes.length; i++) {
+          var node = obj.nodes[i];
+          var wrap = document.createElement('div');
+          wrap.className = 'catalog-card';
+
+          var lbl = document.createElement('label');
+          lbl.className = 'field-label';
+          lbl.textContent = (i + 1) + '. Kelime';
+          wrap.appendChild(lbl);
+
+          if (node.anchor) {
+            var anchorText = document.createElement('div');
+            anchorText.className = 'node-word-anchor';
+            anchorText.style.fontSize = '17px';
+            anchorText.textContent = node.root;
+            wrap.appendChild(anchorText);
+          } else {
+            var inpId = 'speed-input-' + i;
+            lbl.setAttribute('for', inpId);
+            var inp = document.createElement('input');
+            inp.type = 'text';
+            inp.id = inpId;
+            inp.className = 'text-input';
+            inp.disabled = !appState.speedRunning;
+            if (appState.speedRunning) {
+              var firstLetter = trUpper(node.root).charAt(0);
+              inp.placeholder = firstLetter + ' (' + trUpper(node.root).length + ' harf)';
+            } else {
+              inp.placeholder = 'Süre başlayınca ilk harf açılır';
+            }
+            wrap.appendChild(inp);
+          }
+          preview.appendChild(wrap);
+        }
+      }
+
+      function startSpeedTimer() {
+        if (appState.speedRunning) return;
+        appState.speedRunning = true;
+
+        var startBtn = document.getElementById('btn-speed-start');
+        var submitBtn = document.getElementById('btn-speed-submit');
+        if (startBtn) {
+          startBtn.disabled = true;
+          startBtn.textContent = 'Süre İşliyor…';
+        }
+        if (submitBtn) submitBtn.disabled = false;
+
+        renderSpeedStage();
+        var previewBox = document.getElementById('speed-chain-preview');
+        var firstInput = previewBox ? previewBox.querySelector('input') : null;
+        if (firstInput) firstInput.focus();
+
+        if (appState.speedTimerId) clearInterval(appState.speedTimerId);
+        appState.speedTimerId = setInterval(function () {
+          appState.speedSecondsLeft -= 1;
+          var timerBadge = document.getElementById('speed-timer-badge');
+          var bar = document.getElementById('speed-timer-bar');
+          if (timerBadge) timerBadge.textContent = Math.max(0, appState.speedSecondsLeft) + ' sn';
+          if (bar) {
+            var ratio = Math.max(0, appState.speedSecondsLeft / appState.speedMaxSeconds);
+            bar.style.transform = 'scaleX(' + ratio.toFixed(3) + ')';
+          }
+          if (appState.speedSecondsLeft <= 0) {
+            clearInterval(appState.speedTimerId);
+            appState.speedTimerId = null;
+            appState.speedRunning = false;
+            playChimeError();
+            var submitB = document.getElementById('btn-speed-submit');
+            if (submitB) submitB.disabled = true;
+            var obj = getCurrentSpeedChainObj();
+            var fullAns = obj.nodes.map(function (n) { return n.root; }).join(' → ');
+            showSpeedFeedback('is-error', 'Süre Doldu', 'Doğru zincir: ' + fullAns + '. Sonraki tura geçebilirsiniz.');
+          }
+        }, 1000);
+      }
+
+      function submitSpeedChain() {
+        if (!appState.speedRunning) return;
+        var obj = getCurrentSpeedChainObj();
+        var allMatch = true;
+
+        for (var i = 1; i < obj.nodes.length - 1; i++) {
+          var inp = document.getElementById('speed-input-' + i);
+          var val = inp ? inp.value : '';
+          var prevS = obj.nodes[i - 1].bottomForm || obj.nodes[i - 1].root;
+          var nextS = obj.nodes[i + 1].topForm || obj.nodes[i + 1].root;
+          var res = matchGuessAgainstNode(val, obj.nodes[i], prevS, nextS);
+          if (!res.matched) {
+            allMatch = false;
+            break;
+          }
+        }
+
+        if (!allMatch) {
+          playChimeError();
+          showSpeedFeedback('is-error', 'Eksik veya Farklı', 'Bir veya daha fazla kelime eşleşmedi. Süre bitmeden tekrar deneyin!');
+          return;
+        }
+
+        playChimeSuccess();
+        if (appState.speedType === 'bonus') {
+          if (appState.speedBonusSubIdx < BONUS_ROUND_CHAINS.length - 1) {
+            appState.speedBonusSubIdx += 1;
+            showSpeedFeedback('is-success', 'Harika! Sonraki Zincir', 'Kalan sürede sıradaki Büyük Ödül zincirini tamamlayın.');
+            renderSpeedStage();
+            var previewEl = document.getElementById('speed-chain-preview');
+            var firstInp = previewEl ? previewEl.querySelector('input') : null;
+            if (firstInp) firstInp.focus();
+            return;
+          }
+          if (appState.speedTimerId) {
+            clearInterval(appState.speedTimerId);
+            appState.speedTimerId = null;
+          }
+          appState.speedRunning = false;
+          addScoreToActiveTeam(10000);
+          savePersistentState();
+          renderHUD();
+          var submitBtn = document.getElementById('btn-speed-submit');
+          if (submitBtn) submitBtn.disabled = true;
+          showSpeedFeedback('is-success', 'BÜYÜK ÖDÜL KAZANILDI! +10.000 PUAN', '60 saniye dolmadan tüm zincirleri çözdünüz!');
+        } else {
+          if (appState.speedTimerId) {
+            clearInterval(appState.speedTimerId);
+            appState.speedTimerId = null;
+          }
+          appState.speedRunning = false;
+          addScoreToActiveTeam(obj.reward);
+          savePersistentState();
+          renderHUD();
+          var subB = document.getElementById('btn-speed-submit');
+          if (subB) subB.disabled = true;
+          var fullStr = obj.nodes.map(function (n) { return n.root; }).join(' → ');
+          showSpeedFeedback('is-success', 'Hızlı Zincir Başarılı! +' + obj.reward + ' Puan', fullStr);
+        }
+      }
+
+      function skipSpeedChain() {
+        hideSpeedStage();
+        if (appState.mode === 'classic') {
+          if (appState.roundIndex < 3) {
+            appState.roundIndex += 1;
+            if (appState.teamMode) {
+              appState.activeTeam = appState.scores.a <= appState.scores.b ? 'a' : 'b';
+            }
+            loadChain(pickClassicChainForRound(appState.roundIndex));
+            var label = appState.roundIndex === 3
+              ? 'Final Bahis Turu başladı! Harf alırken bahis koyabilirsiniz.'
+              : ('Tur ' + (appState.roundIndex + 1) + ' başladı.');
+            setFeedback('is-hint', 'Yeni Tur', label);
+          } else {
+            appState.roundIndex = 0;
+            appState.scores = { a: 0, b: 0 };
+            appState.activeTeam = 'a';
+            loadChain(pickClassicChainForRound(0));
+            setFeedback('is-hint', 'Yeni Yarışma Başladı', 'Tur 1 ile yeni bir 4 turlu yarışma başladı.');
+          }
+        }
+      }
+
+      function showSpeedFeedback(cls, title, msg) {
+        var box = document.getElementById('speed-feedback');
+        if (!box) return;
+        box.className = 'feedback-box ' + cls;
+        box.innerHTML = '';
+        var t = document.createElement('p');
+        t.className = 'feedback-title';
+        t.textContent = title;
+        var p = document.createElement('p');
+        p.style.margin = '0';
+        p.textContent = msg;
+        box.appendChild(t);
+        box.appendChild(p);
+      }
+
+      /* =====================================================================
+         8. MOD GEÇİŞLERİ, BAHİS VE AYARLAR
+         ===================================================================== */
+      function switchMode(mode) {
+        appState.mode = mode;
+        hideSpeedStage();
+
+        var navIds = ['nav-classic', 'nav-practice', 'nav-builder'];
+        for (var i = 0; i < navIds.length; i++) {
+          var btn = document.getElementById(navIds[i]);
+          if (btn) btn.classList.remove('is-active');
+        }
+        var activeNav = document.getElementById('nav-' + mode);
+        if (activeNav) activeNav.classList.add('is-active');
+
+        var stage = document.getElementById('view-stage');
+        var builder = document.getElementById('view-builder');
+        var picker = document.getElementById('practice-picker-bar');
+
+        if (mode === 'builder') {
+          if (stage) stage.classList.remove('is-visible');
+          if (builder) builder.classList.add('is-visible');
+          renderBuilder();
+          return;
+        }
+
+        if (stage) stage.classList.add('is-visible');
+        if (builder) builder.classList.remove('is-visible');
+
+        if (mode === 'practice') {
+          if (picker) picker.classList.remove('hidden');
+          loadChain(CHAIN_BANK[0]);
+          setFeedback('is-hint', 'Serbest Pratik Modu', 'Soru bankasındaki dilediğiniz zinciri seçip süresiz çözebilirsiniz.');
+        } else {
+          if (picker) picker.classList.add('hidden');
+          loadChain(pickClassicChainForRound(appState.roundIndex));
+          setFeedback('is-hint', 'Klasik Yarışma', 'Tur ' + (appState.roundIndex + 1) + ' tahtada hazır.');
+        }
+        renderPracticeCatalog();
+      }
+
+      function toggleTeamMode() {
+        appState.teamMode = !appState.teamMode;
+        var btn = document.getElementById('btn-team-toggle');
+        if (btn) {
+          btn.textContent = appState.teamMode ? 'Mod: 2 Takım Düellosu' : 'Mod: Tek Kişilik';
+          btn.classList.toggle('is-active', appState.teamMode);
+        }
+        renderHUD();
+      }
+
+      function toggleSound() {
+        appState.soundEnabled = !appState.soundEnabled;
+        var btn = document.getElementById('btn-sound-toggle');
+        if (btn) btn.textContent = appState.soundEnabled ? 'Ses: Açık' : 'Ses: Kapalı';
+        savePersistentState();
+      }
+
+      function handleResetGame(btn) {
+        if (!btn) return;
+        if (btn.dataset.armed !== 'true') {
+          btn.dataset.armed = 'true';
+          btn.textContent = 'Emin misiniz?';
+          setTimeout(function () {
+            if (btn.dataset.armed === 'true') {
+              btn.dataset.armed = 'false';
+              btn.textContent = 'Sıfırla';
+            }
+          }, 3500);
+          return;
+        }
+        btn.dataset.armed = 'false';
+        btn.textContent = 'Sıfırla';
+        hideSpeedStage();
+        appState.roundIndex = 0;
+        appState.scores = { a: 0, b: 0 };
+        appState.activeTeam = 'a';
+        loadChain(appState.mode === 'practice' ? CHAIN_BANK[0] : pickClassicChainForRound(0));
+        setFeedback('is-hint', 'Oyun Sıfırlandı', 'Skorlar sıfırlandı ve başlangıç zinciri yüklendi.');
+      }
+
+      function syncWagerFromSlider(val) {
+        var n = parseInt(val, 10) || 100;
+        appState.wagerAmount = n;
+        var numEl = document.getElementById('wager-number');
+        if (numEl) numEl.value = n;
+      }
+
+      function syncWagerFromNumber(val) {
+        var maxW = countRemainingHiddenSlots() === 1 ? 1000 : 500;
+        var n = Math.min(maxW, Math.max(100, parseInt(val, 10) || 100));
+        appState.wagerAmount = n;
+        var sEl = document.getElementById('wager-slider');
+        if (sEl) sEl.value = n;
+      }
+
+      function setWagerPreset(val) {
+        var maxW = countRemainingHiddenSlots() === 1 ? 1000 : 500;
+        var clamped = Math.min(maxW, Math.max(100, val));
+        appState.wagerAmount = clamped;
+        var sEl = document.getElementById('wager-slider');
+        var nEl = document.getElementById('wager-number');
+        if (sEl) sEl.value = clamped;
+        if (nEl) nEl.value = clamped;
+      }
+
+      /* =====================================================================
+         9. PRATİK KATALOĞU VE TARAYICI TEST KURUCU
+         ===================================================================== */
+      function filterPracticeChains(diff) {
+        appState.practiceFilter = diff;
+        var btns = ['filter-all', 'filter-easy', 'filter-medium', 'filter-hard'];
+        var map = { 'all': 'filter-all', 'Kolay': 'filter-easy', 'Orta': 'filter-medium', 'Zor': 'filter-hard' };
+        for (var i = 0; i < btns.length; i++) {
+          var b = document.getElementById(btns[i]);
+          if (b) b.classList.remove('is-active');
+        }
+        var act = document.getElementById(map[diff]);
+        if (act) act.classList.add('is-active');
+        renderPracticeCatalog();
+      }
+
+      function selectPracticeChain(chainId) {
+        var all = appState.customChains.concat(CHAIN_BANK);
+        for (var i = 0; i < all.length; i++) {
+          if (all[i].id === chainId) {
+            loadChain(all[i]);
+            setFeedback('is-hint', 'Zincir Seçildi', '"' + all[i].title + '" tahtaya yüklendi.');
+            return;
+          }
+        }
+      }
+
+      function renderPracticeCatalog() {
+        var container = document.getElementById('practice-catalog');
+        if (!container) return;
+        container.innerHTML = '';
+
+        var combined = appState.customChains.concat(CHAIN_BANK);
+        var filtered = combined.filter(function (c) {
+          return appState.practiceFilter === 'all' || c.difficulty === appState.practiceFilter;
+        });
+
+        for (var i = 0; i < filtered.length; i++) {
+          var ch = filtered[i];
+          var card = document.createElement('div');
+          card.className = 'catalog-card' + (ch.featured ? ' is-featured' : '');
+
+          var top = document.createElement('div');
+          var badgeRow = document.createElement('div');
+          badgeRow.style.cssText = 'display:flex; justify-content:space-between; gap:6px; margin-bottom:6px;';
+
+          var diffBadge = document.createElement('span');
+          diffBadge.className = 'badge ' + (ch.difficulty === 'Zor' ? 'is-rose' : (ch.difficulty === 'Orta' ? 'is-amber' : 'is-emerald'));
+          diffBadge.textContent = ch.difficulty;
+          badgeRow.appendChild(diffBadge);
+
+          if (ch.featured || ch.isCustom) {
+            var tag = document.createElement('span');
+            tag.className = 'badge is-blue';
+            tag.textContent = ch.isCustom ? 'Özel' : 'Vitrin';
+            badgeRow.appendChild(tag);
+          }
+
+          var h3 = document.createElement('h3');
+          h3.style.cssText = 'margin:0 0 4px 0; font-family:var(--font-display); font-size:16px;';
+          h3.textContent = ch.title;
+
+          var spanInfo = document.createElement('p');
+          spanInfo.style.cssText = 'margin:0; font-size:12.5px; color:var(--text-secondary);';
+          spanInfo.textContent = ch.nodes[0].root + ' → (' + (ch.nodes.length - 2) + ' halka) → ' + ch.nodes[ch.nodes.length - 1].root;
+
+          top.appendChild(badgeRow);
+          top.appendChild(h3);
+          top.appendChild(spanInfo);
+
+          var playBtn = document.createElement('button');
+          playBtn.type = 'button';
+          playBtn.className = 'btn btn-soft-blue';
+          playBtn.textContent = 'Bu Zinciri Oyna';
+          playBtn.setAttribute('onclick', "selectPracticeChain('" + ch.id + "')");
+
+          card.appendChild(top);
+          card.appendChild(playBtn);
+          container.appendChild(card);
+        }
+      }
+
+      function renderBuilder() {
+        var container = document.getElementById('builder-rows');
+        if (!container) return;
+        container.innerHTML = '';
+
+        for (var i = 0; i < appState.builderSlots.length; i++) {
+          var slot = appState.builderSlots[i];
+          var isFirst = i === 0;
+          var isLast = i === appState.builderSlots.length - 1;
+
+          var row = document.createElement('div');
+          row.className = 'builder-row';
+
+          var idx = document.createElement('span');
+          idx.className = 'badge ' + (isFirst || isLast ? 'is-blue' : 'is-emerald');
+          idx.textContent = isFirst ? 'Başlangıç' : (isLast ? 'Bitiş' : (i + '. Halka'));
+          row.appendChild(idx);
+
+          var g1 = document.createElement('div');
+          g1.className = 'control-group';
+          g1.style.marginBottom = '0';
+          var l1 = document.createElement('label');
+          l1.className = 'field-label';
+          l1.setAttribute('for', 'b-root-' + i);
+          l1.textContent = 'Kök Sözcük';
+          var i1 = document.createElement('input');
+          i1.type = 'text';
+          i1.id = 'b-root-' + i;
+          i1.className = 'text-input';
+          i1.value = slot.root;
+          i1.setAttribute('oninput', 'updateBuilderSlot(' + i + ', "root", this.value)');
+          g1.appendChild(l1);
+          g1.appendChild(i1);
+          row.appendChild(g1);
+
+          var g2 = document.createElement('div');
+          g2.className = 'control-group';
+          g2.style.marginBottom = '0';
+          var l2 = document.createElement('label');
+          l2.className = 'field-label';
+          l2.setAttribute('for', 'b-top-' + i);
+          l2.textContent = isFirst ? 'Üst Bağlantı (Yok)' : 'Üst Tamlama Biçimi';
+          var i2 = document.createElement('input');
+          i2.type = 'text';
+          i2.id = 'b-top-' + i;
+          i2.className = 'text-input';
+          i2.value = slot.topForm;
+          i2.disabled = isFirst;
+          i2.placeholder = slot.root;
+          i2.setAttribute('oninput', 'updateBuilderSlot(' + i + ', "topForm", this.value)');
+          g2.appendChild(l2);
+          g2.appendChild(i2);
+          row.appendChild(g2);
+
+          var g3 = document.createElement('div');
+          g3.className = 'control-group';
+          g3.style.marginBottom = '0';
+          var l3 = document.createElement('label');
+          l3.className = 'field-label';
+          l3.setAttribute('for', 'b-bot-' + i);
+          l3.textContent = isLast ? 'Alt Bağlantı (Yok)' : 'Alt Tamlama Biçimi';
+          var i3 = document.createElement('input');
+          i3.type = 'text';
+          i3.id = 'b-bot-' + i;
+          i3.className = 'text-input';
+          i3.value = slot.bottomForm;
+          i3.disabled = isLast;
+          i3.placeholder = slot.root;
+          i3.setAttribute('oninput', 'updateBuilderSlot(' + i + ', "bottomForm", this.value)');
+          g3.appendChild(l3);
+          g3.appendChild(i3);
+          row.appendChild(g3);
+
+          container.appendChild(row);
+        }
+      }
+
+      function updateBuilderSlot(idx, field, value) {
+        if (!appState.builderSlots[idx]) return;
+        appState.builderSlots[idx][field] = trUpper(value);
+      }
+
+      function addBuilderSlot() {
+        if (appState.builderSlots.length >= 6) {
+          showBuilderFeedback('is-error', 'Sınır', 'Bir zincir en fazla 6 kelimeden oluşabilir.');
+          return;
+        }
+        var last = appState.builderSlots.pop();
+        appState.builderSlots.push({ root: '', topForm: '', bottomForm: '', anchor: false });
+        appState.builderSlots.push(last);
+        renderBuilder();
+      }
+
+      function removeBuilderSlot() {
+        if (appState.builderSlots.length <= 4) {
+          showBuilderFeedback('is-error', 'En Az 4 Kelime', 'Bir zincirde en az 2 ara kelime (toplam 4 sözcük) bulunmalıdır.');
+          return;
+        }
+        appState.builderSlots.splice(appState.builderSlots.length - 2, 1);
+        renderBuilder();
+      }
+
+      function loadBuilderExample() {
+        appState.builderSlots = [
+          { root: 'DOLAP', topForm: '', bottomForm: 'DOLAP', anchor: true },
+          { root: 'BEYGİR', topForm: 'BEYGİRİ', bottomForm: 'BEYGİR', anchor: false },
+          { root: 'GÜÇ', topForm: 'GÜCÜ', bottomForm: 'GÜÇ', anchor: false },
+          { root: 'ZEHİR', topForm: 'ZEHİRLENMESİ', bottomForm: 'ZEHİR', anchor: false },
+          { root: 'GİBİ', topForm: 'GİBİ', bottomForm: '', anchor: true }
+        ];
+        var titleEl = document.getElementById('builder-title');
+        if (titleEl) titleEl.value = 'Dolap Beygiri Örneği';
+        renderBuilder();
+        showBuilderFeedback('is-hint', 'Örnek Yüklendi', 'Kök ve ekli biçimleri inceleyip doğrudan tahtada oynayabilirsiniz.');
+      }
+
+      function saveAndPlayCustomChain() {
+        var titleEl = document.getElementById('builder-title');
+        var diffEl = document.getElementById('builder-difficulty');
+        var title = titleEl && titleEl.value.trim() ? titleEl.value.trim() : 'Özel Zincir';
+        var diff = diffEl ? diffEl.value : 'Orta';
+
+        var cleanNodes = [];
+        for (var i = 0; i < appState.builderSlots.length; i++) {
+          var s = appState.builderSlots[i];
+          var rootU = trUpper(s.root);
+          if (!rootU || rootU.indexOf(' ') !== -1) {
+            showBuilderFeedback('is-error', 'Eksik veya Geçersiz Kelime', (i + 1) + '. satırdaki kök sözcük tek kelime ve dolu olmalıdır.');
+            return;
+          }
+          var topU = trUpper(s.topForm) || rootU;
+          var botU = trUpper(s.bottomForm) || rootU;
+          var isAnchor = (i === 0 || i === appState.builderSlots.length - 1);
+          cleanNodes.push({
+            root: rootU,
+            topForm: topU,
+            bottomForm: botU,
+            anchor: isAnchor,
+            accepted: [rootU, topU, botU],
+            morphNote: isAnchor ? '' : ('Özel halka: ' + topU + ' / ' + botU)
+          });
+        }
+
+        var newChain = {
+          id: 'custom-' + Date.now(),
+          title: title,
+          difficulty: diff,
+          isCustom: true,
+          roundEligible: false,
+          nodes: cleanNodes
+        };
+
+        appState.customChains.unshift(newChain);
+        savePersistentState();
+        switchMode('practice');
+        loadChain(newChain);
+        setFeedback('is-success', 'Özel Zincir Hazır', '"' + title + '" kaydedildi ve oyun tahtasına yüklendi.');
+      }
+
+      function showBuilderFeedback(cls, title, msg) {
+        var box = document.getElementById('builder-feedback');
+        if (!box) return;
+        box.className = 'feedback-box ' + cls;
+        box.innerHTML = '';
+        var t = document.createElement('p');
+        t.className = 'feedback-title';
+        t.textContent = title;
+        var p = document.createElement('p');
+        p.style.margin = '0';
+        p.textContent = msg;
+        box.appendChild(t);
+        box.appendChild(p);
+      }
+
+      /* =====================================================================
+         10. RENDER FONKSİYONLARI
+         ===================================================================== */
+      function setFeedback(cls, title, msg) {
+        var box = document.getElementById('feedback-box');
+        var t = document.getElementById('feedback-title');
+        var m = document.getElementById('feedback-msg');
+        if (!box || !t || !m) return;
+        box.className = 'feedback-box ' + cls;
+        t.textContent = title;
+        m.textContent = msg;
+      }
+
+      function renderBoard() {
+        var board = document.getElementById('chain-board');
+        if (!board || !appState.currentChain) return;
+        board.innerHTML = '';
+
+        var nodes = appState.currentChain.nodes;
+        var frontier = getFrontierIndices();
+        var activeIdx = getActiveTargetIndex();
+
+        var solvedCount = 0;
+        for (var k = 1; k < nodes.length - 1; k++) {
+          if (appState.nodeStates[k].solved) solvedCount++;
+        }
+
+        var kickerEl = document.getElementById('board-kicker');
+        var titleEl = document.getElementById('board-title');
+        var diffEl = document.getElementById('board-difficulty-badge');
+        var progEl = document.getElementById('board-progress-badge');
+
+        if (kickerEl) {
+          if (appState.mode === 'classic') {
+            kickerEl.textContent = isFinalWagerRound()
+              ? 'Tur 4 / 4 · Final Bahis Turu (100–500 / Son Kelime 1000)'
+              : ('Tur ' + (appState.roundIndex + 1) + ' / 4 · +' + getRoundPoints() + ' Puan / Kelime');
+          } else {
+            kickerEl.textContent = 'Serbest Pratik · Türkçe Kök & Tamlama Modu';
+          }
+        }
+        if (titleEl) titleEl.textContent = appState.currentChain.title;
+        if (diffEl) diffEl.textContent = appState.currentChain.difficulty;
+        if (progEl) progEl.textContent = solvedCount + ' / ' + (nodes.length - 2) + ' Çözüldü';
+
+        for (var i = 0; i < nodes.length; i++) {
+          var node = nodes[i];
+          var st = appState.nodeStates[i];
+          var isFrontier = (i === frontier.topIdx || i === frontier.bottomIdx);
+          var isTarget = (i === activeIdx);
+
+          var card = document.createElement('div');
+          card.className = 'chain-node';
+          if (node.anchor) card.classList.add('is-anchor');
+          else if (st.passed) card.classList.add('is-passed');
+          else if (st.solved) card.classList.add('is-solved');
+          if (isFrontier && !st.solved) card.classList.add('is-frontier');
+          if (isTarget && !st.solved) card.classList.add('is-target');
+
+          if (isFrontier && !st.solved) {
+            card.setAttribute('onclick', 'selectFrontierSlot(' + i + ')');
+            card.setAttribute('onkeydown', 'handleNodeKeydown(event, ' + i + ')');
+            card.setAttribute('tabindex', '0');
+            card.setAttribute('role', 'button');
+            card.setAttribute('aria-label', (i + 1) + '. kelimeyi hedef seç');
+          }
+
+          var idxBadge = document.createElement('div');
+          idxBadge.className = 'node-index';
+          idxBadge.textContent = node.anchor ? (i === 0 ? 'BAŞ' : 'SON') : ('0' + i);
+          card.appendChild(idxBadge);
+
+          var body = document.createElement('div');
+          body.className = 'node-body';
+
+          if (node.anchor) {
+            var anchorWord = document.createElement('div');
+            anchorWord.className = 'node-word-anchor';
+            anchorWord.textContent = trUpper(node.root);
+            body.appendChild(anchorWord);
+          } else {
+            var strip = document.createElement('div');
+            strip.className = 'letter-strip';
+            var wordU = trUpper(node.root);
+            for (var chIdx = 0; chIdx < wordU.length; chIdx++) {
+              var box = document.createElement('span');
+              var isRev = st.solved || chIdx < st.revealedCount;
+              box.className = 'letter-box ' + (isRev ? 'is-revealed' : 'is-blank');
+              box.textContent = isRev ? wordU.charAt(chIdx) : '·';
+              strip.appendChild(box);
+            }
+            body.appendChild(strip);
+
+            var sub = document.createElement('div');
+            sub.className = 'node-subnote';
+            if (st.solved) {
+              sub.textContent = node.morphNote || ('Çözülen kök: ' + wordU);
+            } else if (isTarget) {
+              sub.textContent = 'Seçili hedef · ' + wordU.length + ' harfli kök (ekli biçimler de kabul edilir)';
+            } else if (isFrontier) {
+              sub.textContent = 'Seçmek için tıklayın · ' + wordU.length + ' harf';
+            } else {
+              sub.textContent = wordU.length + ' harf · Komşu kelime açılınca hedeflenir';
+            }
+            body.appendChild(sub);
+          }
+          card.appendChild(body);
+
+          var actCol = document.createElement('div');
+          actCol.className = 'node-action-col';
+          var statusTag = document.createElement('span');
+          if (node.anchor) {
+            statusTag.className = 'badge is-blue';
+            statusTag.textContent = i === 0 ? 'Başlangıç' : 'Bitiş';
+          } else if (st.passed) {
+            statusTag.className = 'badge is-amber';
+            statusTag.textContent = 'Açıldı';
+          } else if (st.solved) {
+            statusTag.className = 'badge is-emerald';
+            statusTag.textContent = 'Çözüldü';
+          } else if (isTarget) {
+            statusTag.className = 'badge is-blue';
+            statusTag.textContent = 'Hedef';
+          } else if (isFrontier) {
+            statusTag.className = 'badge';
+            statusTag.textContent = i === frontier.topIdx ? 'Üst Sınır' : 'Alt Sınır';
+          } else {
+            statusTag.className = 'badge';
+            statusTag.textContent = 'Kilitli';
+          }
+          actCol.appendChild(statusTag);
+          card.appendChild(actCol);
+
+          board.appendChild(card);
+
+          if (i < nodes.length - 1) {
+            var nextNode = nodes[i + 1];
+            var bothSolved = st.solved && appState.nodeStates[i + 1].solved;
+            var bridge = document.createElement('div');
+            bridge.className = 'link-bridge' + (bothSolved ? ' is-linked' : '');
+
+            var leftText = node.bottomForm || node.root;
+            var rightText = nextNode.topForm || nextNode.root;
+
+            var phraseSpan = document.createElement('span');
+            phraseSpan.className = 'bridge-phrase';
+            if (bothSolved) {
+              phraseSpan.textContent = leftText + ' ' + rightText;
+            } else if (st.solved) {
+              phraseSpan.textContent = leftText + ' + [ ? ]';
+            } else if (appState.nodeStates[i + 1].solved) {
+              phraseSpan.textContent = '[ ? ] + ' + rightText;
+            } else {
+              phraseSpan.textContent = '[ ? ] — [ ? ]';
+            }
+            bridge.appendChild(phraseSpan);
+
+            if (bothSolved && (leftText !== trUpper(node.root) || rightText !== trUpper(nextNode.root))) {
+              var morphBadge = document.createElement('span');
+              morphBadge.className = 'bridge-morph';
+              morphBadge.textContent = 'Tamlama Köprüsü';
+              bridge.appendChild(morphBadge);
+            }
+
+            board.appendChild(bridge);
+          }
+        }
+      }
+
+      function renderHUD() {
+        var labelA = document.getElementById('label-team-a');
+        var scoreA = document.getElementById('score-team-a');
+        var capA = document.getElementById('caption-team-a');
+        var tileA = document.getElementById('tile-team-a');
+
+        var labelB = document.getElementById('label-team-b');
+        var scoreB = document.getElementById('score-team-b');
+        var capB = document.getElementById('caption-team-b');
+        var tileB = document.getElementById('tile-team-b');
+
+        var modeBadge = document.getElementById('round-mode-badge');
+        var solvedBadge = document.getElementById('stats-solved-badge');
+
+        if (appState.teamMode) {
+          if (labelA) labelA.textContent = 'Takım A';
+          if (scoreA) scoreA.textContent = appState.scores.a;
+          if (capA) capA.textContent = appState.activeTeam === 'a' ? '● Sıra bu takımda' : 'Beklemede';
+          if (tileA) tileA.classList.toggle('is-active-team', appState.activeTeam === 'a');
+
+          if (labelB) labelB.textContent = 'Takım B';
+          if (scoreB) scoreB.textContent = appState.scores.b;
+          if (capB) capB.textContent = appState.activeTeam === 'b' ? '● Sıra bu takımda' : 'Beklemede';
+          if (tileB) tileB.classList.toggle('is-active-team', appState.activeTeam === 'b');
+        } else {
+          if (labelA) labelA.textContent = 'Güncel Skor';
+          if (scoreA) scoreA.textContent = appState.scores.a;
+          if (capA) capA.textContent = appState.mode === 'classic' ? ('Tur ' + (appState.roundIndex + 1) + ' / 4') : 'Pratik Oturumu';
+          if (tileA) tileA.classList.add('is-active-team');
+
+          if (labelB) labelB.textContent = 'En Yüksek Skor';
+          if (scoreB) scoreB.textContent = appState.bestScore;
+          if (capB) capB.textContent = 'Kayıtlı oturum rekoru';
+          if (tileB) tileB.classList.remove('is-active-team');
+        }
+
+        if (modeBadge) {
+          modeBadge.textContent = appState.mode === 'classic'
+            ? (isFinalWagerRound() ? 'Final Bahis' : ('Tur ' + (appState.roundIndex + 1)))
+            : 'Serbest Pratik';
+        }
+        if (solvedBadge) {
+          solvedBadge.textContent = appState.solvedChainsCount + ' Zincir';
+        }
+
+        var tbody = document.getElementById('history-tbody');
+        if (!tbody) return;
+        tbody.innerHTML = '';
+        if (appState.history.length === 0) {
+          var trEmpty = document.createElement('tr');
+          var tdEmpty = document.createElement('td');
+          tdEmpty.colSpan = 3;
+          tdEmpty.style.color = 'var(--text-muted)';
+          tdEmpty.textContent = 'Henüz tamamlanan zincir yok. İlk zinciri çözdüğünüzde kayıtlar burada görünür.';
+          trEmpty.appendChild(tdEmpty);
+          tbody.appendChild(trEmpty);
+          return;
+        }
+        for (var i = 0; i < appState.history.length; i++) {
+          var h = appState.history[i];
+          var tr = document.createElement('tr');
+          var td1 = document.createElement('td');
+          td1.textContent = h.title;
+          var td2 = document.createElement('td');
+          td2.textContent = h.mode;
+          var td3 = document.createElement('td');
+          td3.textContent = h.score;
+          tr.appendChild(td1);
+          tr.appendChild(td2);
+          tr.appendChild(td3);
+          tbody.appendChild(tr);
+        }
+      }
+
+      function renderControls() {
+        var f = getFrontierIndices();
+        var activeIdx = getActiveTargetIndex();
+        var nodes = appState.currentChain ? appState.currentChain.nodes : [];
+
+        var targetBadge = document.getElementById('active-target-badge');
+        var guessLabel = document.getElementById('guess-label');
+        var btnTop = document.getElementById('btn-letter-top');
+        var btnBot = document.getElementById('btn-letter-bottom');
+        var btnSubmit = document.getElementById('btn-submit-guess');
+        var btnMorph = document.getElementById('btn-hint-morph');
+        var btnMean = document.getElementById('btn-hint-meaning');
+        var btnPass = document.getElementById('btn-pass-word');
+        var wagerBox = document.getElementById('wager-box');
+        var btn1000 = document.getElementById('btn-wager-1000');
+        var wSlider = document.getElementById('wager-slider');
+        var wNum = document.getElementById('wager-number');
+
+        var disabled = appState.chainCompleted || activeIdx === -1;
+
+        if (btnSubmit) btnSubmit.disabled = disabled;
+        if (btnMorph) btnMorph.disabled = disabled;
+        if (btnMean) btnMean.disabled = disabled;
+        if (btnPass) btnPass.disabled = disabled;
+
+        if (btnTop) {
+          btnTop.disabled = disabled || f.topIdx === -1;
+          if (f.topIdx !== -1 && nodes[f.topIdx - 1]) {
+            var topRef = nodes[f.topIdx - 1].bottomForm || nodes[f.topIdx - 1].root;
+            btnTop.textContent = topRef + ' Altından Harf';
+          } else {
+            btnTop.textContent = 'Üstten Harf Al';
+          }
+        }
+        if (btnBot) {
+          btnBot.disabled = disabled || f.bottomIdx === -1;
+          if (f.bottomIdx !== -1 && nodes[f.bottomIdx + 1]) {
+            var botRef = nodes[f.bottomIdx + 1].topForm || nodes[f.bottomIdx + 1].root;
+            btnBot.textContent = botRef + ' Üstünden Harf';
+          } else {
+            btnBot.textContent = 'Alttan Harf Al';
+          }
+        }
+
+        if (targetBadge) {
+          if (disabled) {
+            targetBadge.textContent = 'Tamamlandı';
+          } else {
+            targetBadge.textContent = (activeIdx === f.topIdx ? 'Üst Sınır' : 'Alt Sınır') + ' (' + activeIdx + '. Halka)';
+          }
+        }
+
+        if (guessLabel && activeIdx !== -1 && nodes[activeIdx]) {
+          var len = trUpper(nodes[activeIdx].root).length;
+          guessLabel.textContent = activeIdx + '. Halka İçin Tahmin (' + len + ' harfli kök veya ekli biçimi)';
+        }
+
+        var showWager = isFinalWagerRound() && !disabled;
+        if (wagerBox) wagerBox.classList.toggle('hidden', !showWager);
+        if (showWager) {
+          var isLastWord = countRemainingHiddenSlots() === 1;
+          var maxW = isLastWord ? 1000 : 500;
+          if (wSlider) wSlider.max = String(maxW);
+          if (wNum) wNum.max = String(maxW);
+          if (btn1000) btn1000.classList.toggle('hidden', !isLastWord);
+          var rulesEl = document.getElementById('wager-rules-text');
+          if (rulesEl) {
+            rulesEl.textContent = isLastWord
+              ? 'Son kelime! Bu elde 1.000 puana kadar bahis oynayabilirsiniz.'
+              : 'Final Turu: Bu elde en fazla 500 puan bahis oynayabilirsiniz.';
+          }
+        }
+      }
+
+      function renderAll() {
+        renderBoard();
+        renderHUD();
+        renderControls();
+      }
+
+      /* =====================================================================
+         11. KLAVYE KISAYOLLARI (↑ / ↓ Sınır Geçişi)
+         ===================================================================== */
+      document.addEventListener('keydown', function (ev) {
+        if (appState.mode === 'builder' || appState.speedActive || appState.chainCompleted) return;
+        if (ev.key === 'ArrowUp') {
+          var fUp = getFrontierIndices();
+          if (fUp.topIdx !== -1) {
+            ev.preventDefault();
+            selectFrontierSlot(fUp.topIdx);
+          }
+        } else if (ev.key === 'ArrowDown') {
+          var fDown = getFrontierIndices();
+          if (fDown.bottomIdx !== -1) {
+            ev.preventDefault();
+            selectFrontierSlot(fDown.bottomIdx);
+          }
+        }
+      });
+
+      window.switchMode = switchMode;
+      window.toggleTeamMode = toggleTeamMode;
+      window.toggleSound = toggleSound;
+      window.handleResetGame = handleResetGame;
+      window.selectFrontierSlot = selectFrontierSlot;
+      window.handleNodeKeydown = handleNodeKeydown;
+      window.revealFrontierLetter = revealFrontierLetter;
+      window.submitGuess = submitGuess;
+      window.passTargetWord = passTargetWord;
+      window.showMorphHint = showMorphHint;
+      window.showMeaningHint = showMeaningHint;
+      window.advanceNextStage = advanceNextStage;
+      window.replayCurrentChain = replayCurrentChain;
+      window.shareGameResult = shareGameResult;
+      window.startSpeedTimer = startSpeedTimer;
+      window.submitSpeedChain = submitSpeedChain;
+      window.skipSpeedChain = skipSpeedChain;
+      window.syncWagerFromSlider = syncWagerFromSlider;
+      window.syncWagerFromNumber = syncWagerFromNumber;
+      window.setWagerPreset = setWagerPreset;
+      window.filterPracticeChains = filterPracticeChains;
+      window.selectPracticeChain = selectPracticeChain;
+      window.updateBuilderSlot = updateBuilderSlot;
+      window.addBuilderSlot = addBuilderSlot;
+      window.removeBuilderSlot = removeBuilderSlot;
+      window.loadBuilderExample = loadBuilderExample;
+      window.saveAndPlayCustomChain = saveAndPlayCustomChain;
+
+      /* =====================================================================
+         12. BAŞLATMA
+         ===================================================================== */
+      async function initApp() {
+        loadPersistentState();
+        var soundBtn = document.getElementById('btn-sound-toggle');
+        if (soundBtn) soundBtn.textContent = appState.soundEnabled ? 'Ses: Açık' : 'Ses: Kapalı';
+        await loadQuestionBank();
+        loadChain(pickClassicChainForRound(0));
+        renderPracticeCatalog();
+      }
+
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initApp);
+      } else {
+        initApp();
+      }
+    })();
+  </script>
+</body>
+</html>

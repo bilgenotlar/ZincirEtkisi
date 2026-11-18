@@ -1,0 +1,1022 @@
+{
+  "version": "1.0",
+  "updatedAt": "2026-11-18",
+  "studio": "MaviBlue Stüdyo",
+  "game": "Zincir Etkisi",
+  "chains": [
+    {
+      "id": "vitrin-dolap-beygiri",
+      "title": "Dolap Beygiri Vitrini",
+      "difficulty": "Orta",
+      "featured": true,
+      "roundEligible": true,
+      "nodes": [
+        {
+          "root": "DOLAP",
+          "bottomForm": "DOLAP",
+          "anchor": true
+        },
+        {
+          "root": "BEYGİR",
+          "topForm": "BEYGİRİ",
+          "bottomForm": "BEYGİR",
+          "accepted": [
+            "BEYGİR",
+            "BEYGİRİ",
+            "BEYGİRİN"
+          ],
+          "morphNote": "İyelik eki (-i): DOLAP BEYGİRİ → yalın tamlayan: BEYGİR GÜCÜ",
+          "meaningHint": "Sürekli aynı işi tekdüze yapanları anlatan benzetmedeki yük hayvanı."
+        },
+        {
+          "root": "GÜÇ",
+          "topForm": "GÜCÜ",
+          "bottomForm": "GÜÇ",
+          "accepted": [
+            "GÜÇ",
+            "GÜCÜ",
+            "GÜCE",
+            "GÜCÜN"
+          ],
+          "morphNote": "Ünsüz yumuşaması (ç→c) + iyelik (-ü): BEYGİR GÜCÜ → yalın: GÜÇ ZEHİRLENMESİ",
+          "meaningHint": "Motorlarda beygirle ölçülen birim; elde edilince insanı sarhoş edebilen yetke."
+        },
+        {
+          "root": "ZEHİR",
+          "topForm": "ZEHİRLENMESİ",
+          "bottomForm": "ZEHİR",
+          "accepted": [
+            "ZEHİR",
+            "ZEHİRLENMESİ",
+            "ZEHİRLENME",
+            "ZEHRİ",
+            "ZEHİRİ"
+          ],
+          "morphNote": "Yapım + iyelik (-len-me-si) türemesi: GÜÇ ZEHİRLENMESİ → kök: ZEHİR GİBİ",
+          "meaningHint": "Acı veya çok keskin tatları, sert sözleri anlatırken benzetme yapılan yakıcı madde."
+        },
+        {
+          "root": "GİBİ",
+          "topForm": "GİBİ",
+          "anchor": true
+        }
+      ]
+    },
+    {
+      "id": "klasik-kapi-hukuk",
+      "title": "Açık Kapıdan Hukuka",
+      "difficulty": "Kolay",
+      "featured": false,
+      "roundEligible": true,
+      "nodes": [
+        {
+          "root": "AÇIK",
+          "bottomForm": "AÇIK",
+          "anchor": true
+        },
+        {
+          "root": "KAPI",
+          "topForm": "KAPI",
+          "bottomForm": "KAPI",
+          "accepted": [
+            "KAPI",
+            "KAPISI",
+            "KAPIYI"
+          ],
+          "morphNote": "Sıfat tamlamasından belirtisiz tamlamaya: AÇIK KAPI → KAPI KULU",
+          "meaningHint": "Bir odaya veya binaya girip çıkmaya yarayan, kanatlı geçiş bölümü."
+        },
+        {
+          "root": "KUL",
+          "topForm": "KULU",
+          "bottomForm": "KUL",
+          "accepted": [
+            "KUL",
+            "KULU",
+            "KULLUĞU"
+          ],
+          "morphNote": "İyelik eki (-u): KAPI KULU → yalın tamlayan: KUL HAKKI",
+          "meaningHint": "Osmanlı’da padişaha bağlı asker sınıfı; günlük dilde insan, beşer."
+        },
+        {
+          "root": "HAK",
+          "topForm": "HAKKI",
+          "bottomForm": "HAK",
+          "accepted": [
+            "HAK",
+            "HAKKI",
+            "HAKKIYLA"
+          ],
+          "morphNote": "Ünsüz ikizleşmesi (k→kk) + iyelik (-ı): KUL HAKKI → ikileme: HAK HUKUK",
+          "meaningHint": "Adaletin ve hukukun kişiye tanıdığı yetki; yenmemesi gereken pay."
+        },
+        {
+          "root": "HUKUK",
+          "topForm": "HUKUK",
+          "bottomForm": "HUKUK",
+          "accepted": [
+            "HUKUK",
+            "HUKUKU",
+            "HUKUKİ"
+          ],
+          "morphNote": "İkileme ve isim tamlaması: HAK HUKUK → HUKUK DEVLETİ",
+          "meaningHint": "Toplumu düzenleyen yasaların ve adalet sisteminin bütünü."
+        },
+        {
+          "root": "DEVLETİ",
+          "topForm": "DEVLETİ",
+          "anchor": true
+        }
+      ]
+    },
+    {
+      "id": "klasik-kar-sicaklik",
+      "title": "Kardan Oda Sıcaklığına",
+      "difficulty": "Kolay",
+      "featured": false,
+      "roundEligible": true,
+      "nodes": [
+        {
+          "root": "KAR",
+          "bottomForm": "KAR",
+          "anchor": true
+        },
+        {
+          "root": "TOP",
+          "topForm": "TOPU",
+          "bottomForm": "TOP",
+          "accepted": [
+            "TOP",
+            "TOPU",
+            "TOPUN"
+          ],
+          "morphNote": "İyelik eki (-u): KAR TOPU → yalın tamlayan: TOP SAHASI",
+          "meaningHint": "Kışın elde sıkıştırılarak atılan yuvarlak kütle; oyun aracı."
+        },
+        {
+          "root": "SAHA",
+          "topForm": "SAHASI",
+          "bottomForm": "SAHA",
+          "accepted": [
+            "SAHA",
+            "SAHASI",
+            "SAHADA"
+          ],
+          "morphNote": "Kaynaştırma (s) + iyelik (-ı): TOP SAHASI → SAHA ÇALIŞMASI",
+          "meaningHint": "Spor müsabakalarının oynandığı alan; araştırmada arazi."
+        },
+        {
+          "root": "ÇALIŞMA",
+          "topForm": "ÇALIŞMASI",
+          "bottomForm": "ÇALIŞMA",
+          "accepted": [
+            "ÇALIŞMA",
+            "ÇALIŞMASI",
+            "ÇALIŞMALARI"
+          ],
+          "morphNote": "İyelik (-sı): SAHA ÇALIŞMASI → tamlayan: ÇALIŞMA ODASI",
+          "meaningHint": "Veri toplamak için alanda yapılan faaliyet; emek verme işi."
+        },
+        {
+          "root": "ODA",
+          "topForm": "ODASI",
+          "bottomForm": "ODA",
+          "accepted": [
+            "ODA",
+            "ODASI",
+            "ODANIN"
+          ],
+          "morphNote": "İyelik (-sı): ÇALIŞMA ODASI → tamlayan: ODA SICAKLIĞI",
+          "meaningHint": "Ev veya ofiste duvarlarla ayrılmış, içinde masa bulunan bölüm."
+        },
+        {
+          "root": "SICAKLIĞI",
+          "topForm": "SICAKLIĞI",
+          "anchor": true
+        }
+      ]
+    },
+    {
+      "id": "klasik-kara-yarisma",
+      "title": "Kara Kutudan Bilgiye",
+      "difficulty": "Orta",
+      "featured": false,
+      "roundEligible": true,
+      "nodes": [
+        {
+          "root": "KARA",
+          "bottomForm": "KARA",
+          "anchor": true
+        },
+        {
+          "root": "KUTU",
+          "topForm": "KUTU",
+          "bottomForm": "KUTU",
+          "accepted": [
+            "KUTU",
+            "KUTUSU"
+          ],
+          "morphNote": "Sıfat tamlaması → belirtisiz isim tamlaması: KARA KUTU → KUTU OYUNU",
+          "meaningHint": "Uçaklarda uçuş verilerini kaydeden dayanıklı cihaz; karton kap."
+        },
+        {
+          "root": "OYUN",
+          "topForm": "OYUNU",
+          "bottomForm": "OYUN",
+          "accepted": [
+            "OYUN",
+            "OYUNU",
+            "OYUNLARI"
+          ],
+          "morphNote": "İyelik (-u): KUTU OYUNU → yalın tamlayan: OYUN ALANI",
+          "meaningHint": "Masa başında zar veya kartlarla vakit geçirilen eğlence."
+        },
+        {
+          "root": "ALAN",
+          "topForm": "ALANI",
+          "bottomForm": "ALAN",
+          "accepted": [
+            "ALAN",
+            "ALANI",
+            "ALANDA"
+          ],
+          "morphNote": "İyelik (-ı): OYUN ALANI → tamlayan: ALAN BİLGİSİ",
+          "meaningHint": "Çocukların oynadığı park bölgesi; uzmanlık branşı."
+        },
+        {
+          "root": "BİLGİ",
+          "topForm": "BİLGİSİ",
+          "bottomForm": "BİLGİ",
+          "accepted": [
+            "BİLGİ",
+            "BİLGİSİ",
+            "BİLGİLER"
+          ],
+          "morphNote": "Kaynaştırma (s) + iyelik (-i): ALAN BİLGİSİ → BİLGİ YARIŞMASI",
+          "meaningHint": "Öğrenme ve araştırma yoluyla edinilen gerçeklerin bütünü."
+        },
+        {
+          "root": "YARIŞMASI",
+          "topForm": "YARIŞMASI",
+          "anchor": true
+        }
+      ]
+    },
+    {
+      "id": "klasik-ses-borek",
+      "title": "Ses Telinden Böreğe",
+      "difficulty": "Orta",
+      "featured": false,
+      "roundEligible": true,
+      "nodes": [
+        {
+          "root": "SES",
+          "bottomForm": "SES",
+          "anchor": true
+        },
+        {
+          "root": "TEL",
+          "topForm": "TELİ",
+          "bottomForm": "TEL",
+          "accepted": [
+            "TEL",
+            "TELİ",
+            "TELLERİ"
+          ],
+          "morphNote": "İyelik (-i): SES TELİ → yalın tamlayan: TEL KADAYIF",
+          "meaningHint": "Gırtlakta titreşerek konuşmayı sağlayan ince yapı; metal iplik."
+        },
+        {
+          "root": "KADAYIF",
+          "topForm": "KADAYIF",
+          "bottomForm": "KADAYIF",
+          "accepted": [
+            "KADAYIF",
+            "KADAYIFI"
+          ],
+          "morphNote": "Sıfatlaşmış tamlama: TEL KADAYIF → KADAYIF TEPSİSİ",
+          "meaningHint": "İncecik hamur tellerinden yapılan şerbetli geleneksel tatlı."
+        },
+        {
+          "root": "TEPSİ",
+          "topForm": "TEPSİSİ",
+          "bottomForm": "TEPSİ",
+          "accepted": [
+            "TEPSİ",
+            "TEPSİSİ",
+            "TEPSİDE"
+          ],
+          "morphNote": "Kaynaştırma (s) + iyelik (-i): KADAYIF TEPSİSİ → TEPSİ BÖREĞİ",
+          "meaningHint": "Fırında tatlı veya hamur işi pişirilen geniş, kenarlı kap."
+        },
+        {
+          "root": "BÖREK",
+          "topForm": "BÖREĞİ",
+          "bottomForm": "BÖREK",
+          "accepted": [
+            "BÖREK",
+            "BÖREĞİ",
+            "BÖREKLERİ"
+          ],
+          "morphNote": "Ünsüz yumuşaması (k→ğ) + iyelik (-i): TEPSİ BÖREĞİ → BÖREK HARCI",
+          "meaningHint": "Yufka arasına peynir veya kıyma konarak fırınlanan hamur işi."
+        },
+        {
+          "root": "HARCI",
+          "topForm": "HARCI",
+          "anchor": true
+        }
+      ]
+    },
+    {
+      "id": "klasik-gece-secim",
+      "title": "Gece Kuşundan Baskın Seçime",
+      "difficulty": "Zor",
+      "featured": false,
+      "roundEligible": true,
+      "nodes": [
+        {
+          "root": "GECE",
+          "bottomForm": "GECE",
+          "anchor": true
+        },
+        {
+          "root": "KUŞ",
+          "topForm": "KUŞU",
+          "bottomForm": "KUŞ",
+          "accepted": [
+            "KUŞ",
+            "KUŞU",
+            "KUŞLAR"
+          ],
+          "morphNote": "İyelik (-u): GECE KUŞU → yalın tamlayan: KUŞ ÜZÜMÜ",
+          "meaningHint": "Geç saatlere kadar uyanık kalan kişi için kullanılan deyimdeki canlı."
+        },
+        {
+          "root": "ÜZÜM",
+          "topForm": "ÜZÜMÜ",
+          "bottomForm": "ÜZÜM",
+          "accepted": [
+            "ÜZÜM",
+            "ÜZÜMÜ",
+            "ÜZÜMLÜ"
+          ],
+          "morphNote": "İyelik (-ü): KUŞ ÜZÜMÜ → yalın tamlayan: ÜZÜM SUYU",
+          "meaningHint": "İç pilavda ve dolmalarda kullanılan minik, çekirdeksiz kuru meyve."
+        },
+        {
+          "root": "SU",
+          "topForm": "SUYU",
+          "bottomForm": "SU",
+          "accepted": [
+            "SU",
+            "SUYU",
+            "SUYUN"
+          ],
+          "morphNote": "Özel kaynaştırma (y): ÜZÜM SUYU → yalın tamlayan: SU BASKINI",
+          "meaningHint": "Meyvelerin sıkılmasıyla elde edilen içecek; taşkın yaratan sıvı."
+        },
+        {
+          "root": "BASKIN",
+          "topForm": "BASKINI",
+          "bottomForm": "BASKIN",
+          "accepted": [
+            "BASKIN",
+            "BASKINI",
+            "BASKINLAR"
+          ],
+          "morphNote": "İyelik (-ı): SU BASKINI → sıfat tamlayanı: BASKIN SEÇİM",
+          "meaningHint": "Ani sel felaketi; siyaset dilinde beklenmedik anda yapılan seçim."
+        },
+        {
+          "root": "SEÇİM",
+          "topForm": "SEÇİM",
+          "anchor": true
+        }
+      ]
+    },
+    {
+      "id": "klasik-ates-devrim",
+      "title": "Ateş Böceğinden Harf Devrimine",
+      "difficulty": "Zor",
+      "featured": false,
+      "roundEligible": true,
+      "nodes": [
+        {
+          "root": "ATEŞ",
+          "bottomForm": "ATEŞ",
+          "anchor": true
+        },
+        {
+          "root": "BÖCEK",
+          "topForm": "BÖCEĞİ",
+          "bottomForm": "BÖCEK",
+          "accepted": [
+            "BÖCEK",
+            "BÖCEĞİ",
+            "BÖCEKLER"
+          ],
+          "morphNote": "Ünsüz yumuşaması (k→ğ) + iyelik (-i): ATEŞ BÖCEĞİ → BÖCEK İLACI",
+          "meaningHint": "Yaz akşamları karnından ışık saçan küçük kanatlı canlı."
+        },
+        {
+          "root": "İLAÇ",
+          "topForm": "İLACI",
+          "bottomForm": "İLAÇ",
+          "accepted": [
+            "İLAÇ",
+            "İLACI",
+            "İLACIN"
+          ],
+          "morphNote": "Ünsüz yumuşaması (ç→c) + iyelik (-ı): BÖCEK İLACI → İLAÇ KUTUSU",
+          "meaningHint": "Zararlı haşereleri uzaklaştırmak veya hastalıkları iyileştirmek için kullanılan madde."
+        },
+        {
+          "root": "KUTU",
+          "topForm": "KUTUSU",
+          "bottomForm": "KUTU",
+          "accepted": [
+            "KUTU",
+            "KUTUSU",
+            "KUTUYA"
+          ],
+          "morphNote": "Kaynaştırma (s) + iyelik (-u): İLAÇ KUTUSU → sıfat tamlayanı: KUTU HARF",
+          "meaningHint": "Eczane ürünlerinin konduğu ambalaj; tabelalarda üç boyutlu yazı tipi."
+        },
+        {
+          "root": "HARF",
+          "topForm": "HARF",
+          "bottomForm": "HARF",
+          "accepted": [
+            "HARF",
+            "HARFİ",
+            "HARFLER"
+          ],
+          "morphNote": "Tamlama geçişi: KUTU HARF → HARF DEVRİMİ",
+          "meaningHint": "Alfabeyi oluşturan her bir yazı işareti."
+        },
+        {
+          "root": "DEVRİMİ",
+          "topForm": "DEVRİMİ",
+          "anchor": true
+        }
+      ]
+    },
+    {
+      "id": "pratik-dil-fisi",
+      "title": "Dil Balığından Kasa Fişine",
+      "difficulty": "Zor",
+      "featured": false,
+      "roundEligible": false,
+      "nodes": [
+        {
+          "root": "DİL",
+          "bottomForm": "DİL",
+          "anchor": true
+        },
+        {
+          "root": "BALIK",
+          "topForm": "BALIĞI",
+          "bottomForm": "BALIK",
+          "accepted": [
+            "BALIK",
+            "BALIĞI",
+            "BALIĞIN"
+          ],
+          "morphNote": "Ünsüz yumuşaması (k→ğ) + iyelik (-ı): DİL BALIĞI → BALIK EKMEK",
+          "meaningHint": "Denizlerin yassı ve lezzetli bir türü; kıyı lezzetlerinin ana malzemesi."
+        },
+        {
+          "root": "EKMEK",
+          "topForm": "EKMEK",
+          "bottomForm": "EKMEK",
+          "accepted": [
+            "EKMEK",
+            "EKMEĞİ"
+          ],
+          "morphNote": "Yalın birleşme: BALIK EKMEK → tamlayan: EKMEK PARASI",
+          "meaningHint": "Fırından çıkan temel gıda; geçim karşılığı kazanılan gelir deyiminde ilk sözcük."
+        },
+        {
+          "root": "PARA",
+          "topForm": "PARASI",
+          "bottomForm": "PARA",
+          "accepted": [
+            "PARA",
+            "PARASI",
+            "PARAYI"
+          ],
+          "morphNote": "Kaynaştırma (s) + iyelik (-ı): EKMEK PARASI → PARA KASASI",
+          "meaningHint": "Alışverişte ödeme aracı; emekle kazanılan geçim bedeli."
+        },
+        {
+          "root": "KASA",
+          "topForm": "KASASI",
+          "bottomForm": "KASA",
+          "accepted": [
+            "KASA",
+            "KASASI",
+            "KASADAN"
+          ],
+          "morphNote": "Kaynaştırma (s) + iyelik (-ı): PARA KASASI → KASA FİŞİ",
+          "meaningHint": "Değerli eşya saklanan çelik dolap; markette ödeme yapılan nokta."
+        },
+        {
+          "root": "FİŞİ",
+          "topForm": "FİŞİ",
+          "anchor": true
+        }
+      ]
+    },
+    {
+      "id": "pratik-deniz-kapagi",
+      "title": "Deniz Yıldızından Dolaba",
+      "difficulty": "Orta",
+      "featured": false,
+      "roundEligible": false,
+      "nodes": [
+        {
+          "root": "DENİZ",
+          "bottomForm": "DENİZ",
+          "anchor": true
+        },
+        {
+          "root": "YILDIZ",
+          "topForm": "YILDIZI",
+          "bottomForm": "YILDIZ",
+          "accepted": [
+            "YILDIZ",
+            "YILDIZI"
+          ],
+          "morphNote": "İyelik (-ı): DENİZ YILDIZI → YILDIZ TAKIMI",
+          "meaningHint": "Beş kollu deniz canlısı; gökyüzündeki parlak gök cismi."
+        },
+        {
+          "root": "TAKIM",
+          "topForm": "TAKIMI",
+          "bottomForm": "TAKIM",
+          "accepted": [
+            "TAKIM",
+            "TAKIMI"
+          ],
+          "morphNote": "İyelik (-ı): YILDIZ TAKIMI → sıfatlaşmış tamlama: TAKIM ELBİSE",
+          "meaningHint": "Bir arada bulunan grup; ceket ve pantolondan oluşan resmi giysi."
+        },
+        {
+          "root": "ELBİSE",
+          "topForm": "ELBİSE",
+          "bottomForm": "ELBİSE",
+          "accepted": [
+            "ELBİSE",
+            "ELBİSESİ"
+          ],
+          "morphNote": "Yalın birleşme: TAKIM ELBİSE → ELBİSE DOLABI",
+          "meaningHint": "Giyilen kıyafetlerin ortak adı."
+        },
+        {
+          "root": "DOLAP",
+          "topForm": "DOLABI",
+          "bottomForm": "DOLAP",
+          "accepted": [
+            "DOLAP",
+            "DOLABI",
+            "DOLABA"
+          ],
+          "morphNote": "Ünsüz yumuşaması (p→b) + iyelik (-ı): ELBİSE DOLABI → DOLAP KAPAĞI",
+          "meaningHint": "Giysilerin asıldığı ve saklandığı kapaklı mobilya."
+        },
+        {
+          "root": "KAPAĞI",
+          "topForm": "KAPAĞI",
+          "anchor": true
+        }
+      ]
+    },
+    {
+      "id": "pratik-yapay-sinav",
+      "title": "Yapay Zekâdan Ehliyete",
+      "difficulty": "Kolay",
+      "featured": false,
+      "roundEligible": false,
+      "nodes": [
+        {
+          "root": "YAPAY",
+          "bottomForm": "YAPAY",
+          "anchor": true
+        },
+        {
+          "root": "ZEKA",
+          "topForm": "ZEKA",
+          "bottomForm": "ZEKA",
+          "accepted": [
+            "ZEKA",
+            "ZEKÂ",
+            "ZEKASI",
+            "ZEKÂSI"
+          ],
+          "morphNote": "Sıfat tamlaması → belirtisiz tamlama: YAPAY ZEKA → ZEKA TESTİ",
+          "meaningHint": "İnsanın düşünme ve akıl yürütme yetisi; bilgisayarların taklit ettiği güç."
+        },
+        {
+          "root": "TEST",
+          "topForm": "TESTİ",
+          "bottomForm": "TEST",
+          "accepted": [
+            "TEST",
+            "TESTİ"
+          ],
+          "morphNote": "İyelik (-i): ZEKA TESTİ → tamlayan: TEST SÜRÜŞÜ",
+          "meaningHint": "Bilgi, yetenek veya araç performansını ölçmek için yapılan deneme."
+        },
+        {
+          "root": "SÜRÜŞ",
+          "topForm": "SÜRÜŞÜ",
+          "bottomForm": "SÜRÜŞ",
+          "accepted": [
+            "SÜRÜŞ",
+            "SÜRÜŞÜ",
+            "SÜRÜŞTE"
+          ],
+          "morphNote": "İyelik (-ü): TEST SÜRÜŞÜ → SÜRÜŞ EHLİYETİ",
+          "meaningHint": "Otomobili trafiğe çıkmadan önce kullanıp deneme eylemi."
+        },
+        {
+          "root": "EHLİYET",
+          "topForm": "EHLİYETİ",
+          "bottomForm": "EHLİYET",
+          "accepted": [
+            "EHLİYET",
+            "EHLİYETİ"
+          ],
+          "morphNote": "İyelik (-i): SÜRÜŞ EHLİYETİ → EHLİYET SINAVI",
+          "meaningHint": "Motorlu taşıt kullanabilmek için alınması zorunlu belge."
+        },
+        {
+          "root": "SINAVI",
+          "topForm": "SINAVI",
+          "anchor": true
+        }
+      ]
+    },
+    {
+      "id": "pratik-aci-kalp",
+      "title": "Acı Kahveden Kalp Krizine",
+      "difficulty": "Orta",
+      "featured": false,
+      "roundEligible": false,
+      "nodes": [
+        {
+          "root": "ACI",
+          "bottomForm": "ACI",
+          "anchor": true
+        },
+        {
+          "root": "KAHVE",
+          "topForm": "KAHVE",
+          "bottomForm": "KAHVE",
+          "accepted": [
+            "KAHVE",
+            "KAHVESİ"
+          ],
+          "morphNote": "Sıfat tamlaması → belirtisiz tamlama: ACI KAHVE → KAHVE FALI",
+          "meaningHint": "Kırk yıl hatırı olduğu söylenen sıcak içecek."
+        },
+        {
+          "root": "FAL",
+          "topForm": "FALI",
+          "bottomForm": "FAL",
+          "accepted": [
+            "FAL",
+            "FALI"
+          ],
+          "morphNote": "İyelik (-ı): KAHVE FALI → tamlayan: FAL TAŞI",
+          "meaningHint": "Fincan telvesine bakılarak yapılan eğlencelik yorum."
+        },
+        {
+          "root": "TAŞ",
+          "topForm": "TAŞI",
+          "bottomForm": "TAŞ",
+          "accepted": [
+            "TAŞ",
+            "TAŞI",
+            "TAŞLI"
+          ],
+          "morphNote": "İyelik (-ı): FAL TAŞI → benzetmeli sıfat: TAŞ KALP",
+          "meaningHint": "Şaşkınlıktan gözlerin açılması deyimindeki sert doğa maddesi."
+        },
+        {
+          "root": "KALP",
+          "topForm": "KALP",
+          "bottomForm": "KALP",
+          "accepted": [
+            "KALP",
+            "KALBİ",
+            "KALPLİ"
+          ],
+          "morphNote": "Sıfat tamlamasından isim tamlamasına: TAŞ KALP → KALP KRİZİ",
+          "meaningHint": "Merhametsiz kişiyi anlatan mecazdaki yaşamsal organ."
+        },
+        {
+          "root": "KRİZİ",
+          "topForm": "KRİZİ",
+          "anchor": true
+        }
+      ]
+    },
+    {
+      "id": "pratik-okul-pist",
+      "title": "Okul Servisinden Rekor Piste",
+      "difficulty": "Kolay",
+      "featured": false,
+      "roundEligible": false,
+      "nodes": [
+        {
+          "root": "OKUL",
+          "bottomForm": "OKUL",
+          "anchor": true
+        },
+        {
+          "root": "SERVİS",
+          "topForm": "SERVİSİ",
+          "bottomForm": "SERVİS",
+          "accepted": [
+            "SERVİS",
+            "SERVİSİ"
+          ],
+          "morphNote": "İyelik (-i): OKUL SERVİSİ → SERVİS ARABASI",
+          "meaningHint": "Öğrencileri evlerinden eğitim kurumuna taşıyan düzenli ulaşım."
+        },
+        {
+          "root": "ARABA",
+          "topForm": "ARABASI",
+          "bottomForm": "ARABA",
+          "accepted": [
+            "ARABA",
+            "ARABASI"
+          ],
+          "morphNote": "Kaynaştırma (s) + iyelik (-ı): SERVİS ARABASI → ARABA YARIŞI",
+          "meaningHint": "Dört tekerlekli motorlu kara taşıtı."
+        },
+        {
+          "root": "YARIŞ",
+          "topForm": "YARIŞI",
+          "bottomForm": "YARIŞ",
+          "accepted": [
+            "YARIŞ",
+            "YARIŞI"
+          ],
+          "morphNote": "İyelik (-ı): ARABA YARIŞI → YARIŞ PİSTİ",
+          "meaningHint": "Hız ve rekabete dayalı spor mücadelesi."
+        },
+        {
+          "root": "PİST",
+          "topForm": "PİSTİ",
+          "bottomForm": "PİST",
+          "accepted": [
+            "PİST",
+            "PİSTİ"
+          ],
+          "morphNote": "İyelik (-i): YARIŞ PİSTİ → PİST REKORU",
+          "meaningHint": "Otomobillerin veya atletlerin hız yaptığı özel parkur."
+        },
+        {
+          "root": "REKORU",
+          "topForm": "REKORU",
+          "anchor": true
+        }
+      ]
+    }
+  ],
+  "speedChains": [
+    {
+      "id": "speed-kopru",
+      "reward": 100,
+      "nodes": [
+        {
+          "root": "KÖPRÜ",
+          "bottomForm": "KÖPRÜ",
+          "anchor": true
+        },
+        {
+          "root": "ALT",
+          "topForm": "ALTI",
+          "bottomForm": "ALT",
+          "accepted": [
+            "ALT",
+            "ALTI"
+          ]
+        },
+        {
+          "root": "GEÇİT",
+          "topForm": "GEÇİT",
+          "bottomForm": "GEÇİT",
+          "accepted": [
+            "GEÇİT",
+            "GEÇİDİ"
+          ]
+        },
+        {
+          "root": "TÖRENİ",
+          "topForm": "TÖRENİ",
+          "anchor": true
+        }
+      ]
+    },
+    {
+      "id": "speed-su",
+      "reward": 200,
+      "nodes": [
+        {
+          "root": "SU",
+          "bottomForm": "SU",
+          "anchor": true
+        },
+        {
+          "root": "SAAT",
+          "topForm": "SAATİ",
+          "bottomForm": "SAAT",
+          "accepted": [
+            "SAAT",
+            "SAATİ"
+          ]
+        },
+        {
+          "root": "KULE",
+          "topForm": "KULESİ",
+          "bottomForm": "KULE",
+          "accepted": [
+            "KULE",
+            "KULESİ"
+          ]
+        },
+        {
+          "root": "VİNCİ",
+          "topForm": "VİNCİ",
+          "anchor": true
+        }
+      ]
+    },
+    {
+      "id": "speed-gun",
+      "reward": 300,
+      "nodes": [
+        {
+          "root": "GÜN",
+          "bottomForm": "GÜN",
+          "anchor": true
+        },
+        {
+          "root": "DOĞUM",
+          "topForm": "DOĞUMU",
+          "bottomForm": "DOĞUM",
+          "accepted": [
+            "DOĞUM",
+            "DOĞUMU"
+          ]
+        },
+        {
+          "root": "YER",
+          "topForm": "YERİ",
+          "bottomForm": "YER",
+          "accepted": [
+            "YER",
+            "YERİ"
+          ]
+        },
+        {
+          "root": "ÇEKİMİ",
+          "topForm": "ÇEKİMİ",
+          "anchor": true
+        }
+      ]
+    }
+  ],
+  "bonusChains": [
+    {
+      "label": "1. Zincir (4 Kelime)",
+      "nodes": [
+        {
+          "root": "GÖZ",
+          "bottomForm": "GÖZ",
+          "anchor": true
+        },
+        {
+          "root": "BEBEK",
+          "topForm": "BEBEĞİ",
+          "bottomForm": "BEBEK",
+          "accepted": [
+            "BEBEK",
+            "BEBEĞİ"
+          ]
+        },
+        {
+          "root": "ARABA",
+          "topForm": "ARABASI",
+          "bottomForm": "ARABA",
+          "accepted": [
+            "ARABA",
+            "ARABASI"
+          ]
+        },
+        {
+          "root": "VAPURU",
+          "topForm": "VAPURU",
+          "anchor": true
+        }
+      ]
+    },
+    {
+      "label": "2. Zincir (5 Kelime)",
+      "nodes": [
+        {
+          "root": "DEMİR",
+          "bottomForm": "DEMİR",
+          "anchor": true
+        },
+        {
+          "root": "YOL",
+          "topForm": "YOLU",
+          "bottomForm": "YOL",
+          "accepted": [
+            "YOL",
+            "YOLU"
+          ]
+        },
+        {
+          "root": "ARKADAŞ",
+          "topForm": "ARKADAŞI",
+          "bottomForm": "ARKADAŞ",
+          "accepted": [
+            "ARKADAŞ",
+            "ARKADAŞI"
+          ]
+        },
+        {
+          "root": "ÇEVRE",
+          "topForm": "ÇEVRESİ",
+          "bottomForm": "ÇEVRE",
+          "accepted": [
+            "ÇEVRE",
+            "ÇEVRESİ"
+          ]
+        },
+        {
+          "root": "KİRLİLİĞİ",
+          "topForm": "KİRLİLİĞİ",
+          "anchor": true
+        }
+      ]
+    },
+    {
+      "label": "3. Zincir (6 Kelime)",
+      "nodes": [
+        {
+          "root": "KALEM",
+          "bottomForm": "KALEM",
+          "anchor": true
+        },
+        {
+          "root": "KUTU",
+          "topForm": "KUTUSU",
+          "bottomForm": "KUTU",
+          "accepted": [
+            "KUTU",
+            "KUTUSU"
+          ]
+        },
+        {
+          "root": "SÜT",
+          "topForm": "SÜT",
+          "bottomForm": "SÜT",
+          "accepted": [
+            "SÜT",
+            "SÜTÜ"
+          ]
+        },
+        {
+          "root": "DİŞ",
+          "topForm": "DİŞİ",
+          "bottomForm": "DİŞ",
+          "accepted": [
+            "DİŞ",
+            "DİŞİ"
+          ]
+        },
+        {
+          "root": "MACUN",
+          "topForm": "MACUNU",
+          "bottomForm": "MACUN",
+          "accepted": [
+            "MACUN",
+            "MACUNU"
+          ]
+        },
+        {
+          "root": "TÜPÜ",
+          "topForm": "TÜPÜ",
+          "anchor": true
+        }
+      ]
+    }
+  ]
+}
