@@ -67,7 +67,6 @@
       --shadow-card: 0 4px 20px -2px rgba(2, 6, 23, 0.55);
       --shadow-focus: 0 0 0 3px rgba(56, 189, 248, 0.25);
       --shadow-active: 0 8px 24px -4px rgba(14, 165, 233, 0.2);
-      --shadow-dock: 0 -8px 28px rgba(2, 6, 23, 0.72);
     }
 
     [data-theme="light"] {
@@ -121,7 +120,6 @@
       --shadow-card: 0 4px 16px -2px rgba(15, 23, 42, 0.08);
       --shadow-focus: 0 0 0 3px rgba(2, 132, 199, 0.2);
       --shadow-active: 0 8px 20px -4px rgba(2, 132, 199, 0.16);
-      --shadow-dock: 0 -6px 24px rgba(15, 23, 42, 0.12);
     }
 
     [data-theme="spring"] {
@@ -175,7 +173,6 @@
       --shadow-card: 0 4px 18px -2px rgba(20, 54, 38, 0.08);
       --shadow-focus: 0 0 0 3px rgba(22, 163, 74, 0.22);
       --shadow-active: 0 8px 20px -4px rgba(22, 163, 74, 0.16);
-      --shadow-dock: 0 -6px 24px rgba(20, 54, 38, 0.12);
     }
 
     [data-theme="blue"] {
@@ -229,7 +226,6 @@
       --shadow-card: 0 6px 24px -2px rgba(3, 13, 26, 0.65);
       --shadow-focus: 0 0 0 3px rgba(56, 189, 248, 0.3);
       --shadow-active: 0 8px 26px -4px rgba(56, 189, 248, 0.28);
-      --shadow-dock: 0 -8px 28px rgba(3, 13, 26, 0.8);
     }
 
     :root {
@@ -993,15 +989,21 @@
     .hidden { display: none !important; }
 
     /* =====================================================================
-       MOBİL & TABLET OPTİMİZASYONU (<= 1024px): KOMPAKT TAHTA + SABİT DOCK
+       MOBİL & TABLET OPTİMİZASYONU (<= 1024px):
+       TAHMİN PANELİ DOĞRUDAN AKTİF AŞAMANIN HEMEN ALTINDA AÇILIR
        ===================================================================== */
     @media (max-width: 1024px) {
       html, body {
         font-size: 13.5px;
       }
 
+      .page-shell {
+        padding: 10px 10px 28px 10px;
+        gap: 12px;
+      }
+
       .studio-topbar {
-        padding: 7px 12px;
+        padding: 8px 12px;
         gap: 8px;
       }
       .brand-mark {
@@ -1019,7 +1021,7 @@
 
       .game-header {
         grid-template-columns: 1fr;
-        padding: 11px 14px;
+        padding: 12px 14px;
         gap: 8px;
       }
       .game-header .kicker {
@@ -1050,19 +1052,13 @@
         gap: 12px;
       }
 
-      /* Alt sabit bar nedeniyle içeriğin altta kalmaması için boşluk */
-      .page-shell {
-        padding: 8px 10px 215px 10px;
-        gap: 10px;
-      }
-
-      /* Skor kutusu mobilde en üstte çok kompakt */
+      /* Skor kutusu mobilde en üstte kompakt */
       .hud-column {
         display: contents;
       }
       .score-panel-mobile-top {
         order: -1;
-        padding: 9px 12px;
+        padding: 10px 12px;
       }
       .score-panel-mobile-top .panel-head {
         margin-bottom: 6px;
@@ -1076,19 +1072,19 @@
         margin-bottom: 2px;
       }
       .score-panel-mobile-top .stat-value {
-        font-size: 19px;
+        font-size: 20px;
       }
       .score-panel-mobile-top .stat-caption {
         font-size: 10.5px;
         margin-top: 2px;
       }
       .score-panel-mobile-top .score-tile {
-        padding: 7px 10px;
+        padding: 8px 10px;
       }
 
-      /* Zincir tahtasını sanal klavye açıkken bile sığacak kadar kompakt yap */
+      /* Zincir tahtası */
       .board-panel-mobile {
-        padding: 10px 12px;
+        padding: 12px;
       }
       .board-panel-mobile .panel-head {
         margin-bottom: 10px;
@@ -1108,24 +1104,24 @@
       }
 
       .chain-board {
-        gap: 3px;
+        gap: 4px;
       }
       .chain-node {
         grid-template-columns: auto minmax(0, 1fr) auto;
-        padding: 6px 10px;
+        padding: 8px 10px;
         gap: 8px;
         border-radius: 10px;
       }
       .node-index {
-        min-width: 28px;
-        font-size: 10px;
-        padding: 2px 4px;
+        min-width: 30px;
+        font-size: 10.5px;
+        padding: 3px 4px;
       }
       .node-body {
-        gap: 3px;
+        gap: 4px;
       }
       .node-word-anchor {
-        font-size: 15px;
+        font-size: 15.5px;
       }
       .letter-strip {
         gap: 4px;
@@ -1137,7 +1133,7 @@
         border-radius: 6px;
       }
       .node-subnote {
-        font-size: 10.5px;
+        font-size: 11px;
         line-height: 1.3;
       }
       .node-action-col .badge {
@@ -1145,64 +1141,29 @@
         padding: 2px 7px;
       }
       .link-bridge {
-        margin-left: 12px;
-        padding: 1px 8px;
-        font-size: 10.5px;
+        margin-left: 14px;
+        padding: 2px 8px;
+        font-size: 11px;
         line-height: 1.3;
       }
       .bridge-morph {
-        font-size: 10px;
+        font-size: 10.5px;
       }
 
-      /* Sanal klavye açıkken (visualViewport küçüldüğünde) ekstra dikey tasarruf */
-      body.is-kbd-open .studio-topbar,
-      body.is-kbd-open .game-header,
-      body.is-kbd-open .score-panel-mobile-top {
-        display: none;
-      }
-      body.is-kbd-open .page-shell {
-        padding-top: 6px;
-      }
-      body.is-kbd-open .chain-node:not(.is-target) .node-subnote {
-        display: none;
-      }
-      body.is-kbd-open #control-panel .panel-head,
-      body.is-kbd-open #control-panel .feedback-box {
-        display: none;
-      }
-      body.is-kbd-open #control-panel {
-        padding-top: 8px;
-        padding-bottom: 8px;
-      }
-
-      /* TAHMİN VE HARF AL PANELİ: EKRANIN ALTINA SABİT (FIXED DOCK) */
-      #control-panel {
-        position: fixed;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        z-index: 900;
-        margin: 0;
-        border-radius: 16px 16px 0 0;
-        border-left: none;
-        border-right: none;
-        border-bottom: none;
-        border-top: 1.5px solid var(--brand-blue-border);
-        background: var(--bg-card);
-        padding: 8px 12px calc(8px + env(safe-area-inset-bottom)) 12px;
-        box-shadow: var(--shadow-dock);
+      /* TAHMİN PANELİ: SABİT DEĞİL, AKTİF AŞAMANIN HEMEN ALTINDA SATIR İÇİ (INLINE) */
+      #control-panel.is-inline-slot {
+        position: relative;
+        margin: 4px 0 8px 0;
+        padding: 10px 12px;
+        border-radius: 12px;
+        border: 1.5px solid var(--brand-blue-border);
+        border-top: 3px solid var(--brand-blue);
+        background: var(--bg-card-elevated);
+        box-shadow: var(--shadow-active);
       }
 
       #control-panel .panel-head {
-        margin-bottom: 6px;
-        padding-bottom: 5px;
-      }
-      #control-panel .panel-title {
-        font-size: 13.5px;
-      }
-      #control-panel .badge {
-        font-size: 10.5px;
-        padding: 2px 8px;
+        display: none;
       }
 
       #control-panel .input-action-row {
@@ -1216,7 +1177,7 @@
       #control-panel .text-input {
         min-height: 38px;
         padding: 6px 10px;
-        font-size: 16px; /* iOS otomatik yakınlaştırmayı önlemek için 16px korunur */
+        font-size: 16px; /* iOS otomatik yakınlaştırmayı önlemek için 16px */
       }
       #control-panel #btn-submit-guess {
         min-height: 38px;
@@ -1226,7 +1187,7 @@
         flex-shrink: 0;
       }
 
-      /* Mobilde Harf Al ve 3 İpucu butonu tek kompakt satırda yan yana */
+      /* Harf Al ve 3 İpucu butonu tek satırda yan yana */
       #control-panel .dock-actions-wrap {
         display: grid;
         grid-template-columns: 1.35fr 1fr 1fr 1fr;
@@ -1245,17 +1206,17 @@
         text-align: center;
       }
 
-      /* Geri bildirim kutusu alt dock içinde kompakt tek/iki satır */
+      /* Geri bildirim kutusu kompakt */
       #control-panel .feedback-box {
         margin-top: 6px;
         padding: 6px 9px;
-        font-size: 11px;
-        line-height: 1.3;
+        font-size: 11.5px;
+        line-height: 1.35;
       }
       #control-panel .feedback-title {
         display: inline;
         margin-right: 5px;
-        font-size: 11px;
+        font-size: 11.5px;
       }
       #control-panel #feedback-msg {
         display: inline;
@@ -1263,7 +1224,7 @@
 
       /* Final bahis kutusu mobilde kompakt */
       #control-panel .wager-box {
-        padding: 6px 8px;
+        padding: 7px 9px;
         margin-bottom: 6px;
       }
       #control-panel .wager-box p {
@@ -1287,24 +1248,24 @@
         display: none;
       }
       .chain-node {
-        padding: 5px 8px;
+        padding: 7px 8px;
         gap: 6px;
       }
       .node-index {
-        min-width: 24px;
-        font-size: 9.5px;
+        min-width: 26px;
+        font-size: 10px;
         padding: 2px 3px;
       }
       .letter-box {
-        width: 21px;
-        height: 25px;
-        font-size: 12.5px;
+        width: 22px;
+        height: 26px;
+        font-size: 13px;
       }
       .node-word-anchor {
-        font-size: 14px;
+        font-size: 14.5px;
       }
       .node-subnote {
-        font-size: 10px;
+        font-size: 10.5px;
       }
     }
   </style>
@@ -1402,8 +1363,8 @@
         </section>
 
         <!-- SAĞ SÜTUN: SKOR VE KUMANDA -->
-        <aside class="hud-column" aria-label="Yarışma Kumandası">
-          <section class="card-panel score-panel-mobile-top">
+        <aside class="hud-column" id="hud-column" aria-label="Yarışma Kumandası">
+          <section class="card-panel score-panel-mobile-top" id="score-panel">
             <div class="panel-head">
               <h2 class="panel-title">Skor ve Durum</h2>
               <span class="badge is-amber" id="round-mode-badge">Klasik Mod</span>
@@ -1501,7 +1462,7 @@
             </div>
           </section>
 
-          <section class="card-panel">
+          <section class="card-panel" id="history-panel">
             <div class="panel-head">
               <h2 class="panel-title">Oturum Kayıtları</h2>
               <div style="display:flex; align-items:center; gap:8px;">
@@ -1919,51 +1880,47 @@
         return firstW + ' → ' + lastW;
       }
 
+      /* Mobil ve masaüstü arasında kontrol panelini doğru konuma yerleştirir:
+         - Mobilde (<= 1024px): Seçili hedef aşamanın (örn. 1., 2., 3. halka) HEMEN ALTINA girer
+         - Masaüstünde (> 1024px): Sağ sütundaki (#hud-column) yerine döner */
+      function positionControlPanel() {
+        var controlPanel = document.getElementById('control-panel');
+        var hudColumn = document.getElementById('hud-column');
+        var historyPanel = document.getElementById('history-panel');
+        if (!controlPanel || !hudColumn) return;
+
+        var isMobile = window.innerWidth <= 1024;
+        if (!isMobile || appState.chainCompleted) {
+          controlPanel.classList.remove('is-inline-slot');
+          controlPanel.classList.toggle('hidden', isMobile && appState.chainCompleted);
+          if (controlPanel.parentElement !== hudColumn) {
+            if (historyPanel && historyPanel.parentElement === hudColumn) {
+              hudColumn.insertBefore(controlPanel, historyPanel);
+            } else {
+              hudColumn.appendChild(controlPanel);
+            }
+          }
+          return;
+        }
+
+        controlPanel.classList.remove('hidden');
+        controlPanel.classList.add('is-inline-slot');
+        var activeNodeEl = document.querySelector('#chain-board .chain-node.is-target');
+        if (activeNodeEl && activeNodeEl.parentElement) {
+          if (activeNodeEl.nextElementSibling !== controlPanel) {
+            activeNodeEl.insertAdjacentElement('afterend', controlPanel);
+          }
+        }
+      }
+
       function scrollActiveTargetIntoViewOnMobile() {
         if (window.innerWidth > 1024) return;
         setTimeout(function () {
-          var targetEl = document.querySelector('.chain-node.is-target');
+          var targetEl = document.querySelector('#chain-board .chain-node.is-target');
           if (targetEl && typeof targetEl.scrollIntoView === 'function') {
-            targetEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            targetEl.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
           }
-        }, 70);
-      }
-
-      /* Mobil sanal klavye açılışını algılayıp tahtayı sıkılaştırır */
-      function initMobileKeyboardViewportHandler() {
-        var baseHeight = window.innerHeight;
-        function checkViewport() {
-          if (window.innerWidth > 1024) {
-            document.body.classList.remove('is-kbd-open');
-            return;
-          }
-          var currentHeight = window.visualViewport ? window.visualViewport.height : window.innerHeight;
-          var isKeyboardOpen = currentHeight < baseHeight * 0.78;
-          document.body.classList.toggle('is-kbd-open', isKeyboardOpen);
-          if (isKeyboardOpen) {
-            scrollActiveTargetIntoViewOnMobile();
-          }
-        }
-
-        if (window.visualViewport) {
-          window.visualViewport.addEventListener('resize', checkViewport);
-        } else {
-          window.addEventListener('resize', checkViewport);
-        }
-
-        var inp = document.getElementById('guess-input');
-        if (inp) {
-          inp.addEventListener('focus', function () {
-            if (window.innerWidth <= 1024) {
-              scrollActiveTargetIntoViewOnMobile();
-            }
-          });
-          inp.addEventListener('blur', function () {
-            setTimeout(function () {
-              document.body.classList.remove('is-kbd-open');
-            }, 120);
-          });
-        }
+        }, 60);
       }
 
       function loadChain(chainObj) {
@@ -2207,6 +2164,10 @@
           checkChainCompletion();
           renderAll();
           scrollActiveTargetIntoViewOnMobile();
+          if (!appState.chainCompleted) {
+            var nextInp = document.getElementById('guess-input');
+            if (nextInp) nextInp.focus();
+          }
         } else {
           playChimeError();
           if (isFinalWagerRound()) {
@@ -2323,7 +2284,6 @@
 
         var inp = document.getElementById('guess-input');
         if (inp) inp.blur();
-        document.body.classList.remove('is-kbd-open');
 
         var currentPts = appState.teamMode
           ? (appState.scores.a + ' — ' + appState.scores.b)
@@ -2597,6 +2557,19 @@
       function renderBoard() {
         var board = document.getElementById('chain-board');
         if (!board || !appState.currentChain) return;
+
+        /* Tahta yeniden çizilmeden önce kontrol panelini güvenli yere park et */
+        var controlPanel = document.getElementById('control-panel');
+        var hudColumn = document.getElementById('hud-column');
+        var historyPanel = document.getElementById('history-panel');
+        if (controlPanel && hudColumn && controlPanel.parentElement === board) {
+          if (historyPanel && historyPanel.parentElement === hudColumn) {
+            hudColumn.insertBefore(controlPanel, historyPanel);
+          } else {
+            hudColumn.appendChild(controlPanel);
+          }
+        }
+
         board.innerHTML = '';
 
         var nodes = appState.currentChain.nodes;
@@ -2761,6 +2734,9 @@
             board.appendChild(bridge);
           }
         }
+
+        /* Mobil görünümde kontrol panelini seçili aşamanın hemen altına yerleştir */
+        positionControlPanel();
       }
 
       function renderHUD() {
@@ -2919,6 +2895,8 @@
               : 'Final Turu: Bu elde en fazla 500 puan bahis oynayabilirsiniz.';
           }
         }
+
+        positionControlPanel();
       }
 
       function renderAll() {
@@ -2928,8 +2906,10 @@
       }
 
       /* =====================================================================
-         10. KLAVYE KISAYOLLARI (↑ / ↓ Sınır Geçişi)
+         10. KLAVYE KISAYOLLARI VE EKRAN BOYUTU DİNLEYİCİSİ
          ===================================================================== */
+      window.addEventListener('resize', positionControlPanel);
+
       document.addEventListener('keydown', function (ev) {
         if (appState.chainCompleted) return;
         if (ev.key === 'ArrowUp') {
@@ -2974,7 +2954,6 @@
          ===================================================================== */
       async function initApp() {
         initAppTheme();
-        initMobileKeyboardViewportHandler();
         loadPersistentState();
         var soundBtn = document.getElementById('btn-sound-toggle');
         if (soundBtn) soundBtn.textContent = appState.soundEnabled ? 'Ses: Açık' : 'Ses: Kapalı';
