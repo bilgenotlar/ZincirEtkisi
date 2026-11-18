@@ -60,6 +60,7 @@
       --accent-rose: #f43f5e;
       --accent-rose-text: #fb7185;
       --accent-rose-soft: rgba(244, 63, 94, 0.14);
+      --accent-rose-soft-hover: rgba(244, 63, 94, 0.22);
       --accent-rose-border: rgba(244, 63, 94, 0.42);
 
       /* Yumuşak Derinlik Gölgeleri */
@@ -113,6 +114,7 @@
       --accent-rose: #e11d48;
       --accent-rose-text: #be123c;
       --accent-rose-soft: rgba(225, 29, 72, 0.1);
+      --accent-rose-soft-hover: rgba(225, 29, 72, 0.18);
       --accent-rose-border: rgba(225, 29, 72, 0.35);
 
       --shadow-card: 0 4px 16px -2px rgba(15, 23, 42, 0.08);
@@ -165,6 +167,7 @@
       --accent-rose: #db2777;
       --accent-rose-text: #be185d;
       --accent-rose-soft: rgba(219, 39, 119, 0.1);
+      --accent-rose-soft-hover: rgba(219, 39, 119, 0.18);
       --accent-rose-border: rgba(219, 39, 119, 0.35);
 
       --shadow-card: 0 4px 18px -2px rgba(20, 54, 38, 0.08);
@@ -217,6 +220,7 @@
       --accent-rose: #fb7185;
       --accent-rose-text: #fda4af;
       --accent-rose-soft: rgba(251, 113, 133, 0.16);
+      --accent-rose-soft-hover: rgba(251, 113, 133, 0.25);
       --accent-rose-border: rgba(251, 113, 133, 0.45);
 
       --shadow-card: 0 6px 24px -2px rgba(3, 13, 26, 0.65);
@@ -492,6 +496,22 @@
     }
     .btn-amber:hover:not(:disabled) {
       background: var(--accent-amber-soft-hover);
+    }
+
+    .btn-rose {
+      background: var(--accent-rose-soft);
+      border-color: var(--accent-rose-border);
+      color: var(--accent-rose-text);
+    }
+    .btn-rose:hover:not(:disabled) {
+      background: var(--accent-rose-soft-hover);
+    }
+
+    .btn-xs {
+      min-height: 28px;
+      padding: 4px 10px;
+      font-size: 12px;
+      border-radius: var(--radius-pill);
     }
 
     .btn.is-active {
@@ -1027,7 +1047,7 @@
           <button type="button" class="btn btn-soft-blue" id="btn-team-toggle" onclick="toggleTeamMode()">Mod: Tek Kişilik</button>
           <button type="button" class="btn" id="btn-sound-toggle" onclick="toggleSound()">Ses: Açık</button>
           <button type="button" class="btn btn-primary" id="btn-next-puzzle" onclick="loadNextPuzzleAnytime()">Sonraki Zincir →</button>
-          <button type="button" class="btn btn-amber" id="btn-reset-all" onclick="handleResetGame(this)">Sıfırla</button>
+          <button type="button" class="btn btn-amber" id="btn-reset-all" onclick="handleResetGame(this)" title="Mevcut oyunun skorunu sıfırlar ve Tur 1'den başlatır">Oyunu Sıfırla</button>
         </div>
       </div>
     </header>
@@ -1178,7 +1198,10 @@
           <section class="card-panel">
             <div class="panel-head">
               <h2 class="panel-title">Oturum Kayıtları</h2>
-              <span class="badge is-blue" id="stats-solved-badge">0 Zincir</span>
+              <div style="display:flex; align-items:center; gap:8px;">
+                <span class="badge is-blue" id="stats-solved-badge">0 Zincir</span>
+                <button type="button" class="btn btn-rose btn-xs" id="btn-clear-history" onclick="handleResetHistory(this)" title="Oturum geçmişini, çözülen zincir sayısını ve en yüksek skoru temizler">Kayıtları Sıfırla</button>
+              </div>
             </div>
             <div class="history-table-wrap">
               <table class="hud-table">
@@ -1985,7 +2008,7 @@
       }
 
       /* =====================================================================
-         7. MOD GEÇİŞLERİ, BAHİS VE AYARLAR
+         7. MOD GEÇİŞLERİ, BAHİS VE SIFIRLAMA AYARLARI
          ===================================================================== */
       function switchMode(mode) {
         appState.mode = mode === 'practice' ? 'practice' : 'classic';
@@ -2037,18 +2060,41 @@
           setTimeout(function () {
             if (btn.dataset.armed === 'true') {
               btn.dataset.armed = 'false';
-              btn.textContent = 'Sıfırla';
+              btn.textContent = 'Oyunu Sıfırla';
             }
           }, 3500);
           return;
         }
         btn.dataset.armed = 'false';
-        btn.textContent = 'Sıfırla';
+        btn.textContent = 'Oyunu Sıfırla';
         appState.roundIndex = 0;
         appState.scores = { a: 0, b: 0 };
         appState.activeTeam = 'a';
         loadChain(appState.mode === 'practice' ? CHAIN_BANK[0] : pickClassicChainForRound(0));
-        setFeedback('is-hint', 'Oyun Sıfırlandı', 'Skorlar sıfırlandı ve başlangıç zinciri yüklendi.');
+        setFeedback('is-hint', 'Oyun Sıfırlandı', 'Aktif yarışma skoru sıfırlandı ve Tur 1 yeniden başlatıldı.');
+      }
+
+      function handleResetHistory(btn) {
+        if (!btn) return;
+        if (btn.dataset.armed !== 'true') {
+          btn.dataset.armed = 'true';
+          btn.textContent = 'Emin misiniz?';
+          setTimeout(function () {
+            if (btn.dataset.armed === 'true') {
+              btn.dataset.armed = 'false';
+              btn.textContent = 'Kayıtları Sıfırla';
+            }
+          }, 3500);
+          return;
+        }
+        btn.dataset.armed = 'false';
+        btn.textContent = 'Kayıtları Sıfırla';
+        appState.history = [];
+        appState.solvedChainsCount = 0;
+        appState.bestScore = Math.max(appState.scores.a, appState.scores.b);
+        savePersistentState();
+        renderHUD();
+        setFeedback('is-hint', 'Oturum Kayıtları Temizlendi', 'Tamamlanan zincir geçmişi, toplam sayaç ve rekor sıfırlandı.');
       }
 
       function syncWagerFromSlider(val) {
@@ -2346,6 +2392,7 @@
 
         var modeBadge = document.getElementById('round-mode-badge');
         var solvedBadge = document.getElementById('stats-solved-badge');
+        var clearHistBtn = document.getElementById('btn-clear-history');
 
         if (appState.teamMode) {
           if (labelA) labelA.textContent = 'Takım A';
@@ -2376,6 +2423,9 @@
         }
         if (solvedBadge) {
           solvedBadge.textContent = appState.solvedChainsCount + ' Zincir';
+        }
+        if (clearHistBtn) {
+          clearHistBtn.disabled = appState.history.length === 0 && appState.solvedChainsCount === 0 && appState.bestScore === 0;
         }
 
         var tbody = document.getElementById('history-tbody');
@@ -2513,6 +2563,7 @@
       window.toggleSound = toggleSound;
       window.loadNextPuzzleAnytime = loadNextPuzzleAnytime;
       window.handleResetGame = handleResetGame;
+      window.handleResetHistory = handleResetHistory;
       window.selectFrontierSlot = selectFrontierSlot;
       window.handleNodeKeydown = handleNodeKeydown;
       window.revealFrontierLetter = revealFrontierLetter;
