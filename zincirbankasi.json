@@ -785,6 +785,647 @@
           "anchor": true
         }
       ]
+    },
+    {
+      "id": "denizden-kasiga",
+      "title": "Denizden Mutfak Masasına",
+      "difficulty": "Kolay",
+      "featured": false,
+      "roundEligible": true,
+      "nodes": [
+        {
+          "root": "DENİZ",
+          "topForm": "DENİZ",
+          "bottomForm": "DENİZ",
+          "anchor": true
+        },
+        {
+          "root": "FENER",
+          "topForm": "FENERİ",
+          "bottomForm": "FENER",
+          "anchor": false,
+          "accepted": [
+            "FENER",
+            "FENERİ"
+          ],
+          "morphNote": "'i' iyelik eki alır (Deniz Feneri).",
+          "meaningHint": "Karanlıkta gemilere yol gösteren ışıklı kule"
+        },
+        {
+          "root": "BALIK",
+          "topForm": "BALIĞI",
+          "bottomForm": "BALIK",
+          "anchor": false,
+          "accepted": [
+            "BALIK",
+            "BALIĞI"
+          ],
+          "morphNote": "k->ğ yumuşaması ve 'ı' iyelik eki alır (Fener Balığı).",
+          "meaningHint": "Başının üstünde fener benzeri uzantısı olan deniz canlısı"
+        },
+        {
+          "root": "ÇORBA",
+          "topForm": "ÇORBASI",
+          "bottomForm": "ÇORBA",
+          "anchor": false,
+          "accepted": [
+            "ÇORBA",
+            "ÇORBASI"
+          ],
+          "morphNote": "'sı' iyelik eki alır (Balık Çorbası).",
+          "meaningHint": "Deniz ürünleriyle hazırlanan sıcak sulu yemek"
+        },
+        {
+          "root": "KAŞIK",
+          "topForm": "KAŞIĞI",
+          "bottomForm": "KAŞIK",
+          "anchor": true
+        }
+      ]
+    },
+    {
+      "id": "gozden-iscipe",
+      "title": "Gözden Demir Yollarına",
+      "difficulty": "Orta",
+      "featured": false,
+      "roundEligible": true,
+      "nodes": [
+        {
+          "root": "GÖZ",
+          "topForm": "GÖZ",
+          "bottomForm": "GÖZ",
+          "anchor": true
+        },
+        {
+          "root": "BANYO",
+          "topForm": "BANYOSU",
+          "bottomForm": "BANYO",
+          "anchor": false,
+          "accepted": [
+            "BANYO",
+            "BANYOSU"
+          ],
+          "morphNote": "'su' iyelik eki alır (Göz Banyosu).",
+          "meaningHint": "Gözü yıkama veya görsel olarak seyir keyfi yaşama"
+        },
+        {
+          "root": "PERDE",
+          "topForm": "PERDESİ",
+          "bottomForm": "PERDE",
+          "anchor": false,
+          "accepted": [
+            "PERDE",
+            "PERDESİ"
+          ],
+          "morphNote": "'si' iyelik eki alır (Banyo Perdesi).",
+          "meaningHint": "Mahremiyet ve su sıçramasını önlemek için kullanılan örtü"
+        },
+        {
+          "root": "DEMİR",
+          "topForm": "DEMİRİ",
+          "bottomForm": "DEMİR",
+          "anchor": false,
+          "accepted": [
+            "DEMİR",
+            "DEMİRİ"
+          ],
+          "morphNote": "'i' iyelik eki alır (Perde Demiri).",
+          "meaningHint": "Perdelerin asıldığı metal korniş veya çubuk"
+        },
+        {
+          "root": "YOL",
+          "topForm": "YOLU",
+          "bottomForm": "YOL",
+          "anchor": false,
+          "accepted": [
+            "YOL",
+            "YOLU"
+          ],
+          "morphNote": "'u' iyelik eki alır (Demir Yolu).",
+          "meaningHint": "Trenlerin üzerinde hareket ettiği çelik ray hattı"
+        },
+        {
+          "root": "İŞÇİ",
+          "topForm": "İŞÇİSİ",
+          "bottomForm": "İŞÇİ",
+          "anchor": true
+        }
+      ]
+    },
+    {
+      "id": "atesten-hakeme",
+      "title": "Ateşten Yeşil Sahaya",
+      "difficulty": "Zor",
+      "featured": false,
+      "roundEligible": true,
+      "nodes": [
+        {
+          "root": "ATEŞ",
+          "topForm": "ATEŞ",
+          "bottomForm": "ATEŞ",
+          "anchor": true
+        },
+        {
+          "root": "KIRMIZI",
+          "topForm": "KIRMIZISI",
+          "bottomForm": "KIRMIZI",
+          "anchor": false,
+          "accepted": [
+            "KIRMIZI",
+            "KIRMIZISI"
+          ],
+          "morphNote": "'sı' iyelik eki alır (Ateş Kırmızısı).",
+          "meaningHint": "Alev rengini andıran canlı ve parlak bir kırmızı tonu"
+        },
+        {
+          "root": "HALI",
+          "topForm": "HALISI",
+          "bottomForm": "HALI",
+          "anchor": false,
+          "accepted": [
+            "HALI",
+            "HALISI"
+          ],
+          "morphNote": "Sıfat tamlamasında yalın kullanılır (Kırmızı Halı).",
+          "meaningHint": "Törenlerde ve özel geçitlerde yere serilen prestij örtüsü"
+        },
+        {
+          "root": "SAHA",
+          "topForm": "SAHASI",
+          "bottomForm": "SAHA",
+          "anchor": false,
+          "accepted": [
+            "SAHA",
+            "SAHASI"
+          ],
+          "morphNote": "İsim tamlamasında 'sı' eki alır (Halı Saha).",
+          "meaningHint": "Yapay çimle kaplı küçük futbol alanı"
+        },
+        {
+          "root": "HAKEM",
+          "topForm": "HAKEMİ",
+          "bottomForm": "HAKEM",
+          "anchor": true
+        }
+      ]
+    },
+    {
+      "id": "gunesten-sefe",
+      "title": "Güneşten Mutfak Şefine",
+      "difficulty": "Kolay",
+      "featured": false,
+      "roundEligible": true,
+      "nodes": [
+        {
+          "root": "GÜNEŞ",
+          "topForm": "GÜNEŞ",
+          "bottomForm": "GÜNEŞ",
+          "anchor": true
+        },
+        {
+          "root": "SİSTEM",
+          "topForm": "SİSTEMİ",
+          "bottomForm": "SİSTEM",
+          "anchor": false,
+          "accepted": [
+            "SİSTEM",
+            "SİSTEMİ"
+          ],
+          "morphNote": "'i' iyelik eki alır (Güneş Sistemi).",
+          "meaningHint": "Güneş ve onun etrafında dönen gök cisimlerinin bütünü"
+        },
+        {
+          "root": "ODA",
+          "topForm": "ODASI",
+          "bottomForm": "ODA",
+          "anchor": false,
+          "accepted": [
+            "ODA",
+            "ODASI"
+          ],
+          "morphNote": "'sı' iyelik eki alır (Sistem Odası).",
+          "meaningHint": "Sunucuların ve ağ donanımlarının korunduğu alan"
+        },
+        {
+          "root": "SERVİS",
+          "topForm": "SERVİSİ",
+          "bottomForm": "SERVİS",
+          "anchor": false,
+          "accepted": [
+            "SERVİS",
+            "SERVİSİ"
+          ],
+          "morphNote": "'i' iyelik eki alır (Oda Servisi).",
+          "meaningHint": "Otel müşterilerinin odalarına yemek ve içecek getirme hizmeti"
+        },
+        {
+          "root": "İSTASYON",
+          "topForm": "İSTASYONU",
+          "bottomForm": "İSTASYON",
+          "anchor": false,
+          "accepted": [
+            "İSTASYON",
+            "İSTASYONU"
+          ],
+          "morphNote": "'u' iyelik eki alır (Servis İstasyonu).",
+          "meaningHint": "Bakım ve onarım hizmetlerinin sunulduğu tesis"
+        },
+        {
+          "root": "ŞEF",
+          "topForm": "ŞEFİ",
+          "bottomForm": "ŞEF",
+          "anchor": true
+        }
+      ]
+    },
+    {
+      "id": "cevizden-bolunmeye",
+      "title": "Ceviz Ağacından Hücreye",
+      "difficulty": "Orta",
+      "featured": false,
+      "roundEligible": true,
+      "nodes": [
+        {
+          "root": "CEVİZ",
+          "topForm": "CEVİZ",
+          "bottomForm": "CEVİZ",
+          "anchor": true
+        },
+        {
+          "root": "AĞAÇ",
+          "topForm": "AĞACI",
+          "bottomForm": "AĞAÇ",
+          "anchor": false,
+          "accepted": [
+            "AĞAÇ",
+            "AĞACI"
+          ],
+          "morphNote": "ç->c yumuşaması ve 'ı' iyelik eki alır (Ceviz Ağacı).",
+          "meaningHint": "Sert kabuklu besleyici meyveler veren uzun ömürlü ağaç"
+        },
+        {
+          "root": "KÖK",
+          "topForm": "KÖKÜ",
+          "bottomForm": "KÖK",
+          "anchor": false,
+          "accepted": [
+            "KÖK",
+            "KÖKÜ"
+          ],
+          "morphNote": "'ü' iyelik eki alır (Ağaç Kökü).",
+          "meaningHint": "Bitkiyi toprağa bağlayan ve besin emilimini sağlayan alt kısım"
+        },
+        {
+          "root": "HÜCRE",
+          "topForm": "HÜCRESİ",
+          "bottomForm": "HÜCRE",
+          "anchor": false,
+          "accepted": [
+            "HÜCRE",
+            "HÜCRESİ"
+          ],
+          "morphNote": "Sıfat tamlaması yapısında yalın kullanılır (Kök Hücre).",
+          "meaningHint": "Farklı dokulara dönüşebilme yeteneği olan temel canlı birimi"
+        },
+        {
+          "root": "BÖLÜNME",
+          "topForm": "BÖLÜNMESİ",
+          "bottomForm": "BÖLÜNME",
+          "anchor": true
+        }
+      ]
+    },
+    {
+      "id": "aslan-payindan-sepet-ormeye",
+      "title": "Aslan Payından Sepet Örmeye",
+      "difficulty": "Kolay",
+      "featured": false,
+      "roundEligible": true,
+      "nodes": [
+        {
+          "root": "ASLAN",
+          "topForm": "ASLAN",
+          "bottomForm": "ASLAN",
+          "anchor": true
+        },
+        {
+          "root": "PAY",
+          "topForm": "PAYI",
+          "bottomForm": "PAY",
+          "anchor": false,
+          "accepted": [
+            "PAY",
+            "PAYI"
+          ],
+          "morphNote": "'ı' iyelik eki alır (Aslan Payı).",
+          "meaningHint": "Bir bölüşümde alınan en büyük ve değerli kısım"
+        },
+        {
+          "root": "SENET",
+          "topForm": "SENEDİ",
+          "bottomForm": "SENET",
+          "anchor": false,
+          "accepted": [
+            "SENET",
+            "SENEDİ"
+          ],
+          "morphNote": "t->d yumuşaması ve 'i' iyelik eki alır (Pay Senedi).",
+          "meaningHint": "Hisse veya borç ortaklığını gösteren resmi evrak"
+        },
+        {
+          "root": "SEPET",
+          "topForm": "SEPETİ",
+          "bottomForm": "SEPET",
+          "anchor": false,
+          "accepted": [
+            "SEPET",
+            "SEPETİ"
+          ],
+          "morphNote": "'i' iyelik eki alır (Senet Sepeti).",
+          "meaningHint": "Borç senetlerinin ve değerli kağıtların tümünü ifade eden deyim"
+        },
+        {
+          "root": "ÖRMEK",
+          "topForm": "ÖRMEK",
+          "bottomForm": "ÖRMEK",
+          "anchor": true
+        }
+      ]
+    },
+    {
+      "id": "su-ciceginden-yaprak-dokumune",
+      "title": "Su Çiçeğinden Yaprak Dökümüne",
+      "difficulty": "Orta",
+      "featured": false,
+      "roundEligible": true,
+      "nodes": [
+        {
+          "root": "SU",
+          "topForm": "SU",
+          "bottomForm": "SU",
+          "anchor": true
+        },
+        {
+          "root": "ÇİÇEK",
+          "topForm": "ÇİÇEĞİ",
+          "bottomForm": "ÇİÇEK",
+          "anchor": false,
+          "accepted": [
+            "ÇİÇEK",
+            "ÇİÇEĞİ"
+          ],
+          "morphNote": "k->ğ yumuşaması ve 'i' iyelik eki alır (Su Çiçeği).",
+          "meaningHint": "Bulaşıcı ve döküntülü bir çocuk hastalığı"
+        },
+        {
+          "root": "AŞI",
+          "topForm": "AŞISI",
+          "bottomForm": "AŞI",
+          "anchor": false,
+          "accepted": [
+            "AŞI",
+            "AŞISI"
+          ],
+          "morphNote": "'sı' iyelik eki alır (Çiçek Aşısı).",
+          "meaningHint": "Çiçek hastalığına karşı koruma sağlayan sıvı"
+        },
+        {
+          "root": "TAKVİM",
+          "topForm": "TAKVİMİ",
+          "bottomForm": "TAKVİM",
+          "anchor": false,
+          "accepted": [
+            "TAKVİM",
+            "TAKVİMİ"
+          ],
+          "morphNote": "'i' iyelik eki alır (Aşı Takvimi).",
+          "meaningHint": "Aşıların zamanlamasını gösteren resmi plan"
+        },
+        {
+          "root": "YAPRAK",
+          "topForm": "YAPRAĞI",
+          "bottomForm": "YAPRAK",
+          "anchor": false,
+          "accepted": [
+            "YAPRAK",
+            "YAPRAĞI"
+          ],
+          "morphNote": "k->ğ yumuşaması ve 'ı' iyelik eki alır (Takvim Yaprağı).",
+          "meaningHint": "Takvimin her bir günü temsil eden yaprağı"
+        },
+        {
+          "root": "DÖKÜMÜ",
+          "topForm": "DÖKÜMÜ",
+          "bottomForm": "DÖKÜMÜ",
+          "anchor": true
+        }
+      ]
+    },
+    {
+      "id": "el-arabasindan-dans-muzigine",
+      "title": "El Arabasından Dans Müziğine",
+      "difficulty": "Zor",
+      "featured": false,
+      "roundEligible": true,
+      "nodes": [
+        {
+          "root": "EL",
+          "topForm": "EL",
+          "bottomForm": "EL",
+          "anchor": true
+        },
+        {
+          "root": "ARABA",
+          "topForm": "ARABASI",
+          "bottomForm": "ARABA",
+          "anchor": false,
+          "accepted": [
+            "ARABA",
+            "ARABASI"
+          ],
+          "morphNote": "'sı' iyelik eki alır (El Arabası).",
+          "meaningHint": "Tek tekerlekli yük taşıma aracı"
+        },
+        {
+          "root": "SEVDA",
+          "topForm": "SEVDASI",
+          "bottomForm": "SEVDA",
+          "anchor": false,
+          "accepted": [
+            "SEVDA",
+            "SEVDASI"
+          ],
+          "morphNote": "'sı' iyelik eki mevcuttur (Araba Sevdası).",
+          "meaningHint": "Aşırı düşkünlük veya ünlü Türk romanı"
+        },
+        {
+          "root": "ATEŞ",
+          "topForm": "ATEŞİ",
+          "bottomForm": "ATEŞ",
+          "anchor": false,
+          "accepted": [
+            "ATEŞ",
+            "ATEŞİ"
+          ],
+          "morphNote": "'i' iyelik eki alır (Sevda Ateşi).",
+          "meaningHint": "Aşkın ve sevginin coşkulu duygusal sıcaklığı"
+        },
+        {
+          "root": "DANS",
+          "topForm": "DANSI",
+          "bottomForm": "DANS",
+          "anchor": false,
+          "accepted": [
+            "DANS",
+            "DANSI"
+          ],
+          "morphNote": "'ı' iyelik eki alır (Ateş Dansı).",
+          "meaningHint": "Ateş etrafında veya meşalelerle yapılan ritmik gösteri"
+        },
+        {
+          "root": "MÜZİK",
+          "topForm": "MÜZİĞİ",
+          "bottomForm": "MÜZİK",
+          "anchor": true
+        }
+      ]
+    },
+    {
+      "id": "kara-trenden-koltuk-sevdasi",
+      "title": "Kara Trenden Koltuk Sevdasına",
+      "difficulty": "Kolay",
+      "featured": false,
+      "roundEligible": true,
+      "nodes": [
+        {
+          "root": "KARA",
+          "topForm": "KARA",
+          "bottomForm": "KARA",
+          "anchor": true
+        },
+        {
+          "root": "TREN",
+          "topForm": "TREN",
+          "bottomForm": "TREN",
+          "anchor": false,
+          "accepted": [
+            "TREN"
+          ],
+          "morphNote": "Sıfat tamlamasında yalın haldedir (Kara Tren).",
+          "meaningHint": "Eski tip buharla çalışan siyah demiryolu taşıtı"
+        },
+        {
+          "root": "GAR",
+          "topForm": "GARI",
+          "bottomForm": "GAR",
+          "anchor": false,
+          "accepted": [
+            "GAR",
+            "GARI"
+          ],
+          "morphNote": "'ı' iyelik eki alır (Tren Garı).",
+          "meaningHint": "Trenlerin kalktığı ve durduğu ana istasyon"
+        },
+        {
+          "root": "MÜDÜR",
+          "topForm": "MÜDÜRÜ",
+          "bottomForm": "MÜDÜR",
+          "anchor": false,
+          "accepted": [
+            "MÜDÜR",
+            "MÜDÜRÜ"
+          ],
+          "morphNote": "'ü' iyelik eki alır (Gar Müdürü).",
+          "meaningHint": "İstasyonun yönetiminden sorumlu en üst yetkili"
+        },
+        {
+          "root": "KOLTUK",
+          "topForm": "KOLTUĞU",
+          "bottomForm": "KOLTUK",
+          "anchor": false,
+          "accepted": [
+            "KOLTUK",
+            "KOLTUĞU"
+          ],
+          "morphNote": "k->ğ yumuşaması ve 'u' iyelik eki alır (Müdür Koltuğu).",
+          "meaningHint": "Yönetici makamını ve yetkisini temsil eden sandalye"
+        },
+        {
+          "root": "SEVDA",
+          "topForm": "SEVDASI",
+          "bottomForm": "SEVDA",
+          "anchor": true
+        }
+      ]
+    },
+    {
+      "id": "gunes-gozlugunden-kiz-tarafina",
+      "title": "Güneş Gözlüğünden Kız Tarafına",
+      "difficulty": "Orta",
+      "featured": false,
+      "roundEligible": true,
+      "nodes": [
+        {
+          "root": "GÜNEŞ",
+          "topForm": "GÜNEŞ",
+          "bottomForm": "GÜNEŞ",
+          "anchor": true
+        },
+        {
+          "root": "GÖZLÜK",
+          "topForm": "GÖZLÜĞÜ",
+          "bottomForm": "GÖZLÜK",
+          "anchor": false,
+          "accepted": [
+            "GÖZLÜK",
+            "GÖZLÜĞÜ"
+          ],
+          "morphNote": "k->ğ yumuşaması ve 'ü' iyelik eki alır (Güneş Gözlüğü).",
+          "meaningHint": "Gözleri parlak ışıktan koruyan aksesuar"
+        },
+        {
+          "root": "KUTU",
+          "topForm": "KUTUSU",
+          "bottomForm": "KUTU",
+          "anchor": false,
+          "accepted": [
+            "KUTU",
+            "KUTUSU"
+          ],
+          "morphNote": "'su' iyelik eki alır (Gözlük Kutusu).",
+          "meaningHint": "Gözlüklerin saklandığı sert kılıf"
+        },
+        {
+          "root": "KAPAK",
+          "topForm": "KAPAĞI",
+          "bottomForm": "KAPAK",
+          "anchor": false,
+          "accepted": [
+            "KAPAK",
+            "KAPAĞI"
+          ],
+          "morphNote": "k->ğ yumuşaması ve 'ı' iyelik eki alır (Kutu Kapağı).",
+          "meaningHint": "Kutunun üstünü örten kapama parçası"
+        },
+        {
+          "root": "KIZ",
+          "topForm": "KIZI",
+          "bottomForm": "KIZ",
+          "anchor": false,
+          "accepted": [
+            "KIZ",
+            "KIZI"
+          ],
+          "morphNote": "'ı' iyelik eki alır (Kapak Kızı).",
+          "meaningHint": "Dergilerin ön yüzünde fotoğrafı basılan kadın model"
+        },
+        {
+          "root": "TARAF",
+          "topForm": "TARAFI",
+          "bottomForm": "TARAF",
+          "anchor": true
+        }
+      ]
     }
   ],
   "speedChains": [
