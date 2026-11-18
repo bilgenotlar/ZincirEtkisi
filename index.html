@@ -1153,7 +1153,7 @@
             <div style="display:flex; flex-wrap:wrap; gap:8px;">
               <button type="button" class="btn btn-primary" id="btn-next-stage" onclick="advanceNextStage()">Sonraki Aşamaya Geç</button>
               <button type="button" class="btn btn-soft-blue" onclick="replayCurrentChain()">Bu Zinciri Tekrarla</button>
-              <button type="button" class="btn" id="btn-share-result" onclick="shareGameResult(this)">Sonucu Kopyala</button>
+              <button type="button" class="btn" id="btn-bottom-next-chain" onclick="loadNextPuzzleAnytime()">Sonraki Zincir →</button>
             </div>
           </div>
         </section>
@@ -1814,7 +1814,6 @@
           return;
         }
 
-        // Klasik Yarışma modunda bir sonraki tura / yeni bulmacaya geç
         if (appState.roundIndex < 3) {
           appState.roundIndex += 1;
         } else {
@@ -1951,6 +1950,7 @@
         var st = appState.nodeStates[targetIdx];
         var prevSurface = nodes[targetIdx - 1].bottomForm || nodes[targetIdx - 1].root;
         var nextSurface = nodes[targetIdx + 1].topForm || nodes[targetIdx + 1].root;
+        var nextSolved = appState.nodeStates[targetIdx + 1].solved;
 
         var result = matchGuessAgainstNode(raw, node, prevSurface, nextSurface);
         if (result.matched) {
@@ -1965,14 +1965,15 @@
           var totalPts = basePts + noLetterBonus;
           addScoreToActiveTeam(totalPts);
 
-          var linkSummary = prevSurface + ' ' + (node.topForm || node.root) +
-            ' → ' + (node.bottomForm || node.root) + ' ' + nextSurface;
+          var safeDetail = nextSolved
+            ? (node.morphNote || (prevSurface + ' ' + (node.topForm || node.root) + ' → ' + (node.bottomForm || node.root) + ' ' + nextSurface))
+            : ('Üst bağlantı tamamlandı: ' + prevSurface + ' ' + (node.topForm || node.root));
           var bonusText = noLetterBonus > 0 ? ' (Harf Almadan Bilme Bonusu: +50)' : '';
 
           setFeedback(
             'is-success',
             'Doğru! +' + totalPts + ' Puan' + bonusText,
-            'Kök "' + node.root + '" doğrulandı. ' + (node.morphNote || linkSummary)
+            'Kök "' + node.root + '" doğrulandı. ' + safeDetail
           );
 
           checkChainCompletion();
@@ -2008,8 +2009,12 @@
         var targetIdx = getActiveTargetIndex();
         if (targetIdx === -1) return;
 
-        var node = appState.currentChain.nodes[targetIdx];
+        var nodes = appState.currentChain.nodes;
+        var node = nodes[targetIdx];
         var st = appState.nodeStates[targetIdx];
+        var prevSurface = nodes[targetIdx - 1].bottomForm || nodes[targetIdx - 1].root;
+        var nextSolved = appState.nodeStates[targetIdx + 1].solved;
+
         st.solved = true;
         st.passed = true;
         st.revealedCount = trUpper(node.root).length;
@@ -2017,10 +2022,14 @@
         var inp = document.getElementById('guess-input');
         if (inp) inp.value = '';
 
+        var safeDetail = nextSolved
+          ? (node.morphNote || '')
+          : ('Üst bağlantı: ' + prevSurface + ' ' + (node.topForm || node.root));
+
         setFeedback(
           'is-hint',
           'Kelime Açıldı (0 Puan)',
-          'Hedef kök "' + node.root + '" olarak açıldı. ' + (node.morphNote || '')
+          'Hedef kök "' + node.root + '" olarak açıldı. ' + safeDetail
         );
 
         if (appState.teamMode) {
@@ -2040,7 +2049,6 @@
         var nodes = appState.currentChain.nodes;
         var node = nodes[targetIdx];
         var prevSurface = nodes[targetIdx - 1].bottomForm || nodes[targetIdx - 1].root;
-        var nextSurface = nodes[targetIdx + 1].topForm || nodes[targetIdx + 1].root;
 
         var topChanged = trUpper(node.topForm || node.root) !== trUpper(node.root);
         var botChanged = trUpper(node.bottomForm || node.root) !== trUpper(node.root);
@@ -2050,8 +2058,8 @@
           ? (prevSurface + ' sözcüğünün altında ek/değişim alır; ')
           : (prevSurface + ' sözcüğünün altında yalın kalır; ');
         hintText += botChanged
-          ? (nextSurface + ' sözcüğünün üstünde ek alır.')
-          : (nextSurface + ' sözcüğünün üstünde yalın kök olarak bağlanır.');
+          ? 'alttaki kelimeye ek alarak bağlanır.'
+          : 'alttaki kelimeye yalın kök olarak bağlanır.';
 
         setFeedback('is-hint', 'Morfoloji İpucu (−25 Puan)', hintText);
       }
@@ -2127,22 +2135,6 @@
           }
         }
         if (completeBar) completeBar.classList.remove('hidden');
-      }
-
-      function shareGameResult(btn) {
-        var text = 'MaviBlue Stüdyo · Zincir Etkisi\n' +
-          'Zincir: ' + (appState.currentChain ? appState.currentChain.title : '') + '\n' +
-          'Skor: ' + appState.scores.a + ' Puan | Toplam Çözülen: ' + appState.solvedChainsCount + '\n' +
-          'maviblue.win';
-        if (navigator.clipboard && navigator.clipboard.writeText) {
-          navigator.clipboard.writeText(text).then(function () {
-            if (btn) {
-              var old = btn.textContent;
-              btn.textContent = 'Panoya Kopyalandı ✓';
-              setTimeout(function () { btn.textContent = old; }, 2200);
-            }
-          });
-        }
       }
 
       function advanceNextStage() {
@@ -2888,7 +2880,14 @@
             var sub = document.createElement('div');
             sub.className = 'node-subnote';
             if (st.solved) {
-              sub.textContent = node.morphNote || ('Çözülen kök: ' + wordU);
+              var nextSolved = appState.nodeStates[i + 1] && appState.nodeStates[i + 1].solved;
+              if (nextSolved && node.morphNote) {
+                sub.textContent = node.morphNote;
+              } else {
+                var prevSurface = nodes[i - 1].bottomForm || nodes[i - 1].root;
+                var topSurface = node.topForm || wordU;
+                sub.textContent = 'Çözülen kök: ' + wordU + ' · Üst bağlantı: ' + prevSurface + ' ' + topSurface;
+              }
             } else if (isTarget) {
               sub.textContent = 'Seçili hedef · ' + wordU.length + ' harfli kök (ekli biçimler de kabul edilir)';
             } else if (isFrontier) {
@@ -3140,7 +3139,6 @@
       window.showMeaningHint = showMeaningHint;
       window.advanceNextStage = advanceNextStage;
       window.replayCurrentChain = replayCurrentChain;
-      window.shareGameResult = shareGameResult;
       window.startSpeedTimer = startSpeedTimer;
       window.submitSpeedChain = submitSpeedChain;
       window.skipSpeedChain = skipSpeedChain;
