@@ -1956,7 +1956,6 @@
 
         var currentId = appState.currentChain ? appState.currentChain.id : null;
 
-        // Zorluk tercihi: Tur 1 -> Kolay veya Orta (tek Kolay soruya takılmamak için), Tur 4 -> Zor, Tur 2-3 -> Tümü
         var preferredPool = pool;
         if (rIdx === 0) {
           var easyOrMed = pool.filter(function (c) {
@@ -1968,21 +1967,18 @@
           if (hardOnly.length > 0) preferredPool = hardOnly;
         }
 
-        // Daha önce görülmemiş olanları süz
         var unseenPreferred = preferredPool.filter(function (c) {
           return appState.usedClassicIds.indexOf(c.id) === -1 && c.id !== currentId;
         });
 
         var candidatePool = unseenPreferred;
 
-        // Tercih edilen zorlukta görülmemiş kalmadıysa tüm görülmemiş havuza bak
         if (candidatePool.length === 0) {
           candidatePool = pool.filter(function (c) {
             return appState.usedClassicIds.indexOf(c.id) === -1 && c.id !== currentId;
           });
         }
 
-        // Tüm banka tamamlandıysa geçmişi sıfırla ve mevcut zincir hariç yeniden başlat
         if (candidatePool.length === 0) {
           appState.usedClassicIds = currentId ? [currentId] : [];
           candidatePool = preferredPool.filter(function (c) { return c.id !== currentId; });
@@ -2117,16 +2113,10 @@
         if (targetIdx === -1) return;
 
         appState.selectedFrontier = side;
-        var node = appState.currentChain.nodes[targetIdx];
+        var nodes = appState.currentChain.nodes;
+        var node = nodes[targetIdx];
         var st = appState.nodeStates[targetIdx];
         var rootUpper = trUpper(node.root);
-
-        if (st.revealedCount >= rootUpper.length) {
-          setFeedback('is-hint', 'Tüm Harfler Açık', 'Bu kelimenin tüm harfleri zaten açıldı (Ödül: 25 Puan). Doğru kökü veya tamlama biçimini yazıp tahmin edin.');
-          renderBoard();
-          renderControls();
-          return;
-        }
 
         if (isFinalWagerRound()) {
           var maxWager = countRemainingHiddenSlots() === 1 ? 1000 : 500;
@@ -2135,13 +2125,58 @@
           }
         }
 
-        st.revealedCount += 1;
+        if (st.revealedCount < rootUpper.length) {
+          st.revealedCount += 1;
+        }
+
+        /* Tüm harfler açıldıysa oyuncuya tekrar yazdırmadan otomatik çöz ve alt halkaya geç */
+        if (st.revealedCount >= rootUpper.length) {
+          var openedCount = rootUpper.length;
+          st.solved = true;
+          st.revealedCount = openedCount;
+
+          var inpEl = document.getElementById('guess-input');
+          if (inpEl) inpEl.value = '';
+
+          playChimeSuccess();
+
+          var totalPts = isFinalWagerRound()
+            ? appState.wagerAmount
+            : calculatePointsForLetterCount(openedCount);
+          addScoreToActiveTeam(totalPts);
+
+          var prevSurface = nodes[targetIdx - 1].bottomForm || nodes[targetIdx - 1].root;
+          var nextSolved = appState.nodeStates[targetIdx + 1] && appState.nodeStates[targetIdx + 1].solved;
+          var safeDetail = nextSolved
+            ? (node.morphNote || (prevSurface + ' ' + (node.topForm || node.root)))
+            : ('Üst bağlantı: ' + prevSurface + ' ' + (node.topForm || node.root));
+
+          var tierText = isFinalWagerRound()
+            ? ' (Final Bahis)'
+            : (' (' + openedCount + ' harfle tamamlandı)');
+
+          setFeedback(
+            'is-success',
+            'Tamamlandı! +' + totalPts + ' Puan' + tierText,
+            'Tüm harfler açıldığı için "' + rootUpper + '" otomatik geçildi. ' + safeDetail
+          );
+
+          checkChainCompletion();
+          renderAll();
+          scrollActiveTargetIntoViewOnMobile();
+          if (!appState.chainCompleted) {
+            var nextInp = document.getElementById('guess-input');
+            if (nextInp) nextInp.focus();
+          }
+          return;
+        }
+
         playChimeLetter();
 
         var revealedChar = rootUpper.charAt(st.revealedCount - 1);
         var anchorWord = side === 'top'
-          ? (appState.currentChain.nodes[targetIdx - 1].bottomForm || appState.currentChain.nodes[targetIdx - 1].root)
-          : (appState.currentChain.nodes[targetIdx + 1].topForm || appState.currentChain.nodes[targetIdx + 1].root);
+          ? (nodes[targetIdx - 1].bottomForm || nodes[targetIdx - 1].root)
+          : (nodes[targetIdx + 1].topForm || nodes[targetIdx + 1].root);
 
         var msg = anchorWord + ' kelimesinin altından ' + st.revealedCount + '. harf açıldı: "' + revealedChar + '".';
 
