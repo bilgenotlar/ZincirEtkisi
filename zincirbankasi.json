@@ -1426,6 +1426,623 @@
           "anchor": true
         }
       ]
+    },
+    {
+      "id": "altin-kapi-arkasi",
+      "title": "Sarı Metalden Gizli Köşeye",
+      "difficulty": "Kolay",
+      "featured": false,
+      "roundEligible": true,
+      "nodes": [
+        {
+          "root": "ALTIN",
+          "topForm": "ALTIN",
+          "bottomForm": "ALTIN",
+          "anchor": true
+        },
+        {
+          "root": "ORAN",
+          "topForm": "ORAN",
+          "bottomForm": "ORAN",
+          "anchor": false,
+          "accepted": [
+            "ORAN",
+            "ORANI"
+          ],
+          "morphNote": "Yalın sıfat tamlaması (Altın oran); altta tamlayan eksiz (Oran orantı)",
+          "meaningHint": "Estetik ve matematikte kusursuz uyum ölçüsü"
+        },
+        {
+          "root": "ORANTI",
+          "topForm": "ORANTI",
+          "bottomForm": "ORANTI",
+          "anchor": false,
+          "accepted": [
+            "ORANTI"
+          ],
+          "morphNote": "İkileme/terim (Oran orantı); altta tamlayan eksiz (Orantı merkezi)",
+          "meaningHint": "İki oranın eşitliğini ifade eden matematik kavramı"
+        },
+        {
+          "root": "MERKEZ",
+          "topForm": "MERKEZİ",
+          "bottomForm": "MERKEZ",
+          "anchor": false,
+          "accepted": [
+            "MERKEZ",
+            "MERKEZİ"
+          ],
+          "morphNote": "İyelik eki -i (Orantı merkezi); altta tamlayan eksiz (Merkez bankası)",
+          "meaningHint": "Bir alanın veya sistemin tam orta noktası"
+        },
+        {
+          "root": "BANKA",
+          "topForm": "BANKASI",
+          "bottomForm": "BANKA",
+          "anchor": false,
+          "accepted": [
+            "BANKA",
+            "BANKASI"
+          ],
+          "morphNote": "Kaynaştırma -s ve iyelik -ı (Merkez bankası); altta sıfat tamlaması (Banka hesabı)",
+          "meaningHint": "Para ve kredi işlemleri yapan finans kuruluşu"
+        },
+        {
+          "root": "HESABI",
+          "topForm": "HESABI",
+          "bottomForm": "HESABI",
+          "anchor": true
+        }
+      ]
+    },
+    {
+      "id": "tas-kalp-krizi",
+      "title": "Sert Kayadan Sağlık Alarmına",
+      "difficulty": "Kolay",
+      "featured": false,
+      "roundEligible": true,
+      "nodes": [
+        {
+          "root": "TAŞ",
+          "topForm": "TAŞ",
+          "bottomForm": "TAŞ",
+          "anchor": true
+        },
+        {
+          "root": "DEVRİ",
+          "topForm": "DEVRİ",
+          "bottomForm": "DEVİR",
+          "anchor": false,
+          "accepted": [
+            "DEVİR",
+            "DEVRİ"
+          ],
+          "morphNote": "Ünlü düşmesi ve iyelik -i (Taş devri); altta yalın kök (Devir teslim)",
+          "meaningHint": "Tarih öncesi çağlardan biri veya bir dönem"
+        },
+        {
+          "root": "TESLİM",
+          "topForm": "TESLİM",
+          "bottomForm": "TESLİM",
+          "anchor": false,
+          "accepted": [
+            "TESLİM",
+            "TESLİMİ"
+          ],
+          "morphNote": "İkili deyim (Devir teslim); altta tamlayan eksiz (Teslim belgesi)",
+          "meaningHint": "Bir emaneti veya görevi devretme işi"
+        },
+        {
+          "root": "BELGE",
+          "topForm": "BELGESİ",
+          "bottomForm": "BELGE",
+          "anchor": false,
+          "accepted": [
+            "BELGE",
+            "BELGESİ"
+          ],
+          "morphNote": "Kaynaştırma -s ve iyelik -i (Teslim belgesi); altta tamlayan eksiz (Belge geçer)",
+          "meaningHint": "Bir gerçeği doğrulayan yazılı kanıt, doküman"
+        },
+        {
+          "root": "GEÇER",
+          "topForm": "GEÇER",
+          "bottomForm": "GEÇER",
+          "anchor": true
+        }
+      ]
+    },
+    {
+      "id": "demir-perde-arkasi",
+      "title": "Soğuk Savaş'tan Sahne Gerisine",
+      "difficulty": "Kolay",
+      "featured": false,
+      "roundEligible": true,
+      "nodes": [
+        {
+          "root": "DEMİR",
+          "topForm": "DEMİR",
+          "bottomForm": "DEMİR",
+          "anchor": true
+        },
+        {
+          "root": "PERDE",
+          "topForm": "PERDE",
+          "bottomForm": "PERDE",
+          "anchor": false,
+          "accepted": [
+            "PERDE",
+            "PERDESİ"
+          ],
+          "morphNote": "Sıfat tamlaması (Demir perde); altta tamlayan eksiz (Perde arkası)",
+          "meaningHint": "Pencereye asılan veya sahneyi kapatan örtü"
+        },
+        {
+          "root": "ARKA",
+          "topForm": "ARKASI",
+          "bottomForm": "ARKA",
+          "anchor": false,
+          "accepted": [
+            "ARKA",
+            "ARKASI"
+          ],
+          "morphNote": "Kaynaştırma -s ve iyelik -ı (Perde arkası); altta tamlayan eksiz (Arka plan)",
+          "meaningHint": "Bir şeyin geri tarafı, görünmeyen yüzü"
+        },
+        {
+          "root": "PLAN",
+          "topForm": "PLAN",
+          "bottomForm": "PLAN",
+          "anchor": false,
+          "accepted": [
+            "PLAN",
+            "PLANI"
+          ],
+          "morphNote": "Sıfat tamlaması (Arka plan); altta tamlayan eksiz (Plan programı)",
+          "meaningHint": "Bir işin gerçekleşmesi için hazırlanan tasarı"
+        },
+        {
+          "root": "PROGRAMI",
+          "topForm": "PROGRAMI",
+          "bottomForm": "PROGRAMI",
+          "anchor": true
+        }
+      ]
+    },
+    {
+      "id": "buz-dagi-tepesi",
+      "title": "Okyanus Devinden Zirveye",
+      "difficulty": "Orta",
+      "featured": false,
+      "roundEligible": true,
+      "nodes": [
+        {
+          "root": "BUZ",
+          "topForm": "BUZ",
+          "bottomForm": "BUZ",
+          "anchor": true
+        },
+        {
+          "root": "DAĞ",
+          "topForm": "DAĞI",
+          "bottomForm": "DAĞ",
+          "anchor": false,
+          "accepted": [
+            "DAĞ",
+            "DAĞI"
+          ],
+          "morphNote": "İyelik eki -ı (Buz dağı); altta tamlayan eksiz (Dağ keçisi)",
+          "meaningHint": "Çevresine göre çok yüksek olan yer kabuğu çıkıntısı"
+        },
+        {
+          "root": "KEÇİ",
+          "topForm": "KEÇİSİ",
+          "bottomForm": "KEÇİ",
+          "anchor": false,
+          "accepted": [
+            "KEÇİ",
+            "KEÇİSİ"
+          ],
+          "morphNote": "Kaynaştırma -s ve iyelik -i (Dağ keçisi); altta tamlayan eksiz (Keçi boynuzu)",
+          "meaningHint": "Sarp kayalıklarda yaşayan sakallı ve boynuzlu hayvan"
+        },
+        {
+          "root": "BOYNUZ",
+          "topForm": "BOYNUZU",
+          "bottomForm": "BOYNUZ",
+          "anchor": false,
+          "accepted": [
+            "BOYNUZ",
+            "BOYNUZU"
+          ],
+          "morphNote": "İyelik eki -u (Keçi boynuzu); altta sıfat tamlaması (Boynuz kulağı)",
+          "meaningHint": "Bazı hayvanların başında bulunan sert çıkıntı"
+        },
+        {
+          "root": "KULAĞI",
+          "topForm": "KULAĞI",
+          "bottomForm": "KULAĞI",
+          "anchor": true
+        }
+      ]
+    },
+    {
+      "id": "kum-saati-kulesi",
+      "title": "Zaman Ölçerden Meydan Anıtına",
+      "difficulty": "Orta",
+      "featured": false,
+      "roundEligible": true,
+      "nodes": [
+        {
+          "root": "KUM",
+          "topForm": "KUM",
+          "bottomForm": "KUM",
+          "anchor": true
+        },
+        {
+          "root": "SAAT",
+          "topForm": "SAATİ",
+          "bottomForm": "SAAT",
+          "anchor": false,
+          "accepted": [
+            "SAAT",
+            "SAATİ"
+          ],
+          "morphNote": "İyelik eki -i (Kum saati); altta tamlayan eksiz (Saat kulesi)",
+          "meaningHint": "Zamanı ölçmeye yarayan araç"
+        },
+        {
+          "root": "KULE",
+          "topForm": "KULESİ",
+          "bottomForm": "KULE",
+          "anchor": false,
+          "accepted": [
+            "KULE",
+            "KULESİ"
+          ],
+          "morphNote": "Kaynaştırma -s ve iyelik -i (Saat kulesi); altta tamlayan eksiz (Kule vinci)",
+          "meaningHint": "Yüksek ve dar yapılı mimari eser"
+        },
+        {
+          "root": "VİNÇ",
+          "topForm": "VİNCİ",
+          "bottomForm": "VİNÇ",
+          "anchor": false,
+          "accepted": [
+            "VİNÇ",
+            "VİNCİ"
+          ],
+          "morphNote": "Ünsüz yumuşaması ç→c ve iyelik -i (Kule vinci); altta tamlayan eksiz (Vinç operatörü)",
+          "meaningHint": "Ağır yükleri kaldırıp taşımaya yarayan makine"
+        },
+        {
+          "root": "OPERATÖRÜ",
+          "topForm": "OPERATÖRÜ",
+          "bottomForm": "OPERATÖRÜ",
+          "anchor": true
+        }
+      ]
+    },
+    {
+      "id": "yaprak-sarmasi-sigara",
+      "title": "Mutfak Lezzetinden İnce Tütüne",
+      "difficulty": "Orta",
+      "featured": false,
+      "roundEligible": true,
+      "nodes": [
+        {
+          "root": "YAPRAK",
+          "topForm": "YAPRAK",
+          "bottomForm": "YAPRAK",
+          "anchor": true
+        },
+        {
+          "root": "SARMA",
+          "topForm": "SARMASI",
+          "bottomForm": "SARMA",
+          "anchor": false,
+          "accepted": [
+            "SARMA",
+            "SARMASI"
+          ],
+          "morphNote": "Kaynaştırma -s ve iyelik -ı (Yaprak sarması); altta sıfat tamlaması (Sarma tütün)",
+          "meaningHint": "Asma veya lahana yaprağına pirinç sarılarak yapılan yemek"
+        },
+        {
+          "root": "TÜTÜN",
+          "topForm": "TÜTÜN",
+          "bottomForm": "TÜTÜN",
+          "anchor": false,
+          "accepted": [
+            "TÜTÜN",
+            "TÜTÜNÜ"
+          ],
+          "morphNote": "Sıfat tamlaması (Sarma tütün); altta tamlayan eksiz (Tütün kolonyası)",
+          "meaningHint": "Yaprakları kurutularak içilen bitki"
+        },
+        {
+          "root": "KOLONYA",
+          "topForm": "KOLONYASI",
+          "bottomForm": "KOLONYA",
+          "anchor": false,
+          "accepted": [
+            "KOLONYA",
+            "KOLONYASI"
+          ],
+          "morphNote": "Kaynaştırma -s ve iyelik -ı (Tütün kolonyası); altta tamlayan eksiz (Kolonya şişesi)",
+          "meaningHint": "Ferahlatıcı ve dezenfekte edici alkollü esans"
+        },
+        {
+          "root": "ŞİŞESİ",
+          "topForm": "ŞİŞESİ",
+          "bottomForm": "ŞİŞESİ",
+          "anchor": true
+        }
+      ]
+    },
+    {
+      "id": "yol-haritasi-cizimi",
+      "title": "Rota Rehberinden Sahne Şovuna",
+      "difficulty": "Orta",
+      "featured": false,
+      "roundEligible": true,
+      "nodes": [
+        {
+          "root": "YOL",
+          "topForm": "YOL",
+          "bottomForm": "YOL",
+          "anchor": true
+        },
+        {
+          "root": "HARİTA",
+          "topForm": "HARİTASI",
+          "bottomForm": "HARİTA",
+          "anchor": false,
+          "accepted": [
+            "HARİTA",
+            "HARİTASI"
+          ],
+          "morphNote": "Kaynaştırma -s ve iyelik -ı (Yol haritası); altta tamlayan eksiz (Harita mühendisi)",
+          "meaningHint": "Yeryüzünün kuş bakışı çizimi veya izlenecek plan"
+        },
+        {
+          "root": "MÜHENDİS",
+          "topForm": "MÜHENDİSİ",
+          "bottomForm": "MÜHENDİS",
+          "anchor": false,
+          "accepted": [
+            "MÜHENDİS",
+            "MÜHENDİSİ"
+          ],
+          "morphNote": "İyelik eki -i (Harita mühendisi); altta tamlayan eksiz (Mühendis bey)",
+          "meaningHint": "Teknik tasarım ve uygulama yapan uzman"
+        },
+        {
+          "root": "BEY",
+          "topForm": "BEY",
+          "bottomForm": "BEY",
+          "anchor": false,
+          "accepted": [
+            "BEY",
+            "BEYİ"
+          ],
+          "morphNote": "Unvan öbeği (Mühendis bey); altta tamlayan eksiz (Beyaz eşya)",
+          "meaningHint": "Erkeklere saygı amacıyla söylenen unvan"
+        },
+        {
+          "root": "PAZAR",
+          "topForm": "PAZARI",
+          "bottomForm": "PAZAR",
+          "anchor": false,
+          "accepted": [
+            "PAZAR",
+            "PAZARI"
+          ],
+          "morphNote": "İyelik eki -ı (Bey pazarı); altta tamlayan eksiz (Pazar araştırması)",
+          "meaningHint": "Alıcı ve satıcıların buluştuğu ticaret alanı"
+        },
+        {
+          "root": "ARAŞTIRMASI",
+          "topForm": "ARAŞTIRMASI",
+          "bottomForm": "ARAŞTIRMASI",
+          "anchor": true
+        }
+      ]
+    },
+    {
+      "id": "kuru-fasulye-sirigi",
+      "title": "Geleneksel Yemekten Boy Ölçüsüne",
+      "difficulty": "Zor",
+      "featured": false,
+      "roundEligible": true,
+      "nodes": [
+        {
+          "root": "KURU",
+          "topForm": "KURU",
+          "bottomForm": "KURU",
+          "anchor": true
+        },
+        {
+          "root": "FASULYE",
+          "topForm": "FASULYE",
+          "bottomForm": "FASULYE",
+          "anchor": false,
+          "accepted": [
+            "FASULYE",
+            "FASULYESİ"
+          ],
+          "morphNote": "Sıfat tamlaması (Kuru fasulye); altta tamlayan eksiz (Fasulye sırığı)",
+          "meaningHint": "Baklagillerden, taneleri yenen bir bitki"
+        },
+        {
+          "root": "SIRIK",
+          "topForm": "SIRIĞI",
+          "bottomForm": "SIRIK",
+          "anchor": false,
+          "accepted": [
+            "SIRIK",
+            "SIRIĞI"
+          ],
+          "morphNote": "Ünsüz yumuşaması k→ğ ve iyelik -ı (Fasulye sırığı); altta tamlayan eksiz (Sırıkla atlama)",
+          "meaningHint": "Uzun ve ince ağaç değnek"
+        },
+        {
+          "root": "ATLAMA",
+          "topForm": "ATLAMA",
+          "bottomForm": "ATLAMA",
+          "anchor": false,
+          "accepted": [
+            "ATLAMA",
+            "ATLAMASI"
+          ],
+          "morphNote": "Atletizm branşı (Sırıkla atlama); altta tamlayan eksiz (Atlama taşı)",
+          "meaningHint": "Sıçrayarak bir engeli aşma eylemi"
+        },
+        {
+          "root": "TAŞ",
+          "topForm": "TAŞI",
+          "bottomForm": "TAŞ",
+          "anchor": false,
+          "accepted": [
+            "TAŞ",
+            "TAŞI"
+          ],
+          "morphNote": "İyelik eki -ı (Atlama taşı); altta tamlayan eksiz (Taş kömür)",
+          "meaningHint": "Sert ve katı doğal mineral kütlesi"
+        },
+        {
+          "root": "KÖMÜRÜ",
+          "topForm": "KÖMÜRÜ",
+          "bottomForm": "KÖMÜRÜ",
+          "anchor": true
+        }
+      ]
+    },
+    {
+      "id": "ipek-bocegi-kozasi",
+      "title": "Değerli Kumaştan Hukuk Mücadelesine",
+      "difficulty": "Zor",
+      "featured": false,
+      "roundEligible": true,
+      "nodes": [
+        {
+          "root": "İPEK",
+          "topForm": "İPEK",
+          "bottomForm": "İPEK",
+          "anchor": true
+        },
+        {
+          "root": "BÖCEK",
+          "topForm": "BÖCEĞİ",
+          "bottomForm": "BÖCEK",
+          "anchor": false,
+          "accepted": [
+            "BÖCEK",
+            "BÖCEĞİ"
+          ],
+          "morphNote": "Ünsüz yumuşaması k→ğ ve iyelik -i (İpek böceği); altta tamlayan eksiz (Böcek ilacı)",
+          "meaningHint": "Altı bacaklı, eklem bacaklı küçük canlı"
+        },
+        {
+          "root": "İLAÇ",
+          "topForm": "İLACI",
+          "bottomForm": "İLAÇ",
+          "anchor": false,
+          "accepted": [
+            "İLAÇ",
+            "İLACI"
+          ],
+          "morphNote": "Ünsüz yumuşaması ç→c ve iyelik -ı (Böcek ilacı); altta tamlayan eksiz (İlaç firması)",
+          "meaningHint": "Hastalıkları iyileştiren veya zararlıları yok eden madde"
+        },
+        {
+          "root": "FİRMA",
+          "topForm": "FİRMASI",
+          "bottomForm": "FİRMA",
+          "anchor": false,
+          "accepted": [
+            "FİRMA",
+            "FİRMASI"
+          ],
+          "morphNote": "Kaynaştırma -s ve iyelik -ı (İlaç firması); altta tamlayan eksiz (Firma sahibi)",
+          "meaningHint": "Ticari kuruluş, şirket"
+        },
+        {
+          "root": "SAHİP",
+          "topForm": "SAHİBİ",
+          "bottomForm": "SAHİP",
+          "anchor": false,
+          "accepted": [
+            "SAHİP",
+            "SAHİBİ"
+          ],
+          "morphNote": "Ünsüz yumuşaması p→b ve iyelik -i (Firma sahibi); altta yardımcı fiille birleşik eylem (Sahip çıkmak)",
+          "meaningHint": "Bir şeyin mülkiyetini elinde tutan kimse"
+        },
+        {
+          "root": "ÇIKMAK",
+          "topForm": "ÇIKMAK",
+          "bottomForm": "ÇIKMAK",
+          "anchor": true
+        }
+      ]
+    },
+    {
+      "id": "cam-tavan-sendromu",
+      "title": "Görünmez Engelden Psikolojik Terime",
+      "difficulty": "Zor",
+      "featured": false,
+      "roundEligible": true,
+      "nodes": [
+        {
+          "root": "CAM",
+          "topForm": "CAM",
+          "bottomForm": "CAM",
+          "anchor": true
+        },
+        {
+          "root": "TAVAN",
+          "topForm": "TAVAN",
+          "bottomForm": "TAVAN",
+          "anchor": false,
+          "accepted": [
+            "TAVAN",
+            "TAVANI"
+          ],
+          "morphNote": "Sıfat tamlaması (Cam tavan); altta tamlayan eksiz (Tavan fiyatı)",
+          "meaningHint": "Bir odanın veya yapının üst örtüsü, ulaşılabilecek en üst sınır"
+        },
+        {
+          "root": "FİYAT",
+          "topForm": "FİYATI",
+          "bottomForm": "FİYAT",
+          "anchor": false,
+          "accepted": [
+            "FİYAT",
+            "FİYATI"
+          ],
+          "morphNote": "İyelik eki -ı (Tavan fiyatı); altta tamlayan eksiz (Fiyat etiketi)",
+          "meaningHint": "Bir malın para cinsinden değeri"
+        },
+        {
+          "root": "ETİKET",
+          "topForm": "ETİKETİ",
+          "bottomForm": "ETİKET",
+          "anchor": false,
+          "accepted": [
+            "ETİKET",
+            "ETİKETİ"
+          ],
+          "morphNote": "İyelik eki -i (Fiyat etiketi); altta tamlayan eksiz (Etiket kuralları)",
+          "meaningHint": "Ürün bilgisi içeren kağıt veya toplumsal görgü kuralları"
+        },
+        {
+          "root": "KURALLARI",
+          "topForm": "KURALLARI",
+          "bottomForm": "KURALLARI",
+          "anchor": true
+        }
+      ]
     }
   ],
   "speedChains": [
