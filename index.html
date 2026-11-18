@@ -895,35 +895,6 @@
     .feedback-box.is-error .feedback-title { color: var(--accent-rose-text); }
     .feedback-box.is-hint .feedback-title { color: var(--brand-blue); }
 
-    /* Hızlı Zincir & Bonus Alanı */
-    .speed-panel {
-      background: var(--bg-card);
-      border: 1px solid var(--accent-amber-border);
-      border-radius: var(--radius-lg);
-      padding: 22px;
-      margin-bottom: 22px;
-      box-shadow: var(--shadow-card);
-    }
-    .timer-bar-track {
-      height: 8px;
-      background: var(--bg-surface);
-      border-radius: var(--radius-pill);
-      overflow: hidden;
-      margin: 10px 0 14px 0;
-    }
-    .timer-bar-fill {
-      height: 100%;
-      background: linear-gradient(90deg, var(--brand-blue), var(--accent-amber));
-      transform-origin: left center;
-      transition: transform 200ms linear;
-    }
-    .speed-inputs-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
-      gap: 12px;
-      margin-bottom: 14px;
-    }
-
     .chain-catalog-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
@@ -1063,33 +1034,6 @@
 
     <!-- ANA OYUN SAHNESİ -->
     <main id="view-stage">
-      <!-- Hızlı Zincir / 60sn Bonus Turu -->
-      <section id="speed-stage" class="speed-panel hidden" aria-live="polite">
-        <div class="panel-head">
-          <div>
-            <p class="kicker" id="speed-kicker">Hızlı Zincir · Bonus Turu</p>
-            <h2 class="panel-title" id="speed-title">Hızlı Zinciri Bağla</h2>
-          </div>
-          <div style="display:flex; gap:8px; align-items:center;">
-            <span class="badge is-amber" id="speed-timer-badge">15 sn</span>
-            <span class="badge is-blue" id="speed-reward-badge">+100 Puan</span>
-          </div>
-        </div>
-        <div class="timer-bar-track" aria-hidden="true">
-          <div class="timer-bar-fill" id="speed-timer-bar"></div>
-        </div>
-        <p id="speed-desc" style="margin-top:0; color:var(--text-secondary);">
-          Başlangıç ve bitiş sözcüklerini ilk harf ipuçlarıyla hızlıca birleştirin.
-        </p>
-        <div id="speed-chain-preview" class="speed-inputs-grid"></div>
-        <div style="display:flex; flex-wrap:wrap; gap:8px;">
-          <button type="button" class="btn btn-amber" id="btn-speed-start" onclick="startSpeedTimer()">Süreyi Başlat</button>
-          <button type="button" class="btn btn-primary" id="btn-speed-submit" onclick="submitSpeedChain()" disabled>Yanıtları Kontrol Et</button>
-          <button type="button" class="btn" id="btn-speed-skip" onclick="skipSpeedChain()">Sonraki Tura Geç</button>
-        </div>
-        <div id="speed-feedback" class="feedback-box hidden"></div>
-      </section>
-
       <!-- Pratik Modu Zincir Seçici -->
       <section id="practice-picker-bar" class="card-panel hidden" style="margin-bottom: 22px;">
         <div class="panel-head">
@@ -1128,9 +1072,8 @@
             <p class="feedback-title" id="complete-title">Zincir Tamamlandı</p>
             <p id="complete-summary" style="margin:0 0 12px 0;"></p>
             <div style="display:flex; flex-wrap:wrap; gap:8px;">
-              <button type="button" class="btn btn-primary" id="btn-next-stage" onclick="advanceNextStage()">Sonraki Aşamaya Geç</button>
+              <button type="button" class="btn btn-primary" id="btn-next-stage" onclick="advanceNextStage()">Sonraki Tura Geç →</button>
               <button type="button" class="btn btn-soft-blue" onclick="replayCurrentChain()">Bu Zinciri Tekrarla</button>
-              <button type="button" class="btn" id="btn-bottom-next-chain" onclick="loadNextPuzzleAnytime()">Sonraki Zincir →</button>
             </div>
           </div>
         </section>
@@ -1373,35 +1316,10 @@
               { root: 'GİBİ', topForm: 'GİBİ', anchor: true }
             ]
           }
-        ],
-        speedChains: [
-          {
-            id: 'speed-kopru',
-            reward: 100,
-            nodes: [
-              { root: 'KÖPRÜ', bottomForm: 'KÖPRÜ', anchor: true },
-              { root: 'ALT', topForm: 'ALTI', bottomForm: 'ALT', accepted: ['ALT', 'ALTI'] },
-              { root: 'GEÇİT', topForm: 'GEÇİT', bottomForm: 'GEÇİT', accepted: ['GEÇİT', 'GEÇİDİ'] },
-              { root: 'TÖRENİ', topForm: 'TÖRENİ', anchor: true }
-            ]
-          }
-        ],
-        bonusChains: [
-          {
-            label: '1. Zincir (4 Kelime)',
-            nodes: [
-              { root: 'GÖZ', bottomForm: 'GÖZ', anchor: true },
-              { root: 'BEBEK', topForm: 'BEBEĞİ', bottomForm: 'BEBEK', accepted: ['BEBEK', 'BEBEĞİ'] },
-              { root: 'ARABA', topForm: 'ARABASI', bottomForm: 'ARABA', accepted: ['ARABA', 'ARABASI'] },
-              { root: 'VAPURU', topForm: 'VAPURU', anchor: true }
-            ]
-          }
         ]
       };
 
       var CHAIN_BANK = [];
-      var SPEED_CHAINS = [];
-      var BONUS_ROUND_CHAINS = [];
 
       /* =====================================================================
          2. TÜRKÇE MORFOLOJİ VE EŞLEŞTİRME MOTORU (Ünlü Düşmesi Dahil)
@@ -1562,16 +1480,7 @@
         nodeStates: [],
         selectedFrontier: 'top',
         wagerAmount: 200,
-        chainCompleted: false,
-
-        speedActive: false,
-        speedType: 'speed',
-        speedChainIdx: 0,
-        speedBonusSubIdx: 0,
-        speedTimerId: null,
-        speedSecondsLeft: 15,
-        speedMaxSeconds: 15,
-        speedRunning: false
+        chainCompleted: false
       };
 
       var audioCtx = null;
@@ -1643,12 +1552,6 @@
             throw new Error('Geçersiz JSON şeması');
           }
           CHAIN_BANK = data.chains;
-          SPEED_CHAINS = Array.isArray(data.speedChains) && data.speedChains.length > 0
-            ? data.speedChains
-            : FALLBACK_BANK.speedChains;
-          BONUS_ROUND_CHAINS = Array.isArray(data.bonusChains) && data.bonusChains.length > 0
-            ? data.bonusChains
-            : FALLBACK_BANK.bonusChains;
 
           if (statusBadge) {
             statusBadge.textContent = CHAIN_BANK.length + ' Zincir Yüklendi';
@@ -1656,8 +1559,6 @@
           }
         } catch (err) {
           CHAIN_BANK = FALLBACK_BANK.chains;
-          SPEED_CHAINS = FALLBACK_BANK.speedChains;
-          BONUS_ROUND_CHAINS = FALLBACK_BANK.bonusChains;
           if (statusBadge) {
             statusBadge.textContent = 'Yerleşik Yedek Mod (' + CHAIN_BANK.length + ' Zincir)';
             statusBadge.className = 'badge is-amber';
@@ -1692,7 +1593,6 @@
           };
         });
         appState.selectedFrontier = 'top';
-        hideSpeedStage();
         var completeBar = document.getElementById('chain-complete-bar');
         if (completeBar) completeBar.classList.add('hidden');
 
@@ -1726,9 +1626,7 @@
         return chosen;
       }
 
-      /* İstediğiniz an sıradaki bulmacaya geçme fonksiyonu */
       function loadNextPuzzleAnytime() {
-        hideSpeedStage();
         if (appState.mode === 'practice') {
           var idx = CHAIN_BANK.indexOf(appState.currentChain);
           var nextIdx = (idx + 1) % CHAIN_BANK.length;
@@ -1739,12 +1637,23 @@
 
         if (appState.roundIndex < 3) {
           appState.roundIndex += 1;
+          if (appState.teamMode) {
+            appState.activeTeam = appState.scores.a <= appState.scores.b ? 'a' : 'b';
+          }
+          var nextChain = pickClassicChainForRound(appState.roundIndex);
+          loadChain(nextChain);
+          var label = appState.roundIndex === 3
+            ? ('Final Bahis Turu (Tur 4 / 4): "' + nextChain.title + '" yüklendi.')
+            : ('Tur ' + (appState.roundIndex + 1) + ' / 4: "' + nextChain.title + '" yüklendi.');
+          setFeedback('is-hint', 'Sıradaki Tur', label);
         } else {
           appState.roundIndex = 0;
+          appState.scores = { a: 0, b: 0 };
+          appState.activeTeam = 'a';
+          var firstChain = pickClassicChainForRound(0);
+          loadChain(firstChain);
+          setFeedback('is-hint', 'Yeni Yarışma Başladı', '4 turluk yarışma tamamlandı, skorlar sıfırlandı ve Tur 1 ("' + firstChain.title + '") başladı.');
         }
-        var nextChain = pickClassicChainForRound(appState.roundIndex);
-        loadChain(nextChain);
-        setFeedback('is-hint', 'Sıradaki Bulmaca (Tur ' + (appState.roundIndex + 1) + ')', '"' + nextChain.title + '" yüklendi.');
       }
 
       function getFrontierIndices() {
@@ -2054,33 +1963,18 @@
         }
         if (nextBtn) {
           if (appState.mode === 'classic') {
-            if (appState.roundIndex < 3) {
-              var spObj = SPEED_CHAINS[appState.roundIndex % SPEED_CHAINS.length];
-              nextBtn.textContent = 'Hızlı Zincire Geç (+' + spObj.reward + ' Puan)';
-            } else {
-              nextBtn.textContent = '60 sn Büyük Ödül Turuna Geç (+10.000)';
-            }
+            nextBtn.textContent = appState.roundIndex < 3
+              ? ('Sonraki Tura Geç (Tur ' + (appState.roundIndex + 2) + ' / 4) →')
+              : 'Yeni Yarışmaya Başla (Tur 1) →';
           } else {
-            nextBtn.textContent = 'Sıradaki Zinciri Yükle';
+            nextBtn.textContent = 'Sonraki Zincir →';
           }
         }
         if (completeBar) completeBar.classList.remove('hidden');
       }
 
       function advanceNextStage() {
-        if (appState.mode === 'practice') {
-          var idx = CHAIN_BANK.indexOf(appState.currentChain);
-          var nextIdx = (idx + 1) % CHAIN_BANK.length;
-          loadChain(CHAIN_BANK[nextIdx]);
-          setFeedback('is-hint', 'Yeni Zincir Yüklendi', CHAIN_BANK[nextIdx].title + ' tahtada hazır.');
-          return;
-        }
-
-        if (appState.roundIndex < 3) {
-          openSpeedStage('speed', appState.roundIndex);
-        } else {
-          openSpeedStage('bonus', 0);
-        }
+        loadNextPuzzleAnytime();
       }
 
       function replayCurrentChain() {
@@ -2091,273 +1985,10 @@
       }
 
       /* =====================================================================
-         7. HIZLI ZİNCİR VE 60 SN BÜYÜK ÖDÜL TURU
-         ===================================================================== */
-      function hideSpeedStage() {
-        if (appState.speedTimerId) {
-          clearInterval(appState.speedTimerId);
-          appState.speedTimerId = null;
-        }
-        appState.speedActive = false;
-        appState.speedRunning = false;
-        var el = document.getElementById('speed-stage');
-        if (el) el.classList.add('hidden');
-      }
-
-      function openSpeedStage(type, idx) {
-        appState.speedActive = true;
-        appState.speedType = type;
-        appState.speedChainIdx = idx;
-        appState.speedBonusSubIdx = 0;
-        appState.speedRunning = false;
-        appState.speedMaxSeconds = type === 'bonus' ? 60 : 15;
-        appState.speedSecondsLeft = appState.speedMaxSeconds;
-
-        var el = document.getElementById('speed-stage');
-        if (el) el.classList.remove('hidden');
-
-        var startBtn = document.getElementById('btn-speed-start');
-        var submitBtn = document.getElementById('btn-speed-submit');
-        if (startBtn) {
-          startBtn.disabled = false;
-          startBtn.textContent = 'Süreyi Başlat';
-        }
-        if (submitBtn) submitBtn.disabled = true;
-
-        var fb = document.getElementById('speed-feedback');
-        if (fb) fb.classList.add('hidden');
-
-        renderSpeedStage();
-      }
-
-      function getCurrentSpeedChainObj() {
-        if (appState.speedType === 'bonus') {
-          return BONUS_ROUND_CHAINS[appState.speedBonusSubIdx % BONUS_ROUND_CHAINS.length];
-        }
-        return SPEED_CHAINS[appState.speedChainIdx % SPEED_CHAINS.length];
-      }
-
-      function renderSpeedStage() {
-        var obj = getCurrentSpeedChainObj();
-        var kicker = document.getElementById('speed-kicker');
-        var title = document.getElementById('speed-title');
-        var timerBadge = document.getElementById('speed-timer-badge');
-        var rewardBadge = document.getElementById('speed-reward-badge');
-        var bar = document.getElementById('speed-timer-bar');
-        var preview = document.getElementById('speed-chain-preview');
-        var desc = document.getElementById('speed-desc');
-
-        if (kicker) {
-          kicker.textContent = appState.speedType === 'bonus'
-            ? ('Büyük Ödül Turu · ' + obj.label)
-            : ('Tur ' + (appState.roundIndex + 1) + ' Hızlı Zinciri');
-        }
-        if (title) {
-          title.textContent = appState.speedType === 'bonus'
-            ? '60 Saniyede Zincirleri Tamamla'
-            : 'Hızlı Zincir Bonusu';
-        }
-        if (desc) {
-          desc.textContent = appState.speedRunning
-            ? 'Gizli kelimelerin ilk harfleri açık. Hızlıca doldurup kontrol edin!'
-            : 'Süreyi başlat düğmesine bastığınızda gizli sözcüklerin ilk harfleri açılır ve geri sayım başlar.';
-        }
-        if (timerBadge) timerBadge.textContent = appState.speedSecondsLeft + ' sn';
-        if (rewardBadge) {
-          rewardBadge.textContent = appState.speedType === 'bonus'
-            ? '+10.000 Puan'
-            : ('+' + obj.reward + ' Puan');
-        }
-        if (bar) {
-          var ratio = Math.max(0, appState.speedSecondsLeft / appState.speedMaxSeconds);
-          bar.style.transform = 'scaleX(' + ratio.toFixed(3) + ')';
-        }
-
-        if (!preview) return;
-        preview.innerHTML = '';
-
-        for (var i = 0; i < obj.nodes.length; i++) {
-          var node = obj.nodes[i];
-          var wrap = document.createElement('div');
-          wrap.className = 'catalog-card';
-
-          var lbl = document.createElement('label');
-          lbl.className = 'field-label';
-          lbl.textContent = (i + 1) + '. Kelime';
-          wrap.appendChild(lbl);
-
-          if (node.anchor) {
-            var anchorText = document.createElement('div');
-            anchorText.className = 'node-word-anchor';
-            anchorText.style.fontSize = '17px';
-            anchorText.textContent = node.root;
-            wrap.appendChild(anchorText);
-          } else {
-            var inpId = 'speed-input-' + i;
-            lbl.setAttribute('for', inpId);
-            var inp = document.createElement('input');
-            inp.type = 'text';
-            inp.id = inpId;
-            inp.className = 'text-input';
-            inp.disabled = !appState.speedRunning;
-            if (appState.speedRunning) {
-              var firstLetter = trUpper(node.root).charAt(0);
-              inp.placeholder = firstLetter + ' (' + trUpper(node.root).length + ' harf)';
-            } else {
-              inp.placeholder = 'Süre başlayınca ilk harf açılır';
-            }
-            wrap.appendChild(inp);
-          }
-          preview.appendChild(wrap);
-        }
-      }
-
-      function startSpeedTimer() {
-        if (appState.speedRunning) return;
-        appState.speedRunning = true;
-
-        var startBtn = document.getElementById('btn-speed-start');
-        var submitBtn = document.getElementById('btn-speed-submit');
-        if (startBtn) {
-          startBtn.disabled = true;
-          startBtn.textContent = 'Süre İşliyor…';
-        }
-        if (submitBtn) submitBtn.disabled = false;
-
-        renderSpeedStage();
-        var previewBox = document.getElementById('speed-chain-preview');
-        var firstInput = previewBox ? previewBox.querySelector('input') : null;
-        if (firstInput) firstInput.focus();
-
-        if (appState.speedTimerId) clearInterval(appState.speedTimerId);
-        appState.speedTimerId = setInterval(function () {
-          appState.speedSecondsLeft -= 1;
-          var timerBadge = document.getElementById('speed-timer-badge');
-          var bar = document.getElementById('speed-timer-bar');
-          if (timerBadge) timerBadge.textContent = Math.max(0, appState.speedSecondsLeft) + ' sn';
-          if (bar) {
-            var ratio = Math.max(0, appState.speedSecondsLeft / appState.speedMaxSeconds);
-            bar.style.transform = 'scaleX(' + ratio.toFixed(3) + ')';
-          }
-          if (appState.speedSecondsLeft <= 0) {
-            clearInterval(appState.speedTimerId);
-            appState.speedTimerId = null;
-            appState.speedRunning = false;
-            playChimeError();
-            var submitB = document.getElementById('btn-speed-submit');
-            if (submitB) submitB.disabled = true;
-            var obj = getCurrentSpeedChainObj();
-            var fullAns = obj.nodes.map(function (n) { return n.root; }).join(' → ');
-            showSpeedFeedback('is-error', 'Süre Doldu', 'Doğru zincir: ' + fullAns + '. Sonraki tura geçebilirsiniz.');
-          }
-        }, 1000);
-      }
-
-      function submitSpeedChain() {
-        if (!appState.speedRunning) return;
-        var obj = getCurrentSpeedChainObj();
-        var allMatch = true;
-
-        for (var i = 1; i < obj.nodes.length - 1; i++) {
-          var inp = document.getElementById('speed-input-' + i);
-          var val = inp ? inp.value : '';
-          var prevS = obj.nodes[i - 1].bottomForm || obj.nodes[i - 1].root;
-          var nextS = obj.nodes[i + 1].topForm || obj.nodes[i + 1].root;
-          var res = matchGuessAgainstNode(val, obj.nodes[i], prevS, nextS);
-          if (!res.matched) {
-            allMatch = false;
-            break;
-          }
-        }
-
-        if (!allMatch) {
-          playChimeError();
-          showSpeedFeedback('is-error', 'Eksik veya Farklı', 'Bir veya daha fazla kelime eşleşmedi. Süre bitmeden tekrar deneyin!');
-          return;
-        }
-
-        playChimeSuccess();
-        if (appState.speedType === 'bonus') {
-          if (appState.speedBonusSubIdx < BONUS_ROUND_CHAINS.length - 1) {
-            appState.speedBonusSubIdx += 1;
-            showSpeedFeedback('is-success', 'Harika! Sonraki Zincir', 'Kalan sürede sıradaki Büyük Ödül zincirini tamamlayın.');
-            renderSpeedStage();
-            var previewEl = document.getElementById('speed-chain-preview');
-            var firstInp = previewEl ? previewEl.querySelector('input') : null;
-            if (firstInp) firstInp.focus();
-            return;
-          }
-          if (appState.speedTimerId) {
-            clearInterval(appState.speedTimerId);
-            appState.speedTimerId = null;
-          }
-          appState.speedRunning = false;
-          addScoreToActiveTeam(10000);
-          savePersistentState();
-          renderHUD();
-          var submitBtn = document.getElementById('btn-speed-submit');
-          if (submitBtn) submitBtn.disabled = true;
-          showSpeedFeedback('is-success', 'BÜYÜK ÖDÜL KAZANILDI! +10.000 PUAN', '60 saniye dolmadan tüm zincirleri çözdünüz!');
-        } else {
-          if (appState.speedTimerId) {
-            clearInterval(appState.speedTimerId);
-            appState.speedTimerId = null;
-          }
-          appState.speedRunning = false;
-          addScoreToActiveTeam(obj.reward);
-          savePersistentState();
-          renderHUD();
-          var subB = document.getElementById('btn-speed-submit');
-          if (subB) subB.disabled = true;
-          var fullStr = obj.nodes.map(function (n) { return n.root; }).join(' → ');
-          showSpeedFeedback('is-success', 'Hızlı Zincir Başarılı! +' + obj.reward + ' Puan', fullStr);
-        }
-      }
-
-      function skipSpeedChain() {
-        hideSpeedStage();
-        if (appState.mode === 'classic') {
-          if (appState.roundIndex < 3) {
-            appState.roundIndex += 1;
-            if (appState.teamMode) {
-              appState.activeTeam = appState.scores.a <= appState.scores.b ? 'a' : 'b';
-            }
-            loadChain(pickClassicChainForRound(appState.roundIndex));
-            var label = appState.roundIndex === 3
-              ? 'Final Bahis Turu başladı! Harf alırken bahis koyabilirsiniz.'
-              : ('Tur ' + (appState.roundIndex + 1) + ' başladı.');
-            setFeedback('is-hint', 'Yeni Tur', label);
-          } else {
-            appState.roundIndex = 0;
-            appState.scores = { a: 0, b: 0 };
-            appState.activeTeam = 'a';
-            loadChain(pickClassicChainForRound(0));
-            setFeedback('is-hint', 'Yeni Yarışma Başladı', 'Tur 1 ile yeni bir 4 turlu yarışma başladı.');
-          }
-        }
-      }
-
-      function showSpeedFeedback(cls, title, msg) {
-        var box = document.getElementById('speed-feedback');
-        if (!box) return;
-        box.className = 'feedback-box ' + cls;
-        box.innerHTML = '';
-        var t = document.createElement('p');
-        t.className = 'feedback-title';
-        t.textContent = title;
-        var p = document.createElement('p');
-        p.style.margin = '0';
-        p.textContent = msg;
-        box.appendChild(t);
-        box.appendChild(p);
-      }
-
-      /* =====================================================================
-         8. MOD GEÇİŞLERİ, BAHİS VE AYARLAR
+         7. MOD GEÇİŞLERİ, BAHİS VE AYARLAR
          ===================================================================== */
       function switchMode(mode) {
         appState.mode = mode === 'practice' ? 'practice' : 'classic';
-        hideSpeedStage();
 
         var navIds = ['nav-classic', 'nav-practice'];
         for (var i = 0; i < navIds.length; i++) {
@@ -2413,7 +2044,6 @@
         }
         btn.dataset.armed = 'false';
         btn.textContent = 'Sıfırla';
-        hideSpeedStage();
         appState.roundIndex = 0;
         appState.scores = { a: 0, b: 0 };
         appState.activeTeam = 'a';
@@ -2447,7 +2077,7 @@
       }
 
       /* =====================================================================
-         9. PRATİK KATALOĞU
+         8. PRATİK KATALOĞU
          ===================================================================== */
       function filterPracticeChains(diff) {
         appState.practiceFilter = diff;
@@ -2527,7 +2157,7 @@
       }
 
       /* =====================================================================
-         10. RENDER FONKSİYONLARI
+         9. RENDER FONKSİYONLARI
          ===================================================================== */
       function setFeedback(cls, title, msg) {
         var box = document.getElementById('feedback-box');
@@ -2858,10 +2488,10 @@
       }
 
       /* =====================================================================
-         11. KLAVYE KISAYOLLARI (↑ / ↓ Sınır Geçişi)
+         10. KLAVYE KISAYOLLARI (↑ / ↓ Sınır Geçişi)
          ===================================================================== */
       document.addEventListener('keydown', function (ev) {
-        if (appState.speedActive || appState.chainCompleted) return;
+        if (appState.chainCompleted) return;
         if (ev.key === 'ArrowUp') {
           var fUp = getFrontierIndices();
           if (fUp.topIdx !== -1) {
@@ -2892,9 +2522,6 @@
       window.showMeaningHint = showMeaningHint;
       window.advanceNextStage = advanceNextStage;
       window.replayCurrentChain = replayCurrentChain;
-      window.startSpeedTimer = startSpeedTimer;
-      window.submitSpeedChain = submitSpeedChain;
-      window.skipSpeedChain = skipSpeedChain;
       window.syncWagerFromSlider = syncWagerFromSlider;
       window.syncWagerFromNumber = syncWagerFromNumber;
       window.setWagerPreset = setWagerPreset;
@@ -2902,7 +2529,7 @@
       window.selectPracticeChain = selectPracticeChain;
 
       /* =====================================================================
-         12. BAŞLATMA
+         11. BAŞLATMA
          ===================================================================== */
       async function initApp() {
         initAppTheme();
